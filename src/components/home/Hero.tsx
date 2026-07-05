@@ -2,19 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { MessageCircle, ExternalLink, ChevronDown } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
-
-const floatingShapes = [
-  { size: 80, x: '10%', y: '20%', delay: 0, duration: 20 },
-  { size: 60, x: '80%', y: '15%', delay: 2, duration: 25 },
-  { size: 100, x: '70%', y: '60%', delay: 4, duration: 22 },
-  { size: 50, x: '20%', y: '70%', delay: 1, duration: 18 },
-  { size: 70, x: '90%', y: '40%', delay: 3, duration: 24 },
-  { size: 40, x: '5%', y: '50%', delay: 5, duration: 20 },
-  { size: 90, x: '60%', y: '80%', delay: 2.5, duration: 26 },
-  { size: 55, x: '40%', y: '10%', delay: 1.5, duration: 21 },
-];
 
 export function Hero() {
   const scrollToContent = () => {
@@ -23,100 +11,92 @@ export function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      <div className="absolute inset-0 soul-gradient-green" />
-
-      {floatingShapes.map((shape, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-white/5"
-          style={{
-            width: shape.size,
-            height: shape.size,
-            left: shape.x,
-            top: shape.y,
-          }}
-          animate={{
-            y: [0, -30, 0, 30, 0],
-            x: [0, 15, 0, -15, 0],
-            scale: [1, 1.1, 1, 0.9, 1],
-          }}
-          transition={{
-            duration: shape.duration,
-            repeat: Infinity,
-            delay: shape.delay,
-            ease: 'easeInOut',
-          }}
+      {/* Togetherness video background */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="https://images.pexels.com/videos/7660184/adult-brainstorming-business-child-7660184.jpeg"
+        aria-hidden="true"
+      >
+        <source
+          src="https://videos.pexels.com/video-files/7660184/7660184-uhd_1440_2560_25fps.mp4"
+          type="video/mp4"
         />
-      ))}
+      </video>
 
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(200,168,78,0.15),transparent_70%)]"
-        animate={{ opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      {/* Periwinkle-to-lavender wash so the palette reads through the footage */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#2E2A5C]/80 via-[#4A4499]/65 to-[#6A63C4]/50" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(184,181,240,0.25),transparent_65%)]" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mb-8"
-        >
-          <Image
-            src="/soul-logo.png"
-            alt="SOUL Logo"
-            width={180}
-            height={180}
-            className="drop-shadow-2xl"
-            priority
-          />
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-          className="mb-6 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-playfair)]"
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="glass-panel w-full max-w-3xl rounded-[2rem] px-6 py-10 sm:px-12 sm:py-14"
         >
-          Serving Opportunities,{' '}
-          <span className="text-soul-gold-light">Uplifting Lives</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-          className="mb-10 max-w-2xl text-lg text-white/80 sm:text-xl"
-        >
-          {SITE_CONFIG.description}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: 'easeOut' }}
-          className="flex flex-col gap-4 sm:flex-row"
-        >
-          <a
-            href={SITE_CONFIG.whatsappCommunityLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-soul-green px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-soul-green-dark hover:shadow-xl hover:scale-105"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
+            className="mb-6 flex justify-center"
           >
-            <MessageCircle className="h-5 w-5" />
-            Join WhatsApp Community
-            <ExternalLink className="h-4 w-4" />
-          </a>
-          <a
-            href={SITE_CONFIG.whatsappChannelLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-soul-gold px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-soul-gold-dark hover:shadow-xl hover:scale-105"
+            <Image
+              src="/soul-logo-sm.png"
+              alt="SOUL Logo"
+              width={72}
+              height={72}
+              className="rounded-full shadow-lg"
+              priority
+            />
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: 'easeOut' }}
+            className="mb-5 max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-[family-name:var(--font-playfair)] mx-auto"
           >
-            <MessageCircle className="h-5 w-5" />
-            Follow WhatsApp Channel
-            <ExternalLink className="h-4 w-4" />
-          </a>
+            Serving Opportunities,{' '}
+            <span className="text-[#D9D6FA]">Uplifting Lives</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+            className="mb-9 max-w-xl mx-auto text-base text-white/85 sm:text-lg"
+          >
+            {SITE_CONFIG.description}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55, ease: 'easeOut' }}
+            className="flex flex-col gap-3 sm:flex-row sm:justify-center"
+          >
+            <a
+              href={SITE_CONFIG.whatsappCommunityLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-[#2E2A5C] transition-all hover:scale-[1.03] hover:bg-white/70"
+            >
+              Join WhatsApp Community
+            </a>
+            <a
+              href={SITE_CONFIG.whatsappChannelLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/50 bg-white/10 px-8 py-4 text-base font-semibold text-white transition-all hover:scale-[1.03] hover:bg-white/20"
+            >
+              Follow WhatsApp Channel
+            </a>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -124,16 +104,15 @@ export function Hero() {
         onClick={scrollToContent}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/70 hover:text-white transition-colors"
+        transition={{ delay: 1.3, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
         aria-label="Scroll down"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown className="h-8 w-8" />
-        </motion.div>
+          className="h-9 w-9 rounded-full border border-white/50 bg-white/10 backdrop-blur-md"
+        />
       </motion.button>
     </section>
   );

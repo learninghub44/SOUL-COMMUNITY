@@ -2,37 +2,28 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Heart, Users, Globe, Sparkles, ArrowRight } from 'lucide-react';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 
 const values = [
   {
-    icon: Heart,
+    letter: 'M',
     title: 'Mental Wellness',
     description: 'Prioritizing mental health through guided sessions, peer support, and wellness activities.',
-    color: 'text-soul-green',
-    bg: 'bg-soul-green/10',
   },
   {
-    icon: Users,
+    letter: 'C',
     title: 'Community',
     description: 'Building meaningful friendships and a supportive network of like-minded individuals.',
-    color: 'text-soul-brown',
-    bg: 'bg-soul-brown/10',
   },
   {
-    icon: Globe,
+    letter: 'G',
     title: 'Global Impact',
     description: 'Creating ripples of positive change through service, volunteering, and outreach.',
-    color: 'text-soul-gold',
-    bg: 'bg-soul-gold/10',
   },
   {
-    icon: Sparkles,
+    letter: 'G',
     title: 'Growth',
     description: 'Empowering members to discover opportunities, learn new skills, and thrive together.',
-    color: 'text-soul-green-light',
-    bg: 'bg-soul-green-light/10',
   },
 ];
 
@@ -52,7 +43,7 @@ export function AboutPreview() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
-          <div className="bg-white rounded-2xl p-8 md:p-12 soul-shadow-card mb-12">
+          <div className="glass-card rounded-2xl p-8 md:p-12 mb-12">
             <div className="max-w-3xl mx-auto text-center">
               <p className="text-lg md:text-xl text-foreground/80 leading-relaxed mb-6">
                 SOUL is a vibrant community dedicated to mental wellness, networking, opportunities,
@@ -72,12 +63,14 @@ export function AboutPreview() {
           {values.map((value, index) => (
             <AnimatedSection key={value.title} delay={0.15 + index * 0.1}>
               <motion.div
-                whileHover={{ y: -4, boxShadow: '0 10px 40px -4px rgba(45,90,61,0.12)' }}
+                whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
-                className="bg-white rounded-xl p-6 soul-shadow-card h-full"
+                className="glass-card rounded-xl p-6 h-full"
               >
-                <div className={`w-12 h-12 rounded-xl ${value.bg} flex items-center justify-center mb-4`}>
-                  <value.icon className={`w-6 h-6 ${value.color}`} />
+                <div className="w-12 h-12 rounded-xl bg-soul-green/10 flex items-center justify-center mb-4">
+                  <span className="text-xl font-bold text-soul-green font-[family-name:var(--font-playfair)]">
+                    {value.letter}
+                  </span>
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{value.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
@@ -93,7 +86,6 @@ export function AboutPreview() {
               className="inline-flex items-center gap-2 px-8 py-4 bg-soul-green text-white rounded-full font-semibold transition-all hover:bg-soul-green-dark hover:shadow-lg hover:scale-105"
             >
               Read More
-              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </AnimatedSection>
