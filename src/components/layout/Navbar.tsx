@@ -34,7 +34,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/soul-logo.png"
+              src="/soul-logo-sm.png"
               alt="SOUL Logo"
               width={40}
               height={40}

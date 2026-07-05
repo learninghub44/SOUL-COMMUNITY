@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { CheckCircle, ArrowLeft, Ticket } from 'lucide-react';
+import { CheckCircle, ArrowLeft, Ticket, Calendar, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function ConfirmationContent() {
@@ -75,7 +75,7 @@ export default function ConfirmationContent() {
             <div className="bg-soul-cream-dark/50 rounded-xl p-6 space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-5 h-5 text-soul-green flex items-center justify-center">
-                  <span className="text-lg">📅</span>
+                  <Calendar className="w-5 h-5" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Event</p>
@@ -85,7 +85,7 @@ export default function ConfirmationContent() {
               {name && (
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 text-soul-green flex items-center justify-center">
-                    <span className="text-lg">👤</span>
+                    <User className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Attendee</p>

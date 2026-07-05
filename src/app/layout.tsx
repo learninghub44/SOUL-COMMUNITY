@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { MobileNav } from '@/components/layout/MobileNav';
@@ -7,15 +7,20 @@ import { SWRegister } from '@/components/layout/SWRegister';
 import { Toaster } from 'sonner';
 import './globals.css';
 
-const playfair = Playfair_Display({
+// Single unified font (DM Sans) across the whole site.
+// Kept as two variable names so existing heading/body classes
+// throughout the codebase don't need to be touched.
+const dmSansHeading = DM_Sans({
   variable: '--font-playfair',
   subsets: ['latin'],
+  weight: ['500', '600', '700'],
   display: 'swap',
 });
 
-const inter = Inter({
+const dmSansBody = DM_Sans({
   variable: '--font-inter',
   subsets: ['latin'],
+  weight: ['400', '500'],
   display: 'swap',
 });
 
@@ -52,8 +57,8 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: '/icons/icon-192x192.svg',
-    apple: '/icons/apple-touch-icon.svg',
+    icon: '/icons/icon-192x192.png',
+    apple: '/apple-touch-icon.png',
   },
 };
 
@@ -72,9 +77,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${dmSansHeading.variable} ${dmSansBody.variable}`}>
       <head>
-        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
