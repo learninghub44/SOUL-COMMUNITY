@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { MessageCircle, Mail, ExternalLink, Heart } from 'lucide-react';
+import { MessageCircle, Mail, ExternalLink } from 'lucide-react';
 import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
 
 export function Footer() {
@@ -118,13 +118,10 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-center">
           <p className="text-xs text-white/50">
             © {new Date().getFullYear()} S.O.U.L – Serving Opportunities, Uplifting Lives. All rights reserved.
           </p>
-          <div className="flex items-center gap-1 text-xs text-white/50">
-            Made with <Heart className="w-3 h-3 text-soul-gold fill-current" /> for the SOUL community
-          </div>
         </div>
       </div>
     </footer>
