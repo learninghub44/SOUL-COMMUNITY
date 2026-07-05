@@ -16,10 +16,10 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/soul-logo-sm.png"
+                src="/soul-logo.png"
                 alt="SOUL Logo"
-                width={48}
-                height={48}
+                width={64}
+                height={64}
                 className="rounded-full"
               />
               <div>
@@ -120,7 +120,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-center">
           <p className="text-xs text-white/50">
-            © {new Date().getFullYear()} S.O.U.L – Serving Opportunities, Uplifting Lives. All rights reserved.
+            © 2025–{new Date().getFullYear()} S.O.U.L – Serving Opportunities, Uplifting Lives. All rights reserved.
           </p>
         </div>
       </div>

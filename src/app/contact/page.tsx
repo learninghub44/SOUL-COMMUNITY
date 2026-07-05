@@ -2,17 +2,6 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import {
-  MessageCircle,
-  Mail,
-  MapPin,
-  Send,
-  ExternalLink,
-  Globe,
-  Share2,
-  Link,
-  Video,
-} from 'lucide-react'
 import { toast } from 'sonner'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
@@ -61,56 +50,30 @@ export default function ContactPage() {
 
   const contactInfo = [
     {
-      icon: MessageCircle,
+      label: 'WA',
       title: 'WhatsApp Community',
       description: 'Join our vibrant community',
       href: SITE_CONFIG.whatsappCommunityLink || '#',
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
     },
     {
-      icon: MessageCircle,
+      label: 'WA',
       title: 'WhatsApp Channel',
       description: 'Stay updated with our channel',
       href: SITE_CONFIG.whatsappChannelLink || '#',
-      color: 'text-green-500',
-      bgColor: 'bg-green-50',
     },
     {
-      icon: Mail,
+      label: '@',
       title: 'Email',
       description: SITE_CONFIG.email || 'info@soulcommunity.org',
       href: `mailto:${SITE_CONFIG.email || 'info@soulcommunity.org'}`,
-      color: 'text-soul-brown',
-      bgColor: 'bg-amber-50',
     },
   ]
 
   const socialLinks = [
-    {
-      icon: Globe,
-      name: 'Facebook',
-      href: '#',
-      color: 'hover:text-blue-600',
-    },
-    {
-      icon: Share2,
-      name: 'Instagram',
-      href: '#',
-      color: 'hover:text-pink-500',
-    },
-    {
-      icon: Link,
-      name: 'Twitter',
-      href: '#',
-      color: 'hover:text-sky-500',
-    },
-    {
-      icon: Video,
-      name: 'YouTube',
-      href: '#',
-      color: 'hover:text-red-600',
-    },
+    { label: 'FB', name: 'Facebook', href: '#' },
+    { label: 'IG', name: 'Instagram', href: '#' },
+    { label: 'X', name: 'Twitter', href: '#' },
+    { label: 'YT', name: 'YouTube', href: '#' },
   ]
 
   return (
@@ -122,9 +85,9 @@ export default function ContactPage() {
 
       <div className="container mx-auto px-4 py-16">
         <AnimatedSection>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             {/* Contact Form */}
-            <div className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(45,90,61,0.08)]">
+            <div className="glass-card rounded-2xl p-8">
               <h2 className="text-2xl font-bold text-soul-green-dark mb-6">
                 Send us a Message
               </h2>
@@ -132,7 +95,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-foreground/70 mb-2"
                   >
                     Name
                   </label>
@@ -144,14 +107,14 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your name"
-                    className="w-full border-gray-200 focus:border-soul-green focus:ring-soul-green"
+                    className="w-full border-soul-cream-dark focus:border-soul-green focus:ring-soul-green"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-foreground/70 mb-2"
                   >
                     Email
                   </label>
@@ -163,14 +126,14 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    className="w-full border-gray-200 focus:border-soul-green focus:ring-soul-green"
+                    className="w-full border-soul-cream-dark focus:border-soul-green focus:ring-soul-green"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-foreground/70 mb-2"
                   >
                     Subject
                   </label>
@@ -182,14 +145,14 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="How can we help?"
-                    className="w-full border-gray-200 focus:border-soul-green focus:ring-soul-green"
+                    className="w-full border-soul-cream-dark focus:border-soul-green focus:ring-soul-green"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium text-foreground/70 mb-2"
                   >
                     Message
                   </label>
@@ -201,7 +164,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell us more..."
-                    className="w-full border-gray-200 focus:border-soul-green focus:ring-soul-green resize-none"
+                    className="w-full border-soul-cream-dark focus:border-soul-green focus:ring-soul-green resize-none"
                   />
                 </div>
 
@@ -224,10 +187,7 @@ export default function ContactPage() {
                       Sending...
                     </span>
                   ) : (
-                    <span className="flex items-center gap-2">
-                      <Send className="h-5 w-5" />
-                      Send Message
-                    </span>
+                    'Send Message'
                   )}
                 </Button>
               </form>
@@ -235,7 +195,7 @@ export default function ContactPage() {
 
             {/* Contact Information */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-soul-green-dark mb-6">
+              <h2 className="text-2xl font-bold text-soul-green-dark mb-2">
                 Get in Touch
               </h2>
 
@@ -254,40 +214,40 @@ export default function ContactPage() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-[0_2px_12px_rgba(45,90,61,0.06)] hover:shadow-[0_4px_20px_rgba(45,90,61,0.12)] transition-shadow"
+                    whileHover={{ y: -2 }}
+                    className="glass-card flex items-center gap-4 p-4 rounded-xl"
                   >
-                    <div
-                      className={`p-3 rounded-xl ${item.bgColor}`}
-                    >
-                      <item.icon className={`h-6 w-6 ${item.color}`} />
+                    <div className="w-11 h-11 rounded-xl bg-soul-green/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-sm font-bold text-soul-green font-[family-name:var(--font-playfair)]">
+                        {item.label}
+                      </span>
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900">
+                      <h3 className="font-semibold text-foreground">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-gray-600">{item.description}</p>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
-                    <ExternalLink className="h-4 w-4 text-gray-400" />
                   </motion.a>
                 ))}
               </div>
 
               {/* Social Media */}
-              <div className="bg-white rounded-xl p-6 shadow-[0_2px_12px_rgba(45,90,61,0.06)]">
-                <h3 className="font-semibold text-gray-900 mb-4">
+              <div className="glass-card rounded-xl p-6">
+                <h3 className="font-semibold text-foreground mb-4">
                   Follow Us
                 </h3>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-3">
                   {socialLinks.map((social) => (
                     <a
                       key={social.name}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 bg-gray-50 rounded-xl text-gray-600 ${social.color} transition-colors`}
+                      className="w-11 h-11 rounded-xl bg-soul-green/10 flex items-center justify-center text-sm font-semibold text-soul-green hover:bg-soul-green/20 transition-colors"
                       aria-label={social.name}
                     >
-                      <social.icon className="h-6 w-6" />
+                      {social.label}
                     </a>
                   ))}
                 </div>
@@ -296,33 +256,20 @@ export default function ContactPage() {
           </div>
         </AnimatedSection>
 
-        {/* Google Maps Placeholder */}
+        {/* Location */}
         <AnimatedSection className="mt-16">
-          <div className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(45,90,61,0.08)]">
-            <div className="p-6 border-b border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-soul-green/10 rounded-lg">
-                  <MapPin className="h-5 w-5 text-soul-green" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">Our Location</h3>
-                  <p className="text-sm text-gray-600">
-                    {'Nairobi, Kenya'}
-                  </p>
-                </div>
+          <div className="glass-card rounded-2xl overflow-hidden">
+            <div className="p-6 border-b border-soul-cream-dark">
+              <div>
+                <h3 className="font-semibold text-foreground">Our Location</h3>
+                <p className="text-sm text-muted-foreground">Nairobi, Kenya</p>
               </div>
             </div>
-            <div className="relative h-80 bg-gray-100">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-soul-green/40 mx-auto mb-3" />
-                  <p className="text-gray-500 font-medium">
-                    Google Maps Integration
-                  </p>
-                  <p className="text-sm text-gray-400 mt-1">
-                    Map will be displayed here
-                  </p>
-                </div>
+            <div className="relative h-80 bg-soul-cream-dark/40 flex items-center justify-center">
+              <div className="text-center">
+                <p className="text-muted-foreground font-medium">
+                  Map coming soon
+                </p>
               </div>
             </div>
           </div>

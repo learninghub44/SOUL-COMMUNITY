@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export function Hero() {
@@ -34,26 +33,10 @@ export function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(184,181,240,0.22),transparent_60%)]" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mb-8"
-        >
-          <Image
-            src="/soul-logo-sm.png"
-            alt="SOUL Logo"
-            width={88}
-            height={88}
-            className="rounded-full shadow-2xl"
-            priority
-          />
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+          transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
           className="mb-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-playfair)]"
         >
           Serving Opportunities,{' '}
@@ -63,7 +46,7 @@ export function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+          transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
           className="mb-10 max-w-2xl text-lg text-white/85 sm:text-xl"
         >
           {SITE_CONFIG.description}
@@ -72,7 +55,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+          transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
           className="flex flex-col items-center gap-4 sm:flex-row"
         >
           <a
@@ -99,13 +82,13 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
+        className="glass-card absolute bottom-10 left-1/2 z-10 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full"
         aria-label="Scroll down"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="h-9 w-9 rounded-full border border-white/50 bg-white/10 backdrop-blur-md"
+          className="block h-2.5 w-2.5 rounded-full bg-[#2E2A5C]"
         />
       </motion.button>
     </section>

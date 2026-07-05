@@ -34,10 +34,10 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/soul-logo-sm.png"
+              src="/soul-logo.png"
               alt="SOUL Logo"
-              width={40}
-              height={40}
+              width={56}
+              height={56}
               className="rounded-full"
               priority
             />
