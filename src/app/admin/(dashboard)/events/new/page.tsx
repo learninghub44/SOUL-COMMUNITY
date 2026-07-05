@@ -32,6 +32,8 @@ import {
   ImagePlus
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { createClient } from '@/lib/supabase/client'
+import { createEvent } from '@/lib/services/events'
 
 interface FAQ {
   id: string
@@ -59,6 +61,7 @@ export default function CreateEventPage() {
   })
 
   const [faqs, setFaqs] = useState<FAQ[]>([])
+  const [posterFile, setPosterFile] = useState<File | null>(null)
   const [posterPreview, setPosterPreview] = useState<string | null>(null)
   const [dragActive, setDragActive] = useState(false)
 
@@ -94,6 +97,7 @@ export default function CreateEventPage() {
       toast.error('File size must be less than 5MB')
       return
     }
+    setPosterFile(file)
     const reader = new FileReader()
     reader.onloadend = () => {
       setPosterPreview(reader.result as string)
@@ -162,18 +166,52 @@ export default function CreateEventPage() {
     if (!validateForm()) return
 
     setIsSubmitting(true)
+    const supabase = createClient()
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      let imageUrl = ''
 
-      if (asDraft) {
-        toast.success('Event saved as draft')
-      } else {
-        toast.success('Event created successfully')
+      if (posterFile) {
+        const path = `events/${crypto.randomUUID()}-${posterFile.name}`
+        const { error: uploadError } = await supabase.storage
+          .from('media')
+          .upload(path, posterFile, { upsert: false })
+
+        if (uploadError) {
+          toast.error('Poster upload failed: ' + uploadError.message)
+          setIsSubmitting(false)
+          return
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from('media')
+          .getPublicUrl(path)
+        imageUrl = publicUrlData.publicUrl
       }
+
+      await createEvent(supabase, {
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        venue: formData.venue.trim(),
+        date: formData.date,
+        time: formData.time,
+        organizer: formData.organizer.trim(),
+        image_url: imageUrl,
+        capacity: parseInt(formData.capacity, 10),
+        ticket_price: formData.isFree ? 0 : parseFloat(formData.ticketPrice || '0'),
+        is_free: formData.isFree,
+        whatsapp_link: formData.whatsappLink.trim(),
+        status: asDraft ? 'draft' : (formData.status as 'draft' | 'published' | 'cancelled'),
+        is_featured: formData.isFeatured,
+        gallery: [],
+        faqs: faqs.map(({ question, answer }) => ({ question, answer })),
+      })
+
+      toast.success(asDraft ? 'Event saved as draft' : 'Event created successfully')
       router.push('/admin/events')
-    } catch {
-      toast.error('Something went wrong. Please try again.')
+      router.refresh()
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }

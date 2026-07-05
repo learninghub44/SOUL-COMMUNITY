@@ -1,29 +1,28 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-function getSupabase() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-  if (!supabaseUrl || !supabaseAnonKey) {
-    return null;
-  }
-  return createClient(supabaseUrl, supabaseAnonKey);
-}
-
-export default function AdminLoginPage() {
+function AdminLoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const error = searchParams.get('error');
+    if (error === 'not_admin') {
+      toast.error('That account does not have admin access.');
+    }
+  }, [searchParams]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -34,14 +33,10 @@ export default function AdminLoginPage() {
     }
 
     setLoading(true);
+    const supabase = createClient();
 
     try {
-      const supabase = getSupabase();
-      if (!supabase) {
-        toast.error('Supabase is not configured. Please set environment variables.');
-        return;
-      }
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -51,8 +46,25 @@ export default function AdminLoginPage() {
         return;
       }
 
+      // Verify this user is actually an admin. RLS on admin_users only
+      // returns a row if auth.uid() is itself in the table, so a
+      // non-admin gets an empty result here.
+      const { data: adminRow } = await supabase
+        .from('admin_users')
+        .select('id')
+        .eq('id', data.user.id)
+        .single();
+
+      if (!adminRow) {
+        await supabase.auth.signOut();
+        toast.error('This account does not have admin access.');
+        return;
+      }
+
       toast.success('Welcome back!');
-      router.push('/admin');
+      const redirectTo = searchParams.get('redirectTo') || '/admin';
+      router.push(redirectTo);
+      router.refresh();
     } catch {
       toast.error('An unexpected error occurred');
     } finally {
@@ -101,6 +113,7 @@ export default function AdminLoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10 h-10"
                   disabled={loading}
+                  autoComplete="email"
                 />
               </div>
             </div>
@@ -122,6 +135,7 @@ export default function AdminLoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 pr-10 h-10"
                   disabled={loading}
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
@@ -156,5 +170,13 @@ export default function AdminLoginPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <AdminLoginForm />
+    </Suspense>
   );
 }

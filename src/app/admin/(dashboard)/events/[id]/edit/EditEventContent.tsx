@@ -1,8 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
+import { createClient } from '@/lib/supabase/client'
+import { getEvent, updateEvent } from '@/lib/services/events'
+import { Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -39,59 +42,77 @@ interface FAQ {
   answer: string
 }
 
-const sampleEvent = {
-  id: '1',
-  title: 'Soul Night: Live Music Experience',
-  description: 'Join us for an unforgettable evening of live music, featuring local artists and an electric atmosphere. Experience the soul of our community through rhythm and melody.',
-  venue: 'Nairobi Arts Centre',
-  date: '2026-07-15',
-  time: '19:00',
-  organizer: 'Soul Community Foundation',
-  capacity: '200',
-  ticketPrice: '1000',
-  isFree: false,
-  whatsappLink: 'https://chat.whatsapp.com/example',
-  status: 'published',
-  isFeatured: true,
-  posterUrl: null as string | null,
-  faqs: [
-    {
-      id: '1',
-      question: 'Is there parking available?',
-      answer: 'Yes, there is free parking available at the venue.'
-    },
-    {
-      id: '2',
-      question: 'Can I get a refund?',
-      answer: 'Refunds are available up to 48 hours before the event.'
-    }
-  ] as FAQ[]
-}
-
 export default function EditEventContent() {
   const router = useRouter()
   const params = useParams()
   const eventId = params.id as string
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [posterFile, setPosterFile] = useState<File | null>(null)
+  const [existingImageUrl, setExistingImageUrl] = useState('')
 
   const [formData, setFormData] = useState({
-    title: sampleEvent.title,
-    description: sampleEvent.description,
-    venue: sampleEvent.venue,
-    date: sampleEvent.date,
-    time: sampleEvent.time,
-    organizer: sampleEvent.organizer,
-    capacity: sampleEvent.capacity,
-    ticketPrice: sampleEvent.ticketPrice,
-    isFree: sampleEvent.isFree,
-    whatsappLink: sampleEvent.whatsappLink,
-    status: sampleEvent.status,
-    isFeatured: sampleEvent.isFeatured
+    title: '',
+    description: '',
+    venue: '',
+    date: '',
+    time: '',
+    organizer: '',
+    capacity: '',
+    ticketPrice: '',
+    isFree: false,
+    whatsappLink: '',
+    status: 'draft',
+    isFeatured: false
   })
 
-  const [faqs, setFaqs] = useState<FAQ[]>(sampleEvent.faqs)
-  const [posterPreview, setPosterPreview] = useState<string | null>(sampleEvent.posterUrl)
+  const [faqs, setFaqs] = useState<FAQ[]>([])
+  const [posterPreview, setPosterPreview] = useState<string | null>(null)
   const [dragActive, setDragActive] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    const supabase = createClient()
+
+    getEvent(supabase, eventId)
+      .then((event) => {
+        if (!active) return
+        setFormData({
+          title: event.title || '',
+          description: event.description || '',
+          venue: event.venue || '',
+          date: event.date || '',
+          time: event.time || '',
+          organizer: event.organizer || '',
+          capacity: event.capacity ? String(event.capacity) : '',
+          ticketPrice: event.ticket_price ? String(event.ticket_price) : '',
+          isFree: event.is_free,
+          whatsappLink: event.whatsapp_link || '',
+          status: event.status,
+          isFeatured: event.is_featured,
+        })
+        setFaqs(
+          (event.faqs || []).map((f, i) => ({
+            id: String(i + 1),
+            question: f.question,
+            answer: f.answer,
+          }))
+        )
+        setExistingImageUrl(event.image_url || '')
+        setPosterPreview(event.image_url || null)
+      })
+      .catch(() => {
+        toast.error('Could not load this event')
+        router.push('/admin/events')
+      })
+      .finally(() => {
+        if (active) setIsLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [eventId, router])
 
   const handleInputChange = (field: string, value: string | boolean | null) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -125,6 +146,7 @@ export default function EditEventContent() {
       toast.error('File size must be less than 5MB')
       return
     }
+    setPosterFile(file)
     const reader = new FileReader()
     reader.onloadend = () => {
       setPosterPreview(reader.result as string)
@@ -193,16 +215,62 @@ export default function EditEventContent() {
     if (!validateForm()) return
 
     setIsSubmitting(true)
+    const supabase = createClient()
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      let imageUrl = existingImageUrl
+
+      if (posterFile) {
+        const path = `events/${crypto.randomUUID()}-${posterFile.name}`
+        const { error: uploadError } = await supabase.storage
+          .from('media')
+          .upload(path, posterFile, { upsert: false })
+
+        if (uploadError) {
+          toast.error('Poster upload failed: ' + uploadError.message)
+          setIsSubmitting(false)
+          return
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from('media')
+          .getPublicUrl(path)
+        imageUrl = publicUrlData.publicUrl
+      }
+
+      await updateEvent(supabase, eventId, {
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        venue: formData.venue.trim(),
+        date: formData.date,
+        time: formData.time,
+        organizer: formData.organizer.trim(),
+        image_url: imageUrl,
+        capacity: parseInt(formData.capacity, 10),
+        ticket_price: formData.isFree ? 0 : parseFloat(formData.ticketPrice || '0'),
+        is_free: formData.isFree,
+        whatsapp_link: formData.whatsappLink.trim(),
+        status: formData.status as 'draft' | 'published' | 'cancelled',
+        is_featured: formData.isFeatured,
+        faqs: faqs.map(({ question, answer }) => ({ question, answer })),
+      })
+
       toast.success('Event updated successfully')
       router.push('/admin/events')
-    } catch {
-      toast.error('Something went wrong. Please try again.')
+      router.refresh()
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-soul-cream flex items-center justify-center">
+        <Loader2 className="w-6 h-6 animate-spin text-soul-green" />
+      </div>
+    )
   }
 
   return (
