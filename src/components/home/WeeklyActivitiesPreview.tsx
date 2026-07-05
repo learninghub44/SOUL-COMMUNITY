@@ -33,8 +33,7 @@ export function WeeklyActivitiesPreview() {
                   className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
                   style={{ backgroundColor: activity.color }}
                 />
-                <div className="text-3xl mb-3">{activity.emoji}</div>
-                <h3 className="text-sm font-bold text-foreground mb-1.5 leading-tight">
+                <h3 className="text-sm font-bold text-foreground mb-1.5 leading-tight mt-2">
                   {activity.shortTitle}
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">

@@ -36,6 +36,11 @@ export default function AdminLoginPage() {
     setLoading(true);
 
     try {
+      const supabase = getSupabase();
+      if (!supabase) {
+        toast.error('Supabase is not configured. Please set environment variables.');
+        return;
+      }
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,

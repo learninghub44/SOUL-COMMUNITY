@@ -70,7 +70,6 @@ export default function WeeklyActivitiesPage() {
                       />
                       <div className="p-6 flex flex-col flex-1">
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="text-3xl">{activity.emoji}</span>
                           {Icon && (
                             <div
                               className="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -87,6 +86,9 @@ export default function WeeklyActivitiesPage() {
                         </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed flex-1">
                           {activity.description}
+                        </p>
+                        <p className="text-xs text-muted-foreground/80 mt-3">
+                          {activity.meetingInfo}
                         </p>
                         <div className="mt-4 flex items-center gap-1 text-sm font-medium text-soul-green group-hover:gap-2 transition-all">
                           Learn more

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { MessageCircle, Mail, Phone, ExternalLink, Heart } from 'lucide-react';
+import { MessageCircle, Mail, ExternalLink, Heart } from 'lucide-react';
 import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
 
 export function Footer() {
@@ -82,15 +82,6 @@ export function Footer() {
                 >
                   <Mail className="w-4 h-4 text-soul-green-light" />
                   {SITE_CONFIG.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${SITE_CONFIG.phone}`}
-                  className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
-                >
-                  <Phone className="w-4 h-4 text-soul-gold" />
-                  {SITE_CONFIG.phone}
                 </a>
               </li>
             </ul>

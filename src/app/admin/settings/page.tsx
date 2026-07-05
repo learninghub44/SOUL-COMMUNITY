@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Globe, Phone, Share2, Search, Loader2 } from 'lucide-react';
+import { Settings, Globe, MessageCircle, Share2, Search, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -25,7 +25,6 @@ export default function AdminSettingsPage() {
     whatsappCommunity: 'https://chat.whatsapp.com/soulcommunity2026',
     whatsappChannel: 'https://whatsapp.com/channel/soulcommunity',
     email: 'info@soul-community.org',
-    phone: '+254 712 345 678',
   });
 
   const [social, setSocial] = useState({
@@ -101,7 +100,7 @@ export default function AdminSettingsPage() {
                   General
                 </TabsTrigger>
                 <TabsTrigger value="contact" className="gap-1.5">
-                  <Phone className="h-3.5 w-3.5" />
+                  <MessageCircle className="h-3.5 w-3.5" />
                   Contact
                 </TabsTrigger>
                 <TabsTrigger value="social" className="gap-1.5">
@@ -219,18 +218,6 @@ export default function AdminSettingsPage() {
                       value={contact.email}
                       onChange={(e) =>
                         setContact({ ...contact, email: e.target.value })
-                      }
-                      className="border-[#F5F0E8] bg-[#FFFBF5]"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-sm font-medium text-[#8B6B4A]">
-                      Phone
-                    </label>
-                    <Input
-                      value={contact.phone}
-                      onChange={(e) =>
-                        setContact({ ...contact, phone: e.target.value })
                       }
                       className="border-[#F5F0E8] bg-[#FFFBF5]"
                     />

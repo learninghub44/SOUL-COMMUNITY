@@ -30,7 +30,6 @@ export interface Ticket {
   event_id: string;
   full_name: string;
   email: string;
-  phone: string;
   ticket_reference: string;
   qr_code: string;
   payment_status: 'pending' | 'completed' | 'refunded';
@@ -131,7 +130,6 @@ export interface WebsiteSettings {
   whatsapp_community_link: string;
   whatsapp_channel_link: string;
   email: string;
-  phone: string;
   social_media: SocialMedia;
   seo: SEOSettings;
   updated_at: string;

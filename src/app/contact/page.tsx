@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import {
   MessageCircle,
   Mail,
-  Phone,
   MapPin,
   Send,
   ExternalLink,
@@ -84,14 +83,6 @@ export default function ContactPage() {
       href: `mailto:${SITE_CONFIG.email || 'info@soulcommunity.org'}`,
       color: 'text-soul-brown',
       bgColor: 'bg-amber-50',
-    },
-    {
-      icon: Phone,
-      title: 'Phone',
-      description: SITE_CONFIG.phone || '+254 700 000 000',
-      href: `tel:${SITE_CONFIG.phone || '+254700000000'}`,
-      color: 'text-soul-green',
-      bgColor: 'bg-green-50',
     },
   ]
 

@@ -2,17 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Calendar, Image, Megaphone, Phone } from 'lucide-react';
+import { Home, Calendar, Image, Megaphone, MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const icons = { Home, Calendar, Image, Megaphone, Phone };
+const icons = { Home, Calendar, Image, Megaphone, MessageCircle };
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home', icon: 'Home' },
   { href: '/events', label: 'Events', icon: 'Calendar' },
   { href: '/gallery', label: 'Gallery', icon: 'Image' },
   { href: '/announcements', label: 'News', icon: 'Megaphone' },
-  { href: '/contact', label: 'Contact', icon: 'Phone' },
+  { href: '/contact', label: 'Contact', icon: 'MessageCircle' },
 ];
 
 export function MobileNav() {

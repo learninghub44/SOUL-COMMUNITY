@@ -25,7 +25,6 @@ CREATE TABLE website_settings (
     whatsapp_community_link TEXT,
     whatsapp_channel_link TEXT,
     email TEXT,
-    phone TEXT,
     social_media JSONB DEFAULT '{}',
     seo JSONB DEFAULT '{}',
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -64,7 +63,6 @@ CREATE TABLE tickets (
     event_id UUID REFERENCES events(id) ON DELETE CASCADE,
     full_name TEXT NOT NULL,
     email TEXT NOT NULL,
-    phone TEXT,
     ticket_reference TEXT UNIQUE NOT NULL,
     qr_code TEXT,
     payment_status TEXT DEFAULT 'pending' CHECK (payment_status IN ('pending', 'paid', 'refunded', 'cancelled')),
