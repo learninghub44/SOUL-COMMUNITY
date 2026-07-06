@@ -205,7 +205,7 @@ export default function AdminEventsPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
-                        render={<Link href={`/admin/events/${event.id}/edit`} />}
+                        render={<Link href={`/admin/events/edit?id=${event.id}`} />}
                       >
                         <Pencil className="w-4 h-4" /> Edit
                       </DropdownMenuItem>

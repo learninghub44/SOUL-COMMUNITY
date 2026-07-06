@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Send, Save, Upload, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -13,10 +13,10 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { getAnnouncement, updateAnnouncement } from '@/lib/services/announcements';
 
-export default function EditAnnouncementPage() {
+export default function EditAnnouncementContent() {
   const router = useRouter();
-  const params = useParams();
-  const id = params.id as string;
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id') || '';
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -29,6 +29,11 @@ export default function EditAnnouncementPage() {
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!id) {
+      toast.error('No announcement specified');
+      router.push('/admin/announcements');
+      return;
+    }
     let active = true;
     const supabase = createClient();
     getAnnouncement(supabase, id)

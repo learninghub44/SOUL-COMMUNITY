@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { getEvent, updateEvent } from '@/lib/services/events'
@@ -44,8 +44,8 @@ interface FAQ {
 
 export default function EditEventContent() {
   const router = useRouter()
-  const params = useParams()
-  const eventId = params.id as string
+  const searchParams = useSearchParams()
+  const eventId = searchParams.get('id') || ''
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [posterFile, setPosterFile] = useState<File | null>(null)
@@ -71,6 +71,11 @@ export default function EditEventContent() {
   const [dragActive, setDragActive] = useState(false)
 
   useEffect(() => {
+    if (!eventId) {
+      toast.error('No event specified')
+      router.push('/admin/events')
+      return
+    }
     let active = true
     const supabase = createClient()
 

@@ -166,7 +166,7 @@ export default function AdminAnnouncementsPage() {
                         )}
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem render={<Link href={`/admin/announcements/${a.id}/edit`} />}>
+                        <DropdownMenuItem render={<Link href={`/admin/announcements/edit?id=${a.id}`} />}>
                           <Pencil className="w-4 h-4" /> Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem variant="destructive" onClick={() => handleDelete(a.id)}>
