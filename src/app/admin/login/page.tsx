@@ -3,7 +3,8 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Lock, Mail, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, Loader2, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/input';
@@ -33,9 +34,20 @@ function AdminLoginForm() {
     }
 
     setLoading(true);
-    const supabase = createClient();
 
     try {
+      if (
+        !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+        !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      ) {
+        toast.error(
+          'Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in the build environment.'
+        );
+        return;
+      }
+
+      const supabase = createClient();
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -65,8 +77,11 @@ function AdminLoginForm() {
       const redirectTo = searchParams.get('redirectTo') || '/admin';
       router.push(redirectTo);
       router.refresh();
-    } catch {
-      toast.error('An unexpected error occurred');
+    } catch (err) {
+      console.error('Admin login error:', err);
+      toast.error(
+        err instanceof Error ? err.message : 'An unexpected error occurred'
+      );
     } finally {
       setLoading(false);
     }
@@ -80,12 +95,22 @@ function AdminLoginForm() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-soul-green-dark transition-colors mb-4"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to home
+        </Link>
+
         <div className="bg-white rounded-2xl shadow-lg p-8 border border-soul-cream-dark">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-soul-green/10 mb-4">
-              <div className="w-10 h-10 rounded-full soul-gradient-green flex items-center justify-center">
-                <span className="text-white font-bold text-lg">S</span>
-              </div>
+              <img
+                src="/soul-logo-sm.png"
+                alt="SOUL Community"
+                className="w-12 h-12 rounded-full object-cover"
+              />
             </div>
             <h1 className="text-2xl font-bold text-soul-green-dark">
               Admin Dashboard
