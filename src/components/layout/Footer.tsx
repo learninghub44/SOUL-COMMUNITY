@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MessageCircle, Mail, ExternalLink } from 'lucide-react';
 import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
+import { SocialLinks } from '@/components/shared/SocialLinks';
 
 export function Footer() {
   const quickLinks = NAV_LINKS.filter((link) => link.href !== '/');
@@ -113,6 +114,11 @@ export function Footer() {
                 Follow Channel
               </a>
             </div>
+            <SocialLinks
+              className="flex flex-wrap gap-2 mt-4"
+              iconClassName="w-4 h-4"
+              linkClassName="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            />
           </div>
         </div>
       </div>

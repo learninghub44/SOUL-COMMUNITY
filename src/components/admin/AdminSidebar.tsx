@@ -16,6 +16,7 @@ import {
   Menu,
   LogOut,
   Loader2,
+  Mail,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -37,6 +38,7 @@ const sidebarLinks = [
   { href: '/admin/gallery', label: 'Gallery', icon: Image },
   { href: '/admin/weekly-activities', label: 'Weekly Activities', icon: CalendarDays },
   { href: '/admin/resources', label: 'Resources', icon: FolderOpen },
+  { href: '/admin/messages', label: 'Messages', icon: Mail },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 

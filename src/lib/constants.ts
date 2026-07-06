@@ -313,4 +313,14 @@ export const SITE_CONFIG = {
   whatsappCommunityLink: 'https://chat.whatsapp.com/La7FQSUAfmR02w3OF19AVv',
   whatsappChannelLink: '#',
   email: 'info@soul-community.org',
+  // Real social profile URLs. Leave '' for any platform SOUL doesn't
+  // have yet - components filter these out and won't render a dead link.
+  social: {
+    facebook: '',
+    instagram: '',
+    tiktok: '',
+    twitter: '',
+    youtube: '',
+    linkedin: '',
+  },
 };

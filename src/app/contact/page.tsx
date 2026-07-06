@@ -5,10 +5,13 @@ import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { AnimatedSection } from '@/components/shared/AnimatedSection'
+import { SocialLinks } from '@/components/shared/SocialLinks'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SITE_CONFIG } from '@/lib/constants'
+import { createClient } from '@/lib/supabase/client'
+import { createContactMessage } from '@/lib/services/contact'
 
 interface FormData {
   name: string
@@ -37,15 +40,22 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const supabase = createClient()
+      await createContactMessage(supabase, formData)
 
-    toast.success('Message sent successfully!', {
-      description: 'We will get back to you soon.',
-    })
-
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    setIsSubmitting(false)
+      toast.success('Message sent successfully!', {
+        description: 'We will get back to you soon.',
+      })
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    } catch (err) {
+      console.error('Failed to submit contact message:', err)
+      toast.error('Could not send your message', {
+        description: 'Please try again in a moment, or reach us directly via WhatsApp or email below.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -67,13 +77,6 @@ export default function ContactPage() {
       description: SITE_CONFIG.email || 'info@soulcommunity.org',
       href: `mailto:${SITE_CONFIG.email || 'info@soulcommunity.org'}`,
     },
-  ]
-
-  const socialLinks = [
-    { label: 'FB', name: 'Facebook', href: '#' },
-    { label: 'IG', name: 'Instagram', href: '#' },
-    { label: 'X', name: 'Twitter', href: '#' },
-    { label: 'YT', name: 'YouTube', href: '#' },
   ]
 
   return (
@@ -104,6 +107,7 @@ export default function ContactPage() {
                     name="name"
                     type="text"
                     required
+                    maxLength={200}
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your name"
@@ -123,6 +127,7 @@ export default function ContactPage() {
                     name="email"
                     type="email"
                     required
+                    maxLength={320}
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
@@ -142,6 +147,7 @@ export default function ContactPage() {
                     name="subject"
                     type="text"
                     required
+                    maxLength={200}
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="How can we help?"
@@ -160,6 +166,7 @@ export default function ContactPage() {
                     id="message"
                     name="message"
                     required
+                    maxLength={5000}
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
@@ -233,25 +240,14 @@ export default function ContactPage() {
               </div>
 
               {/* Social Media */}
-              <div className="glass-card rounded-xl p-6">
-                <h3 className="font-semibold text-foreground mb-4">
-                  Follow Us
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-11 h-11 rounded-xl bg-soul-green/10 flex items-center justify-center text-sm font-semibold text-soul-green hover:bg-soul-green/20 transition-colors"
-                      aria-label={social.name}
-                    >
-                      {social.label}
-                    </a>
-                  ))}
+              {Object.values(SITE_CONFIG.social).some(Boolean) && (
+                <div className="glass-card rounded-xl p-6">
+                  <h3 className="font-semibold text-foreground mb-4">
+                    Follow Us
+                  </h3>
+                  <SocialLinks className="flex flex-wrap gap-3" />
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </AnimatedSection>
