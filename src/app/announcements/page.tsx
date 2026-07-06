@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Megaphone, Search, Pin, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
+import { toast } from 'sonner';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { Input } from '@/components/ui/input';
@@ -17,6 +18,7 @@ export default function AnnouncementsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -26,8 +28,12 @@ export default function AnnouncementsPage() {
       .then((data) => {
         if (active) setAnnouncements(data);
       })
-      .catch(() => {
-        if (active) setAnnouncements([]);
+      .catch((err) => {
+        console.error('Failed to load announcements:', err);
+        if (active) {
+          setAnnouncements([]);
+          setLoadError(true);
+        }
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -96,6 +102,12 @@ export default function AnnouncementsPage() {
                   <div className="flex justify-center py-16">
                     <Loader2 className="w-6 h-6 animate-spin text-soul-green" />
                   </div>
+                ) : loadError ? (
+                  <EmptyState
+                    icon={<Megaphone className="w-8 h-8" />}
+                    title="Couldn't load announcements"
+                    description="Something went wrong reaching the server. Please refresh the page or try again shortly."
+                  />
                 ) : filtered.length === 0 ? (
                   <EmptyState
                     icon={<Megaphone className="w-8 h-8" />}

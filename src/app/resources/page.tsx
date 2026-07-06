@@ -26,6 +26,7 @@ export default function ResourcesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -35,8 +36,12 @@ export default function ResourcesPage() {
       .then((data) => {
         if (active) setResources(data);
       })
-      .catch(() => {
-        if (active) setResources([]);
+      .catch((err) => {
+        console.error('Failed to load resources:', err);
+        if (active) {
+          setResources([]);
+          setLoadError(true);
+        }
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -117,6 +122,12 @@ export default function ResourcesPage() {
             <div className="flex justify-center py-16">
               <Loader2 className="w-6 h-6 animate-spin text-soul-green" />
             </div>
+          ) : loadError ? (
+            <EmptyState
+              icon={<FileText className="w-8 h-8" />}
+              title="Couldn't load resources"
+              description="Something went wrong reaching the server. Please refresh the page or try again shortly."
+            />
           ) : filtered.length === 0 ? (
             <EmptyState
               icon={<FileText className="w-8 h-8" />}

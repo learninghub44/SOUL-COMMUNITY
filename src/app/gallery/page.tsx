@@ -14,6 +14,7 @@ export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null);
 
   const categories = ['All', ...GALLERY_CATEGORIES];
@@ -26,8 +27,12 @@ export default function GalleryPage() {
       .then((data) => {
         if (active) setImages(data);
       })
-      .catch(() => {
-        if (active) setImages([]);
+      .catch((err) => {
+        console.error('Failed to load gallery images:', err);
+        if (active) {
+          setImages([]);
+          setLoadError(true);
+        }
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -74,6 +79,12 @@ export default function GalleryPage() {
             <div className="flex justify-center py-16">
               <Loader2 className="w-6 h-6 animate-spin text-soul-green" />
             </div>
+          ) : loadError ? (
+            <EmptyState
+              icon={<ImageIcon className="w-8 h-8" />}
+              title="Couldn't load gallery"
+              description="Something went wrong reaching the server. Please refresh the page or try again shortly."
+            />
           ) : filtered.length === 0 ? (
             <EmptyState
               icon={<ImageIcon className="w-8 h-8" />}

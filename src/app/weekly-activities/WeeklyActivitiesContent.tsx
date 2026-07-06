@@ -31,6 +31,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function WeeklyActivitiesContent() {
   const [dbActivities, setDbActivities] = useState<Record<string, WeeklyActivity>>({});
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -45,8 +46,12 @@ export default function WeeklyActivitiesContent() {
         });
         setDbActivities(byDay);
       })
-      .catch(() => {
-        // fall back silently to static content
+      .catch((err) => {
+        // Falls back to static content so the page still renders, but the
+        // failure is no longer hidden — admin edits won't appear on this
+        // page until whatever this logs is fixed (RLS, env vars, network).
+        console.error('Failed to load weekly activities from Supabase, falling back to static content:', err);
+        if (active) setLoadError(true);
       });
 
     return () => {
@@ -73,6 +78,11 @@ export default function WeeklyActivitiesContent() {
 
       <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-6xl mx-auto">
+          {loadError && (
+            <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              Showing default schedule — we couldn&apos;t load the latest updates from the admin dashboard right now.
+            </div>
+          )}
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
