@@ -34,7 +34,7 @@ const quickActions = [
   },
   {
     label: 'Upload Photos',
-    href: '/admin/gallery/upload',
+    href: '/admin/gallery',
     icon: Upload,
     color: 'bg-soul-gold hover:bg-soul-gold/90 text-soul-green-dark',
   },
