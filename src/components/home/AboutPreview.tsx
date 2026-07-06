@@ -33,7 +33,7 @@ export function AboutPreview() {
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-soul-green-dark font-heading mb-4">
               About SOUL
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -68,7 +68,7 @@ export function AboutPreview() {
                 className="glass-card rounded-xl p-6 h-full"
               >
                 <div className="w-12 h-12 rounded-xl bg-soul-green/10 flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-soul-green font-[family-name:var(--font-playfair)]">
+                  <span className="text-xl font-bold text-soul-green font-heading">
                     {value.letter}
                   </span>
                 </div>

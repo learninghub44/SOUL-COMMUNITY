@@ -24,7 +24,7 @@ export default function ConfirmationContent() {
           <div className="bg-white rounded-2xl soul-shadow-lg overflow-hidden">
             <div className="soul-gradient-green p-8 text-center">
               <CheckCircle className="w-16 h-16 text-soul-gold mx-auto mb-4" />
-              <h1 className="text-2xl font-bold text-white font-[family-name:var(--font-playfair)]">
+              <h1 className="text-2xl font-bold text-white font-heading">
                 No Booking Found
               </h1>
               <p className="text-white/80 mt-2">Please complete a booking first.</p>
@@ -60,7 +60,7 @@ export default function ConfirmationContent() {
             >
               <CheckCircle className="w-16 h-16 text-soul-gold mx-auto mb-4" />
             </motion.div>
-            <h1 className="text-2xl font-bold text-white font-[family-name:var(--font-playfair)]">
+            <h1 className="text-2xl font-bold text-white font-heading">
               Ticket Confirmed!
             </h1>
             <p className="text-white/80 mt-2">Your ticket has been successfully generated</p>

@@ -11,8 +11,8 @@ export function Footer() {
 
   return (
     <footer className="bg-soul-green-dark text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
@@ -23,7 +23,7 @@ export function Footer() {
                 className="rounded-full"
               />
               <div>
-                <h3 className="font-bold text-lg">S.O.U.L</h3>
+                <h3 className="font-heading text-lg font-semibold">S.O.U.L</h3>
                 <p className="text-xs text-white/60">Serving Opportunities, Uplifting Lives</p>
               </div>
             </Link>
@@ -33,7 +33,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-soul-gold mb-4">Quick Links</h4>
+            <h4 className="font-heading font-semibold text-soul-gold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -49,7 +49,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-soul-gold mb-4">Connect With Us</h4>
+            <h4 className="font-heading font-semibold text-soul-gold mb-4">Connect With Us</h4>
             <ul className="space-y-3">
               <li>
                 <a
@@ -88,7 +88,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-soul-gold mb-4">Join Our Community</h4>
+            <h4 className="font-heading font-semibold text-soul-gold mb-4">Join Our Community</h4>
             <p className="text-sm text-white/70 mb-4">
               Be part of a movement that serves, uplifts, and transforms lives.
             </p>
@@ -118,8 +118,9 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-center">
-          <p className="text-xs text-white/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6 flex flex-col items-center gap-4">
+          <span className="soul-dotted-arc w-20 text-soul-gold/60" />
+          <p className="text-xs text-white/50 text-center">
             © 2025–{new Date().getFullYear()} S.O.U.L – Serving Opportunities, Uplifting Lives. All rights reserved.
           </p>
         </div>

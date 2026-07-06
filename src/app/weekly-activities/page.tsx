@@ -47,7 +47,7 @@ export default function WeeklyActivitiesPage() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
                 Your Week with SOUL
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">

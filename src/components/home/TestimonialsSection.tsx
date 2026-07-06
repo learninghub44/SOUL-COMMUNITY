@@ -36,7 +36,7 @@ export function TestimonialsSection() {
       <div className="max-w-6xl mx-auto relative z-10">
         <AnimatedSection>
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white font-[family-name:var(--font-playfair)] mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white font-heading mb-4">
               What Our Community Says
             </h2>
             <p className="text-lg text-white/70 max-w-2xl mx-auto">
@@ -54,7 +54,7 @@ export function TestimonialsSection() {
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                    <span className="text-base font-semibold text-white font-[family-name:var(--font-playfair)]">
+                    <span className="text-base font-semibold text-white font-heading">
                       {testimonial.initial}
                     </span>
                   </div>

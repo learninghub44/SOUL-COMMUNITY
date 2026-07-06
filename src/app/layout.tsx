@@ -1,23 +1,25 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans } from 'next/font/google';
+import { DM_Sans, Fraunces } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { MobileNav } from '@/components/layout/MobileNav';
 import { SWRegister } from '@/components/layout/SWRegister';
 import { Toaster } from 'sonner';
 import './globals.css';
 
-// Single unified font (DM Sans) across the whole site.
-// Kept as two variable names so existing heading/body classes
-// throughout the codebase don't need to be touched.
-const dmSansHeading = DM_Sans({
+// Fraunces for headings (warm, characterful serif with soft terminals —
+// fits a community/nonprofit tone) paired with DM Sans for body copy.
+// Variable names kept as --font-playfair / --font-inter so existing
+// heading/body classes throughout the codebase don't need to change.
+const headingFont = Fraunces({
   variable: '--font-playfair',
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
+  weight: 'variable',
+  style: ['normal'],
+  axes: ['opsz', 'SOFT'],
   display: 'swap',
 });
 
-const dmSansBody = DM_Sans({
+const bodyFont = DM_Sans({
   variable: '--font-inter',
   subsets: ['latin'],
   weight: ['400', '500'],
@@ -77,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSansHeading.variable} ${dmSansBody.variable}`}>
+    <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
       <head>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
@@ -91,7 +93,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <MobileNav />
         <SWRegister />
         <Toaster position="top-right" richColors />
       </body>

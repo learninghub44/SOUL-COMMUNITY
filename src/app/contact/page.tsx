@@ -218,7 +218,7 @@ export default function ContactPage() {
                     className="glass-card flex items-center gap-4 p-4 rounded-xl"
                   >
                     <div className="w-11 h-11 rounded-xl bg-soul-green/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-sm font-bold text-soul-green font-[family-name:var(--font-playfair)]">
+                      <span className="text-sm font-bold text-soul-green font-heading">
                         {item.label}
                       </span>
                     </div>

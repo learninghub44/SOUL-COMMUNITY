@@ -41,7 +41,7 @@ export function Navbar() {
               className="rounded-full"
               priority
             />
-            <span className="font-bold text-lg text-soul-green hidden sm:block">
+            <span className="font-heading text-lg font-semibold text-soul-green hidden sm:block">
               S.O.U.L
             </span>
           </Link>

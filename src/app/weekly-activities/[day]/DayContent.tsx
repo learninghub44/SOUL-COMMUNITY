@@ -92,7 +92,7 @@ export default function DayContent() {
       <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-8">
               About {activity.title}
             </h2>
           </AnimatedSection>
@@ -131,7 +131,7 @@ export default function DayContent() {
       <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-8">
               Meeting Details
             </h2>
           </AnimatedSection>

@@ -60,49 +60,53 @@
 }
 
 :root {
-  --background: #F5F3FC;
-  --foreground: #241F3D;
+  /* Palette grounded in the SOUL mark: deep forest green from the emblem,
+     warm cream paper, and the terracotta/gold tones from the African-pattern
+     border. Replaces a prior purple/lavender palette that had drifted away
+     from the actual logo and manifest theme-color. */
+  --background: #FAF6EC;
+  --foreground: #2A2118;
   --card: #FFFFFF;
-  --card-foreground: #241F3D;
+  --card-foreground: #2A2118;
   --popover: #FFFFFF;
-  --popover-foreground: #241F3D;
-  --primary: #6A63C4;
+  --popover-foreground: #2A2118;
+  --primary: #2D5A3D;
   --primary-foreground: #FFFFFF;
-  --secondary: #A78BC9;
+  --secondary: #8B4A2F;
   --secondary-foreground: #FFFFFF;
-  --muted: #ECE7F8;
-  --muted-foreground: #5B5478;
-  --accent: #7C76D1;
-  --accent-foreground: #FFFFFF;
-  --destructive: #D44B4B;
-  --border: #DDD5F3;
-  --input: #DDD5F3;
-  --ring: #6A63C4;
-  --chart-1: #6A63C4;
-  --chart-2: #9B8AC4;
-  --chart-3: #7C76D1;
-  --chart-4: #B8B5F0;
-  --chart-5: #4A4499;
-  --radius: 0.75rem;
-  --soul-green: #6A63C4;
-  --soul-green-light: #9490DD;
-  --soul-green-dark: #4A4499;
-  --soul-brown: #A78BC9;
-  --soul-brown-light: #C3AEDD;
-  --soul-brown-dark: #7A63A3;
-  --soul-gold: #7C76D1;
-  --soul-gold-light: #A8A3E8;
-  --soul-gold-dark: #5D57B0;
-  --soul-cream: #F5F3FC;
-  --soul-cream-dark: #E7E1F7;
+  --muted: #F0E6D2;
+  --muted-foreground: #6B5D4D;
+  --accent: #C89B3C;
+  --accent-foreground: #2A2118;
+  --destructive: #B3402A;
+  --border: #E4D8C3;
+  --input: #E4D8C3;
+  --ring: #2D5A3D;
+  --chart-1: #2D5A3D;
+  --chart-2: #C89B3C;
+  --chart-3: #8B4A2F;
+  --chart-4: #4F7D5C;
+  --chart-5: #17301F;
+  --radius: 0.875rem;
+  --soul-green: #2D5A3D;
+  --soul-green-light: #4F7D5C;
+  --soul-green-dark: #17301F;
+  --soul-brown: #8B4A2F;
+  --soul-brown-light: #B36B45;
+  --soul-brown-dark: #5C2F1C;
+  --soul-gold: #C89B3C;
+  --soul-gold-light: #DDB968;
+  --soul-gold-dark: #9C7423;
+  --soul-cream: #FAF6EC;
+  --soul-cream-dark: #F0E6D2;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #241F3D;
-  --sidebar-primary: #6A63C4;
+  --sidebar-foreground: #2A2118;
+  --sidebar-primary: #2D5A3D;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #ECE7F8;
-  --sidebar-accent-foreground: #241F3D;
-  --sidebar-border: #DDD5F3;
-  --sidebar-ring: #6A63C4;
+  --sidebar-accent: #F0E6D2;
+  --sidebar-accent-foreground: #2A2118;
+  --sidebar-border: #E4D8C3;
+  --sidebar-ring: #2D5A3D;
 }
 
 @layer base {
@@ -122,51 +126,60 @@
     text-wrap: balance;
   }
   .soul-gradient {
-    background: linear-gradient(135deg, #4A4499 0%, #6A63C4 50%, #B8B5F0 100%);
+    background: linear-gradient(135deg, #17301F 0%, #2D5A3D 50%, #4F7D5C 100%);
   }
   .soul-gradient-warm {
-    background: linear-gradient(135deg, #7A63A3 0%, #A78BC9 50%, #F5F3FC 100%);
+    background: linear-gradient(135deg, #5C2F1C 0%, #8B4A2F 50%, #C89B3C 100%);
   }
   .soul-gradient-green {
-    background: linear-gradient(135deg, #2E2A5C 0%, #4A4499 50%, #6A63C4 100%);
+    background: linear-gradient(135deg, #10241A 0%, #17301F 50%, #2D5A3D 100%);
   }
   .soul-shadow {
-    box-shadow: 0 4px 20px -2px rgba(106, 99, 196, 0.14), 0 2px 8px -2px rgba(106, 99, 196, 0.08);
+    box-shadow: 0 4px 20px -2px rgba(45, 90, 61, 0.16), 0 2px 8px -2px rgba(45, 90, 61, 0.08);
   }
   .soul-shadow-lg {
-    box-shadow: 0 10px 40px -4px rgba(106, 99, 196, 0.2), 0 4px 16px -4px rgba(106, 99, 196, 0.1);
+    box-shadow: 0 10px 40px -4px rgba(45, 90, 61, 0.22), 0 4px 16px -4px rgba(45, 90, 61, 0.1);
   }
   .soul-shadow-card {
-    box-shadow: 0 2px 12px -1px rgba(106, 99, 196, 0.1), 0 1px 4px -1px rgba(106, 99, 196, 0.05);
+    box-shadow: 0 2px 12px -1px rgba(45, 90, 61, 0.1), 0 1px 4px -1px rgba(45, 90, 61, 0.05);
+  }
+
+  /* Signature motif: a dotted arc echoing the beaded border on the SOUL
+     emblem. Used sparingly as a section accent, never as full decoration. */
+  .soul-dotted-arc {
+    background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.6px);
+    background-size: 14px 14px;
+    background-repeat: repeat-x;
+    background-position: center;
+    height: 2px;
   }
 
   /* Clear-glass surfaces: frosted, translucent panels over color or video */
   .glass-card {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 0 8px 32px -6px rgba(74, 68, 153, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px -6px rgba(23, 48, 31, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
   .glass-card-dark {
-    background: rgba(36, 31, 61, 0.35);
+    background: rgba(23, 48, 31, 0.4);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.22);
-    box-shadow: 0 8px 32px -6px rgba(24, 20, 46, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px -6px rgba(16, 36, 26, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
   .glass-panel {
     background: rgba(255, 255, 255, 0.14);
     backdrop-filter: blur(24px) saturate(140%);
     -webkit-backdrop-filter: blur(24px) saturate(140%);
     border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 12px 48px -8px rgba(24, 20, 46, 0.4);
+    box-shadow: 0 12px 48px -8px rgba(16, 36, 26, 0.4);
   }
 }
 
 @media (max-width: 768px) {
   body {
-
-    padding-bottom: 4rem;
+    padding-bottom: 0;
   }
 }

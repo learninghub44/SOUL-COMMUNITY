@@ -68,7 +68,7 @@ export default function AboutPage() {
                 <Compass className="w-7 h-7 text-soul-green" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
                   Our Mission
                 </h2>
                 <p className="text-lg text-foreground/80 leading-relaxed">
@@ -89,7 +89,7 @@ export default function AboutPage() {
                 <Globe className="w-7 h-7 text-soul-gold" />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
                   Our Vision
                 </h2>
                 <p className="text-lg text-foreground/80 leading-relaxed">
@@ -105,7 +105,7 @@ export default function AboutPage() {
       <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
               About SOUL
             </h2>
           </AnimatedSection>
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
                 Our Core Values
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
@@ -165,7 +165,7 @@ export default function AboutPage() {
       <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-[family-name:var(--font-playfair)] mb-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
               The SOUL Vibe
             </h2>
           </AnimatedSection>

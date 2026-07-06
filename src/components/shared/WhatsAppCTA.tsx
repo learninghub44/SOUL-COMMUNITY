@@ -17,7 +17,7 @@ export function WhatsAppCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground font-[family-name:var(--font-playfair)] mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground font-heading mb-4">
             Join SOUL Today
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
