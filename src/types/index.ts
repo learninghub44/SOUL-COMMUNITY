@@ -32,7 +32,7 @@ export interface Ticket {
   email: string;
   ticket_reference: string;
   qr_code: string;
-  payment_status: 'pending' | 'completed' | 'refunded';
+  payment_status: 'pending' | 'paid' | 'refunded' | 'cancelled';
   checked_in: boolean;
   checked_in_at: string | null;
   created_at: string;

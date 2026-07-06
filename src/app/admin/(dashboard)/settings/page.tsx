@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, Globe, MessageCircle, Share2, Search, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -9,43 +9,117 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { createClient } from '@/lib/supabase/client';
+import { getWebsiteSettings, saveWebsiteSettings } from '@/lib/services/settings';
 
 export default function AdminSettingsPage() {
   const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [settingsId, setSettingsId] = useState<string | null>(null);
 
   const [general, setGeneral] = useState({
-    heroHeadline: 'Welcome to SOUL Community',
-    heroSubheadline: 'A vibrant community of faith, growth, and purpose.',
-    mission: 'To empower young people through spiritual growth, mentorship, and community engagement, equipping them to become leaders of positive change in their families, communities, and the world.',
-    vision: 'A generation of purpose-driven youth who are spiritually grounded, emotionally healthy, and socially impactful — transforming society through faith and action.',
-    about: 'SOUL Community is a youth-focused organization dedicated to holistic development through worship, discipleship, skills training, and community service. We believe in the potential of every young person to lead and make a difference.',
+    heroHeadline: '',
+    heroSubheadline: '',
+    mission: '',
+    vision: '',
+    about: '',
   });
 
   const [contact, setContact] = useState({
-    whatsappCommunity: 'https://chat.whatsapp.com/soulcommunity2026',
-    whatsappChannel: 'https://whatsapp.com/channel/soulcommunity',
-    email: 'info@soul-community.org',
+    whatsappCommunity: '',
+    whatsappChannel: '',
+    email: '',
   });
 
   const [social, setSocial] = useState({
-    facebook: 'https://facebook.com/soulcommunity',
-    instagram: 'https://instagram.com/soulcommunity',
-    twitter: 'https://x.com/soulcommunity',
-    youtube: 'https://youtube.com/@soulcommunity',
-    tiktok: 'https://tiktok.com/@soulcommunity',
+    facebook: '',
+    instagram: '',
+    twitter: '',
+    youtube: '',
+    tiktok: '',
   });
 
   const [seo, setSeo] = useState({
-    siteTitle: 'SOUL Community — Faith, Growth, Purpose',
-    metaDescription: 'SOUL Community is a youth-focused faith organization empowering young people through worship, mentorship, skills training, and community service.',
-    keywords: 'youth community, faith, worship, mentorship, Kenya youth, SOUL community, spiritual growth',
+    siteTitle: '',
+    metaDescription: '',
+    keywords: '',
   });
+
+  useEffect(() => {
+    let active = true;
+    const supabase = createClient();
+    getWebsiteSettings(supabase)
+      .then((data) => {
+        if (!active || !data) return;
+        setSettingsId(data.id);
+        setGeneral({
+          heroHeadline: data.hero_headline || '',
+          heroSubheadline: data.hero_subheadline || '',
+          mission: data.mission || '',
+          vision: data.vision || '',
+          about: data.about || '',
+        });
+        setContact({
+          whatsappCommunity: data.whatsapp_community_link || '',
+          whatsappChannel: data.whatsapp_channel_link || '',
+          email: data.email || '',
+        });
+        setSocial({
+          facebook: data.social_media?.facebook || '',
+          instagram: data.social_media?.instagram || '',
+          twitter: data.social_media?.twitter || '',
+          youtube: data.social_media?.youtube || '',
+          tiktok: data.social_media?.tiktok || '',
+        });
+        setSeo({
+          siteTitle: data.seo?.title || '',
+          metaDescription: data.seo?.description || '',
+          keywords: (data.seo?.keywords || []).join(', '),
+        });
+      })
+      .catch(() => toast.error('Could not load settings'))
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const handleSave = async () => {
     setSaving(true);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setSaving(false);
-    toast.success('Settings saved successfully');
+    try {
+      const supabase = createClient();
+      const saved = await saveWebsiteSettings(supabase, settingsId, {
+        hero_headline: general.heroHeadline,
+        hero_subheadline: general.heroSubheadline,
+        mission: general.mission,
+        vision: general.vision,
+        about: general.about,
+        whatsapp_community_link: contact.whatsappCommunity,
+        whatsapp_channel_link: contact.whatsappChannel,
+        email: contact.email,
+        social_media: {
+          facebook: social.facebook,
+          instagram: social.instagram,
+          twitter: social.twitter,
+          youtube: social.youtube,
+          tiktok: social.tiktok,
+        },
+        seo: {
+          title: seo.siteTitle,
+          description: seo.metaDescription,
+          keywords: seo.keywords
+            .split(',')
+            .map((k) => k.trim())
+            .filter(Boolean),
+        },
+      });
+      setSettingsId(saved.id);
+      toast.success('Settings saved successfully');
+    } catch {
+      toast.error('Could not save settings');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -72,7 +146,7 @@ export default function AdminSettingsPage() {
             <Button
               className="bg-[#2D5A3D] hover:bg-[#1E3D2A] text-white"
               onClick={handleSave}
-              disabled={saving}
+              disabled={saving || loading}
             >
               {saving ? (
                 <>
@@ -86,7 +160,11 @@ export default function AdminSettingsPage() {
           </div>
         </motion.div>
 
-        {/* Tabs */}
+        {loading ? (
+          <div className="flex items-center justify-center py-16">
+            <Loader2 className="w-6 h-6 animate-spin text-[#2D5A3D]" />
+          </div>
+        ) : (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -336,6 +414,7 @@ export default function AdminSettingsPage() {
             </Tabs>
           </Card>
         </motion.div>
+        )}
       </div>
     </div>
   );
