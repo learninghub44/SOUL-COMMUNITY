@@ -17,6 +17,19 @@ export async function listAnnouncements(supabase: SupabaseClient) {
   return data as Announcement[];
 }
 
+/** Published announcements only, pinned first, newest first. For public-facing pages. */
+export async function listPublishedAnnouncements(supabase: SupabaseClient) {
+  const { data, error } = await supabase
+    .from('announcements')
+    .select('*')
+    .eq('status', 'published')
+    .order('is_pinned', { ascending: false })
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data as Announcement[];
+}
+
 export async function getAnnouncement(supabase: SupabaseClient, id: string) {
   const { data, error } = await supabase
     .from('announcements')

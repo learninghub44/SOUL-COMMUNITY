@@ -1,12 +1,49 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { WEEKLY_ACTIVITIES } from '@/lib/constants';
+import { createClient } from '@/lib/supabase/client';
+import { listWeeklyActivities } from '@/lib/services/weekly-activities';
+import type { WeeklyActivity } from '@/types';
 
 export function WeeklyActivitiesPreview() {
+  const [dbActivities, setDbActivities] = useState<Record<string, WeeklyActivity>>({});
+
+  useEffect(() => {
+    let active = true;
+    const supabase = createClient();
+
+    listWeeklyActivities(supabase)
+      .then((data) => {
+        if (!active) return;
+        const byDay: Record<string, WeeklyActivity> = {};
+        data.forEach((a) => {
+          byDay[a.day] = a;
+        });
+        setDbActivities(byDay);
+      })
+      .catch(() => {
+        // fall back silently to static content
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const activities = WEEKLY_ACTIVITIES.map((activity) => {
+    const override = dbActivities[activity.day];
+    return {
+      ...activity,
+      title: override?.title || activity.title,
+      description: override?.description || activity.description,
+    };
+  });
+
   return (
     <section className="py-20 px-4 bg-soul-cream-dark">
       <div className="max-w-6xl mx-auto">
@@ -22,24 +59,26 @@ export function WeeklyActivitiesPreview() {
         </AnimatedSection>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 mb-12">
-          {WEEKLY_ACTIVITIES.map((activity, index) => (
+          {activities.map((activity, index) => (
             <AnimatedSection key={activity.day} delay={0.1 + index * 0.07}>
-              <motion.div
-                whileHover={{ scale: 1.04, boxShadow: '0 12px 36px -4px rgba(0,0,0,0.1)' }}
-                transition={{ duration: 0.2 }}
-                className="bg-white rounded-xl p-5 soul-shadow-card h-full relative overflow-hidden group cursor-pointer"
-              >
-                <div
-                  className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
-                  style={{ backgroundColor: activity.color }}
-                />
-                <h3 className="text-sm font-bold text-foreground mb-1.5 leading-tight mt-2">
-                  {activity.shortTitle}
-                </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
-                  {activity.description.split('.')[0]}.
-                </p>
-              </motion.div>
+              <Link href={`/weekly-activities/${activity.day}`}>
+                <motion.div
+                  whileHover={{ scale: 1.04, boxShadow: '0 12px 36px -4px rgba(0,0,0,0.1)' }}
+                  transition={{ duration: 0.2 }}
+                  className="bg-white rounded-xl p-5 soul-shadow-card h-full relative overflow-hidden group cursor-pointer"
+                >
+                  <div
+                    className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
+                    style={{ backgroundColor: activity.color }}
+                  />
+                  <h3 className="text-sm font-bold text-foreground mb-1.5 leading-tight mt-2">
+                    {activity.shortTitle}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                    {activity.description.split('.')[0]}.
+                  </p>
+                </motion.div>
+              </Link>
             </AnimatedSection>
           ))}
         </div>

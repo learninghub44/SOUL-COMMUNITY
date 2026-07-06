@@ -3,7 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { CheckCircle, ArrowLeft, Ticket, Calendar, User } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
+import { CheckCircle, ArrowLeft, Calendar, User, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function ConfirmationContent() {
@@ -11,6 +12,7 @@ export default function ConfirmationContent() {
   const reference = searchParams.get('ref') || '';
   const eventName = searchParams.get('event') || '';
   const name = searchParams.get('name') || '';
+  const isFree = searchParams.get('free') === '1';
 
   if (!reference || !eventName) {
     return (
@@ -24,9 +26,7 @@ export default function ConfirmationContent() {
           <div className="bg-white rounded-2xl soul-shadow-lg overflow-hidden">
             <div className="soul-gradient-green p-8 text-center">
               <CheckCircle className="w-16 h-16 text-soul-gold mx-auto mb-4" />
-              <h1 className="text-2xl font-bold text-white font-heading">
-                No Booking Found
-              </h1>
+              <h1 className="text-2xl font-bold text-white font-heading">No Booking Found</h1>
               <p className="text-white/80 mt-2">Please complete a booking first.</p>
             </div>
             <div className="p-8 text-center">
@@ -61,9 +61,13 @@ export default function ConfirmationContent() {
               <CheckCircle className="w-16 h-16 text-soul-gold mx-auto mb-4" />
             </motion.div>
             <h1 className="text-2xl font-bold text-white font-heading">
-              Ticket Confirmed!
+              {isFree ? 'Spot Reserved!' : 'Registration Received!'}
             </h1>
-            <p className="text-white/80 mt-2">Your ticket has been successfully generated</p>
+            <p className="text-white/80 mt-2">
+              {isFree
+                ? 'Your ticket has been confirmed'
+                : "We'll contact you shortly with payment details"}
+            </p>
           </div>
 
           <div className="p-8 space-y-6">
@@ -74,9 +78,7 @@ export default function ConfirmationContent() {
 
             <div className="bg-soul-cream-dark/50 rounded-xl p-6 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 text-soul-green flex items-center justify-center">
-                  <Calendar className="w-5 h-5" />
-                </div>
+                <Calendar className="w-5 h-5 text-soul-green shrink-0" />
                 <div>
                   <p className="text-sm text-muted-foreground">Event</p>
                   <p className="font-medium">{eventName}</p>
@@ -84,12 +86,19 @@ export default function ConfirmationContent() {
               </div>
               {name && (
                 <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 text-soul-green flex items-center justify-center">
-                    <User className="w-5 h-5" />
-                  </div>
+                  <User className="w-5 h-5 text-soul-green shrink-0" />
                   <div>
                     <p className="text-sm text-muted-foreground">Attendee</p>
                     <p className="font-medium">{name}</p>
+                  </div>
+                </div>
+              )}
+              {!isFree && (
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-soul-green shrink-0" />
+                  <div>
+                    <p className="text-sm text-muted-foreground">Status</p>
+                    <p className="font-medium">Pending payment confirmation</p>
                   </div>
                 </div>
               )}
@@ -97,8 +106,8 @@ export default function ConfirmationContent() {
 
             <div className="bg-soul-cream-dark/30 rounded-xl p-6 text-center">
               <p className="text-sm text-muted-foreground mb-3">QR Code</p>
-              <div className="w-32 h-32 bg-white rounded-lg mx-auto flex items-center justify-center soul-shadow-card">
-                <Ticket className="w-16 h-16 text-soul-green/30" />
+              <div className="w-32 h-32 bg-white rounded-lg mx-auto flex items-center justify-center soul-shadow-card p-2">
+                <QRCodeSVG value={reference} size={112} />
               </div>
               <p className="text-xs text-muted-foreground mt-2">Show this QR code at the entrance</p>
             </div>

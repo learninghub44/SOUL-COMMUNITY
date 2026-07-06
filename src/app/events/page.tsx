@@ -1,19 +1,62 @@
 'use client';
 
-import { useState } from 'react';
-import { Calendar, Search, Filter } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { Calendar, Search, MapPin, Loader2 } from 'lucide-react';
+import { format } from 'date-fns';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { EmptyState } from '@/components/shared/EmptyState';
-
-const categories = ['All', 'Social', 'Professional', 'Outdoor', 'Wellness', 'Celebration'];
+import { createClient } from '@/lib/supabase/client';
+import { listPublishedEvents } from '@/lib/services/events';
+import type { Event } from '@/types';
 
 export default function EventsPage() {
   const [activeTab, setActiveTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    const supabase = createClient();
+
+    listPublishedEvents(supabase)
+      .then((data) => {
+        if (active) setEvents(data);
+      })
+      .catch(() => {
+        if (active) setEvents([]);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  const filtered = useMemo(() => {
+    return events.filter((event) => {
+      if (activeTab === 'upcoming' && event.date && event.date < today) return false;
+      if (activeTab === 'past' && (!event.date || event.date >= today)) return false;
+      if (activeTab === 'free' && !event.is_free) return false;
+      if (activeTab === 'paid' && event.is_free) return false;
+
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        const haystack = `${event.title} ${event.description ?? ''} ${event.venue ?? ''}`.toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+
+      return true;
+    });
+  }, [events, activeTab, searchQuery, today]);
 
   return (
     <>
@@ -22,7 +65,7 @@ export default function EventsPage() {
         description="Discover upcoming events, workshops, and experiences. Connect, learn, and grow with the SOUL community."
       />
 
-      <section className="py-12 px-4 bg-soul-cream">
+      <section className="py-12 px-4 bg-soul-cream min-h-[60vh]">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection>
             <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -49,30 +92,63 @@ export default function EventsPage() {
               </div>
 
               <TabsContent value={activeTab}>
-                <AnimatedSection>
-                  <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
-                    <Filter className="w-4 h-4 text-muted-foreground shrink-0" />
-                    {categories.map((category) => (
-                      <button
-                        key={category}
-                        onClick={() => setSelectedCategory(category)}
-                        className={`px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                          selectedCategory === category
-                            ? 'bg-soul-green text-white'
-                            : 'bg-white text-muted-foreground hover:text-foreground hover:bg-soul-cream-dark'
-                        }`}
-                      >
-                        {category}
-                      </button>
+                {loading ? (
+                  <div className="flex justify-center py-16">
+                    <Loader2 className="w-6 h-6 animate-spin text-soul-green" />
+                  </div>
+                ) : filtered.length === 0 ? (
+                  <EmptyState
+                    icon={<Calendar className="w-8 h-8" />}
+                    title="No events found"
+                    description="Try a different filter or check back soon for new events."
+                  />
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filtered.map((event, index) => (
+                      <AnimatedSection key={event.id} delay={0.05 + index * 0.05}>
+                        <Link
+                          href={`/events/details?id=${event.id}`}
+                          className="block h-full bg-white rounded-xl overflow-hidden soul-shadow-card hover:shadow-lg hover:-translate-y-1 transition-all group"
+                        >
+                          <div className="h-40 bg-soul-cream-dark relative overflow-hidden">
+                            {event.image_url ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={event.image_url}
+                                alt={event.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <Calendar className="w-10 h-10 text-soul-green/30" />
+                              </div>
+                            )}
+                            {event.is_free && (
+                              <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-soul-gold text-white text-xs font-semibold">
+                                Free
+                              </span>
+                            )}
+                          </div>
+                          <div className="p-5">
+                            <h3 className="font-semibold text-foreground mb-2 line-clamp-1 group-hover:text-soul-green transition-colors">
+                              {event.title}
+                            </h3>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                              <Calendar className="w-4 h-4 shrink-0" />
+                              {event.date ? format(new Date(event.date), 'MMM d, yyyy') : 'Date TBA'}
+                            </div>
+                            {event.venue && (
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <MapPin className="w-4 h-4 shrink-0" />
+                                <span className="line-clamp-1">{event.venue}</span>
+                              </div>
+                            )}
+                          </div>
+                        </Link>
+                      </AnimatedSection>
                     ))}
                   </div>
-                </AnimatedSection>
-
-                <EmptyState
-                  icon={<Calendar className="w-8 h-8" />}
-                  title="No events yet"
-                  description="Events will appear here once they are created."
-                />
+                )}
               </TabsContent>
             </Tabs>
           </AnimatedSection>

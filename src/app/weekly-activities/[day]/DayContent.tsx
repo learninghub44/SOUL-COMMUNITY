@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -20,6 +21,9 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { WhatsAppCTA } from '@/components/shared/WhatsAppCTA';
 import { WEEKLY_ACTIVITIES } from '@/lib/constants';
+import { createClient } from '@/lib/supabase/client';
+import { listWeeklyActivities } from '@/lib/services/weekly-activities';
+import type { WeeklyActivity } from '@/types';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Brain,
@@ -35,7 +39,37 @@ export default function DayContent() {
   const params = useParams();
   const day = params.day as string;
 
-  const activity = WEEKLY_ACTIVITIES.find((a) => a.day === day);
+  const [dbActivity, setDbActivity] = useState<WeeklyActivity | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const supabase = createClient();
+
+    listWeeklyActivities(supabase)
+      .then((data) => {
+        if (!active) return;
+        setDbActivity(data.find((a) => a.day === day) || null);
+      })
+      .catch(() => {
+        // fall back silently to static content
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [day]);
+
+  const staticActivity = WEEKLY_ACTIVITIES.find((a) => a.day === day);
+  const activity = staticActivity
+    ? {
+        ...staticActivity,
+        title: dbActivity?.title || staticActivity.title,
+        description: dbActivity?.description || staticActivity.description,
+        detailedDescription: dbActivity?.detailed_description || staticActivity.detailedDescription,
+        meetingInfo: dbActivity?.meeting_info || staticActivity.meetingInfo,
+      }
+    : null;
+  const extraLinks = dbActivity?.links || [];
 
   if (!activity) {
     return (
@@ -189,6 +223,26 @@ export default function DayContent() {
               </div>
             </div>
           </AnimatedSection>
+
+          {extraLinks.length > 0 && (
+            <AnimatedSection delay={0.15}>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                {extraLinks.map((link, i) => (
+                  <a
+                    key={i}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-white transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: activity.color }}
+                  >
+                    {link.label}
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                ))}
+              </div>
+            </AnimatedSection>
+          )}
         </div>
       </section>
 

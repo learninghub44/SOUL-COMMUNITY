@@ -310,7 +310,7 @@ export const SITE_CONFIG = {
   description: 'SOUL is a vibrant community dedicated to mental wellness, networking, opportunities, business promotion, outdoor experiences, learning, volunteering, and meaningful friendships.',
   url: 'https://soul-community.org',
   ogImage: '/og-image.png',
-  whatsappCommunityLink: '#',
+  whatsappCommunityLink: 'https://chat.whatsapp.com/La7FQSUAfmR02w3OF19AVv',
   whatsappChannelLink: '#',
   email: 'info@soul-community.org',
 };

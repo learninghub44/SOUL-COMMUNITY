@@ -17,6 +17,18 @@ export async function listEvents(supabase: SupabaseClient) {
   return data as Event[];
 }
 
+/** Published events only, soonest first. For public-facing pages. */
+export async function listPublishedEvents(supabase: SupabaseClient) {
+  const { data, error } = await supabase
+    .from('events')
+    .select('*')
+    .eq('status', 'published')
+    .order('date', { ascending: true });
+
+  if (error) throw error;
+  return data as Event[];
+}
+
 export async function getEvent(supabase: SupabaseClient, id: string) {
   const { data, error } = await supabase
     .from('events')

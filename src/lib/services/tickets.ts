@@ -1,6 +1,46 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Ticket } from '@/types';
 
+/** Generates a short human-readable reference like SOUL-8F2K9Q. */
+function generateTicketReference() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = '';
+  for (let i = 0; i < 6; i++) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return `SOUL-${code}`;
+}
+
+/**
+ * Public registration for an event. Anon key can insert per RLS
+ * ("Public can insert tickets"). Free events are marked paid
+ * immediately since no money changes hands; paid events are left
+ * pending until an admin confirms payment (no payment gateway is
+ * wired up yet).
+ */
+export async function createTicket(
+  supabase: SupabaseClient,
+  input: { event_id: string; full_name: string; email: string; is_free: boolean }
+) {
+  const reference = generateTicketReference();
+  const { data, error } = await supabase
+    .from('tickets')
+    .insert({
+      id: crypto.randomUUID(),
+      event_id: input.event_id,
+      full_name: input.full_name,
+      email: input.email,
+      ticket_reference: reference,
+      qr_code: reference,
+      payment_status: input.is_free ? 'paid' : 'pending',
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as Ticket;
+}
+
 /** All tickets, most recent first, with their event joined in. */
 export async function listTickets(supabase: SupabaseClient) {
   const { data, error } = await supabase
