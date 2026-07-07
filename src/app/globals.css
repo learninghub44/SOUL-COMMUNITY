@@ -60,34 +60,36 @@
 }
 
 :root {
-  /* Palette grounded in the SOUL mark: deep forest green from the emblem,
-     warm cream paper, and the terracotta/gold tones from the African-pattern
-     border. Replaces a prior purple/lavender palette that had drifted away
-     from the actual logo and manifest theme-color. */
-  --background: #FAF6EC;
-  --foreground: #2A2118;
+  /* Redesign token set (Step 1 of the UI/UX overhaul).
+     Deep Forest Green + Warm Gold pulled from the SOUL emblem, laid over
+     a clean white/off-white premium-corporate background system instead
+     of the previous all-cream surface. Variable names are kept stable
+     (--soul-green, --font-playfair, etc.) so existing components keep
+     working while every page is redesigned one at a time. */
+  --background: #FFFFFF;
+  --foreground: #222222;
   --card: #FFFFFF;
-  --card-foreground: #2A2118;
+  --card-foreground: #222222;
   --popover: #FFFFFF;
-  --popover-foreground: #2A2118;
+  --popover-foreground: #222222;
   --primary: #2D5A3D;
   --primary-foreground: #FFFFFF;
-  --secondary: #8B4A2F;
-  --secondary-foreground: #FFFFFF;
-  --muted: #F0E6D2;
-  --muted-foreground: #6B5D4D;
+  --secondary: #FFFFFF;
+  --secondary-foreground: #2D5A3D;
+  --muted: #FAFAF8;
+  --muted-foreground: #666666;
   --accent: #C89B3C;
-  --accent-foreground: #2A2118;
+  --accent-foreground: #222222;
   --destructive: #B3402A;
-  --border: #E4D8C3;
-  --input: #E4D8C3;
+  --border: #EAEAEA;
+  --input: #EAEAEA;
   --ring: #2D5A3D;
   --chart-1: #2D5A3D;
   --chart-2: #C89B3C;
   --chart-3: #8B4A2F;
   --chart-4: #4F7D5C;
   --chart-5: #17301F;
-  --radius: 0.875rem;
+  --radius: 1rem;
   --soul-green: #2D5A3D;
   --soul-green-light: #4F7D5C;
   --soul-green-dark: #17301F;
@@ -97,16 +99,26 @@
   --soul-gold: #C89B3C;
   --soul-gold-light: #DDB968;
   --soul-gold-dark: #9C7423;
-  --soul-cream: #FAF6EC;
-  --soul-cream-dark: #F0E6D2;
+  --soul-cream: #FAFAF8;
+  --soul-cream-dark: #F0EEE7;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #2A2118;
+  --sidebar-foreground: #222222;
   --sidebar-primary: #2D5A3D;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F0E6D2;
-  --sidebar-accent-foreground: #2A2118;
-  --sidebar-border: #E4D8C3;
+  --sidebar-accent: #FAFAF8;
+  --sidebar-accent-foreground: #222222;
+  --sidebar-border: #EAEAEA;
   --sidebar-ring: #2D5A3D;
+
+  /* Layout tokens: 1200px container, responsive edge padding */
+  --container-width: 1200px;
+  --container-pad-desktop: 48px;
+  --container-pad-tablet: 32px;
+  --container-pad-mobile: 24px;
+
+  /* Section rhythm */
+  --section-gap-desktop: 100px;
+  --section-gap-mobile: 64px;
 }
 
 @layer base {
@@ -124,6 +136,91 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Centered 1200px content container with responsive edge padding.
+     Use on every section instead of ad-hoc max-w-* + px-* combos so
+     spacing stays identical across the whole site. */
+  .container-app {
+    width: 100%;
+    max-width: var(--container-width);
+    margin-inline: auto;
+    padding-inline: var(--container-pad-mobile);
+  }
+  @media (min-width: 768px) {
+    .container-app {
+      padding-inline: var(--container-pad-tablet);
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-app {
+      padding-inline: var(--container-pad-desktop);
+    }
+  }
+
+  /* Vertical section rhythm: 80-120px desktop, ~64px mobile */
+  .section-y {
+    padding-block: var(--section-gap-mobile);
+  }
+  @media (min-width: 1024px) {
+    .section-y {
+      padding-block: var(--section-gap-desktop);
+    }
+  }
+
+  /* Typography scale from the redesign brief */
+  .text-hero {
+    font-size: 2.5rem;      /* 40px on mobile */
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 768px) {
+    .text-hero {
+      font-size: 3.5rem;    /* 56px */
+    }
+  }
+  @media (min-width: 1024px) {
+    .text-hero {
+      font-size: 4rem;      /* 64px */
+    }
+  }
+  .text-section-heading {
+    font-size: 2rem;        /* 32px mobile */
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 768px) {
+    .text-section-heading {
+      font-size: 2.5rem;    /* 40px */
+    }
+  }
+  @media (min-width: 1024px) {
+    .text-section-heading {
+      font-size: 3rem;      /* 48px */
+    }
+  }
+  .text-subheading {
+    font-size: 1.375rem;    /* 22px mobile */
+    line-height: 1.35;
+  }
+  @media (min-width: 768px) {
+    .text-subheading {
+      font-size: 1.75rem;   /* 28px */
+    }
+  }
+
+  /* Card + button hover interactions */
+  .hover-lift {
+    transition: transform 240ms ease, box-shadow 240ms ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+  .btn-lift {
+    transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+  }
+  .btn-lift:hover {
+    transform: translateY(-2px);
   }
   .soul-gradient {
     background: linear-gradient(135deg, #17301F 0%, #2D5A3D 50%, #4F7D5C 100%);
