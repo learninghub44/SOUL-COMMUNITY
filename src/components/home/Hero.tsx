@@ -14,26 +14,31 @@ export function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden soul-gradient-green">
-      {/* Soft gold glow behind the emblem, echoing the Step 1 token palette */}
+      {/* Big S.O.U.L emblem as the hero backdrop itself — multiply-blended into
+          the dark gradient so its cream square edges melt into the background
+          instead of reading as a framed sticker. */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.1, ease: 'easeOut' }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <Image
+          src="/soul-logo.png"
+          alt=""
+          aria-hidden="true"
+          width={1200}
+          height={1200}
+          priority
+          className="h-[80vh] w-[80vh] max-w-none object-contain opacity-90 mix-blend-multiply sm:h-[88vh] sm:w-[88vh]"
+        />
+      </motion.div>
+
+      {/* Soft gold glow + dark gradient overlay so the heading/body text stay legible over the emblem */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(200,155,60,0.18),transparent_60%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/35 to-black/65" />
 
       <div className="container-app relative z-10 flex h-full flex-col items-center justify-center text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mb-8"
-        >
-          <Image
-            src="/soul-logo.png"
-            alt="S.O.U.L — Serving Opportunities, Uplifting Lives"
-            width={640}
-            height={640}
-            priority
-            className="h-72 w-72 sm:h-96 sm:w-96 md:h-[28rem] md:w-[28rem] lg:h-[32rem] lg:w-[32rem] drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
-          />
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
