@@ -1,6 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/marketing/Button';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export function Hero() {
@@ -9,44 +13,41 @@ export function Hero() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* Togetherness video background */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="https://images.pexels.com/videos/7660184/adult-brainstorming-business-child-7660184.jpeg"
-        aria-hidden="true"
-      >
-        <source
-          src="https://videos.pexels.com/video-files/7660184/7660184-uhd_1440_2560_25fps.mp4"
-          type="video/mp4"
-        />
-      </video>
-
-      {/* Deep forest wash so the palette reads through the footage
-          and text stays legible without a card sitting on top of it */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#10241A]/85 via-[#17301F]/60 to-[#0B1811]/85" />
+    <section className="relative h-screen w-full overflow-hidden soul-gradient-green">
+      {/* Soft gold glow behind the emblem, echoing the Step 1 token palette */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(200,155,60,0.18),transparent_60%)]" />
 
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
+      <div className="container-app relative z-10 flex h-full flex-col items-center justify-center text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="mb-8"
+        >
+          <Image
+            src="/soul-logo.png"
+            alt="S.O.U.L — Serving Opportunities, Uplifting Lives"
+            width={280}
+            height={280}
+            priority
+            className="h-40 w-40 sm:h-52 sm:w-52 md:h-64 md:w-64 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+          />
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
-          className="mb-6 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading"
+          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+          className="mb-6 max-w-3xl text-white font-heading text-hero"
         >
           Serving Opportunities,{' '}
-          <span className="text-[#DDB968]">Uplifting Lives</span>
+          <span className="text-soul-gold-light">Uplifting Lives</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
           className="mb-10 max-w-2xl text-lg text-white/85 sm:text-xl"
         >
           {SITE_CONFIG.description}
@@ -55,25 +56,28 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+          transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
           className="flex flex-col items-center gap-4 sm:flex-row"
         >
-          <a
+          <Link
             href={SITE_CONFIG.whatsappCommunityLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#C89B3C] px-8 py-4 text-base font-semibold text-[#17301F] shadow-[0_10px_30px_-6px_rgba(200,155,60,0.5)] transition-all hover:scale-105 hover:bg-[#DDB968]"
+            className={cn(buttonVariants({ variant: 'gold', size: 'lg' }), 'rounded-full')}
           >
             Join WhatsApp Community
-          </a>
-          <a
+          </Link>
+          <Link
             href={SITE_CONFIG.whatsappChannelLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/5 px-8 py-4 text-base font-medium text-white/90 backdrop-blur-sm transition-all hover:bg-white/15"
+            className={cn(
+              buttonVariants({ variant: 'ghost', size: 'lg' }),
+              'rounded-full border border-white/40 bg-white/5 text-white/90 backdrop-blur-sm hover:bg-white/15 hover:text-white'
+            )}
           >
             Follow WhatsApp Channel
-          </a>
+          </Link>
         </motion.div>
       </div>
 
@@ -91,7 +95,7 @@ export function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm"
         >
-          <span className="block h-2 w-2 rounded-full bg-[#DDB968]" />
+          <span className="block h-2 w-2 rounded-full bg-soul-gold-light" />
         </motion.span>
       </motion.button>
     </section>
