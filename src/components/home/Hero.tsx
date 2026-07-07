@@ -27,22 +27,25 @@ export function Hero() {
           <Image
             src="/soul-logo.png"
             alt="S.O.U.L — Serving Opportunities, Uplifting Lives"
-            width={420}
-            height={420}
+            width={640}
+            height={640}
             priority
-            className="h-56 w-56 sm:h-72 sm:w-72 md:h-96 md:w-96 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+            className="h-72 w-72 sm:h-96 sm:w-96 md:h-[28rem] md:w-[28rem] lg:h-[32rem] lg:w-[32rem] drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
           />
         </motion.div>
 
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="mb-6 max-w-3xl text-white font-heading text-hero"
+          className="mb-6 flex max-w-3xl flex-col items-center"
         >
-          Serving Opportunities,{' '}
-          <span className="text-soul-gold-light">Uplifting Lives</span>
-        </motion.h1>
+          <h1 className="text-white font-heading text-hero text-center leading-tight">
+            Serving Opportunities,{' '}
+            <span className="text-soul-gold-light">Uplifting Lives</span>
+          </h1>
+          <span className="mt-5 h-[3px] w-28 rounded-full bg-gradient-to-r from-transparent via-soul-gold-light to-transparent sm:w-36" />
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
