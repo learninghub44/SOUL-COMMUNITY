@@ -1,7 +1,17 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Suggestion } from '@/types';
 
-/** Public insert - anyone can submit, per RLS. No public read exists anywhere. */
+/**
+ * Public insert - anyone can submit, per RLS. No public read exists
+ * anywhere.
+ *
+ * Deliberately does NOT chain `.select().single()` after the insert:
+ * with no public SELECT policy on suggestions, an anonymous
+ * submitter's follow-up read would be filtered to 0 rows by RLS and
+ * throw, even though the insert succeeded. We generate the id
+ * ourselves and already know every field we sent, so we return that
+ * instead of re-reading the row.
+ */
 export async function createSuggestion(
   supabase: SupabaseClient,
   input: { name?: string; email?: string; message: string }
@@ -14,19 +24,26 @@ export async function createSuggestion(
     throw new Error('Please enter your suggestion.');
   }
 
-  const { data, error } = await supabase
-    .from('suggestions')
-    .insert({
-      name: name || null,
-      email: email || null,
-      message,
-      status: 'new',
-    })
-    .select()
-    .single();
+  const id = crypto.randomUUID();
+
+  const { error } = await supabase.from('suggestions').insert({
+    id,
+    name: name || null,
+    email: email || null,
+    message,
+    status: 'new',
+  });
 
   if (error) throw error;
-  return data as Suggestion;
+
+  return {
+    id,
+    name: name || null,
+    email: email || null,
+    message,
+    status: 'new',
+    created_at: new Date().toISOString(),
+  } as Suggestion;
 }
 
 /** Admin-only per RLS ("Admins can view suggestions"). */

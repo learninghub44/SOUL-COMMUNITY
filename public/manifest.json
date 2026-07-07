@@ -32,22 +32,6 @@
       "purpose": "maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/screenshots/phone-portrait.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "SOUL Community Home"
-    },
-    {
-      "src": "/screenshots/phone-landscape.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "SOUL Community Dashboard"
-    }
-  ],
   "shortcuts": [
     {
       "name": "Home",

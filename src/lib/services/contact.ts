@@ -6,6 +6,13 @@ import type { ContactMessage } from '@/types';
  * ("Public can insert contact_messages"). Basic length limits are
  * enforced client-side (see contact/page.tsx) and again here as a
  * defense-in-depth check before hitting the network.
+ *
+ * Deliberately does NOT chain `.select().single()` after the insert:
+ * there is no public SELECT policy on contact_messages (only admins
+ * can read them), so an anonymous submitter's follow-up read would be
+ * filtered to 0 rows by RLS and throw, even though the insert
+ * succeeded. We already know every field we sent, so we just return
+ * that instead of re-reading the row.
  */
 export async function createContactMessage(
   supabase: SupabaseClient,
@@ -20,21 +27,28 @@ export async function createContactMessage(
     throw new Error('Name, email, and message are required.');
   }
 
-  const { data, error } = await supabase
-    .from('contact_messages')
-    .insert({
-      id: crypto.randomUUID(),
-      name,
-      email,
-      subject: subject || null,
-      message,
-      read: false,
-    })
-    .select()
-    .single();
+  const id = crypto.randomUUID();
+
+  const { error } = await supabase.from('contact_messages').insert({
+    id,
+    name,
+    email,
+    subject: subject || null,
+    message,
+    read: false,
+  });
 
   if (error) throw error;
-  return data as ContactMessage;
+
+  return {
+    id,
+    name,
+    email,
+    subject: subject || null,
+    message,
+    read: false,
+    created_at: new Date().toISOString(),
+  } as ContactMessage;
 }
 
 /** Admin-only per RLS ("Admins can view contact_messages"). */

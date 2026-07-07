@@ -17,28 +17,48 @@ function generateTicketReference() {
  * immediately since no money changes hands; paid events are left
  * pending until an admin confirms payment (no payment gateway is
  * wired up yet).
+ *
+ * Deliberately does NOT chain `.select().single()` after the insert.
+ * The only public SELECT policy on `tickets` is "email = auth.email()",
+ * which only matches signed-in Supabase Auth users - an anonymous
+ * ticket submission has no session, so that follow-up read gets
+ * filtered to 0 rows by RLS and PostgREST throws even though the
+ * insert itself succeeded. Since the id/reference are generated here
+ * on the client anyway, we just return the object we already know
+ * instead of re-reading it.
  */
 export async function createTicket(
   supabase: SupabaseClient,
   input: { event_id: string; full_name: string; email: string; is_free: boolean }
 ) {
+  const id = crypto.randomUUID();
   const reference = generateTicketReference();
-  const { data, error } = await supabase
-    .from('tickets')
-    .insert({
-      id: crypto.randomUUID(),
-      event_id: input.event_id,
-      full_name: input.full_name,
-      email: input.email,
-      ticket_reference: reference,
-      qr_code: reference,
-      payment_status: input.is_free ? 'paid' : 'pending',
-    })
-    .select()
-    .single();
+  const payment_status: Ticket['payment_status'] = input.is_free ? 'paid' : 'pending';
+
+  const { error } = await supabase.from('tickets').insert({
+    id,
+    event_id: input.event_id,
+    full_name: input.full_name,
+    email: input.email,
+    ticket_reference: reference,
+    qr_code: reference,
+    payment_status,
+  });
 
   if (error) throw error;
-  return data as Ticket;
+
+  return {
+    id,
+    event_id: input.event_id,
+    full_name: input.full_name,
+    email: input.email,
+    ticket_reference: reference,
+    qr_code: reference,
+    payment_status,
+    checked_in: false,
+    checked_in_at: null,
+    created_at: new Date().toISOString(),
+  } as Ticket;
 }
 
 /** All tickets, most recent first, with their event joined in. */
