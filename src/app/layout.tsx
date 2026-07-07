@@ -1,26 +1,26 @@
 import type { Metadata, Viewport } from 'next';
-import { Poppins } from 'next/font/google';
+import { Playfair_Display, Lora } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SWRegister } from '@/components/layout/SWRegister';
 import { Toaster } from 'sonner';
 import './globals.css';
 
-// Poppins across the whole site per the redesign brief (Inter / Plus
-// Jakarta Sans are the CSS fallbacks, set in the @theme font stack).
-// Variable names kept as --font-playfair / --font-inter so existing
-// heading/body classes throughout the codebase don't need to change.
-const headingFont = Poppins({
+// Playfair Display (headings) + Lora (body) - matches the warm, serif,
+// logo-led reference design (brown/gold/cream). Variable names kept as
+// --font-playfair / --font-inter so existing heading/body classes
+// throughout the codebase don't need to change.
+const headingFont = Playfair_Display({
   variable: '--font-playfair',
   subsets: ['latin'],
-  weight: ['600', '700'],
+  weight: ['600', '700', '800'],
   display: 'swap',
 });
 
-const bodyFont = Poppins({
+const bodyFont = Lora({
   variable: '--font-inter',
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '600'],
   display: 'swap',
 });
 

@@ -60,55 +60,54 @@
 }
 
 :root {
-  /* Redesign token set (Step 1 of the UI/UX overhaul).
-     Deep Forest Green + Warm Gold pulled from the SOUL emblem, laid over
-     a clean white/off-white premium-corporate background system instead
-     of the previous all-cream surface. Variable names are kept stable
-     (--soul-green, --font-playfair, etc.) so existing components keep
-     working while every page is redesigned one at a time. */
+  /* Redesign token set (Step 2): palette pulled directly from the SOUL
+     emblem itself - deep chocolate brown, terracotta, warm gold, olive,
+     and cream - instead of the invented corporate green. Variable names
+     are kept stable (--soul-green, --font-playfair, etc.) so existing
+     components keep working while every page is redesigned one at a time. */
   --background: #FFFFFF;
-  --foreground: #222222;
+  --foreground: #2B1B12;
   --card: #FFFFFF;
-  --card-foreground: #222222;
+  --card-foreground: #2B1B12;
   --popover: #FFFFFF;
-  --popover-foreground: #222222;
-  --primary: #2D5A3D;
+  --popover-foreground: #2B1B12;
+  --primary: #6B3F2A;
   --primary-foreground: #FFFFFF;
   --secondary: #FFFFFF;
-  --secondary-foreground: #2D5A3D;
-  --muted: #FAFAF8;
-  --muted-foreground: #666666;
+  --secondary-foreground: #6B3F2A;
+  --muted: #FAF3E7;
+  --muted-foreground: #6B5A4D;
   --accent: #C89B3C;
-  --accent-foreground: #222222;
+  --accent-foreground: #2B1B12;
   --destructive: #B3402A;
-  --border: #EAEAEA;
-  --input: #EAEAEA;
-  --ring: #2D5A3D;
-  --chart-1: #2D5A3D;
+  --border: #EDE3D3;
+  --input: #EDE3D3;
+  --ring: #6B3F2A;
+  --chart-1: #6B3F2A;
   --chart-2: #C89B3C;
   --chart-3: #8B4A2F;
-  --chart-4: #4F7D5C;
-  --chart-5: #17301F;
+  --chart-4: #6B7A4F;
+  --chart-5: #2B1B12;
   --radius: 1rem;
-  --soul-green: #2D5A3D;
-  --soul-green-light: #4F7D5C;
-  --soul-green-dark: #17301F;
+  --soul-green: #6B3F2A;
+  --soul-green-light: #8B5A3C;
+  --soul-green-dark: #2B1B12;
   --soul-brown: #8B4A2F;
   --soul-brown-light: #B36B45;
   --soul-brown-dark: #5C2F1C;
   --soul-gold: #C89B3C;
   --soul-gold-light: #DDB968;
   --soul-gold-dark: #9C7423;
-  --soul-cream: #FAFAF8;
-  --soul-cream-dark: #F0EEE7;
+  --soul-cream: #FAF3E7;
+  --soul-cream-dark: #F0E6D2;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #222222;
-  --sidebar-primary: #2D5A3D;
+  --sidebar-foreground: #2B1B12;
+  --sidebar-primary: #6B3F2A;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #FAFAF8;
-  --sidebar-accent-foreground: #222222;
-  --sidebar-border: #EAEAEA;
-  --sidebar-ring: #2D5A3D;
+  --sidebar-accent: #FAF3E7;
+  --sidebar-accent-foreground: #2B1B12;
+  --sidebar-border: #EDE3D3;
+  --sidebar-ring: #6B3F2A;
 
   /* Layout tokens: 1200px container, responsive edge padding */
   --container-width: 1200px;
@@ -223,22 +222,22 @@
     transform: translateY(-2px);
   }
   .soul-gradient {
-    background: linear-gradient(135deg, #17301F 0%, #2D5A3D 50%, #4F7D5C 100%);
+    background: linear-gradient(135deg, #2B1B12 0%, #6B3F2A 50%, #8B5A3C 100%);
   }
   .soul-gradient-warm {
     background: linear-gradient(135deg, #5C2F1C 0%, #8B4A2F 50%, #C89B3C 100%);
   }
   .soul-gradient-green {
-    background: linear-gradient(135deg, #10241A 0%, #17301F 50%, #2D5A3D 100%);
+    background: linear-gradient(135deg, #1A0F08 0%, #2B1B12 50%, #6B3F2A 100%);
   }
   .soul-shadow {
-    box-shadow: 0 4px 20px -2px rgba(45, 90, 61, 0.16), 0 2px 8px -2px rgba(45, 90, 61, 0.08);
+    box-shadow: 0 4px 20px -2px rgba(107, 63, 42, 0.16), 0 2px 8px -2px rgba(107, 63, 42, 0.08);
   }
   .soul-shadow-lg {
-    box-shadow: 0 10px 40px -4px rgba(45, 90, 61, 0.22), 0 4px 16px -4px rgba(45, 90, 61, 0.1);
+    box-shadow: 0 10px 40px -4px rgba(107, 63, 42, 0.22), 0 4px 16px -4px rgba(107, 63, 42, 0.1);
   }
   .soul-shadow-card {
-    box-shadow: 0 2px 12px -1px rgba(45, 90, 61, 0.1), 0 1px 4px -1px rgba(45, 90, 61, 0.05);
+    box-shadow: 0 2px 12px -1px rgba(107, 63, 42, 0.1), 0 1px 4px -1px rgba(107, 63, 42, 0.05);
   }
 
   /* Signature motif: a dotted arc echoing the beaded border on the SOUL
@@ -260,18 +259,18 @@
     box-shadow: 0 8px 32px -6px rgba(23, 48, 31, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
   .glass-card-dark {
-    background: rgba(23, 48, 31, 0.4);
+    background: rgba(43, 27, 18, 0.4);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.22);
-    box-shadow: 0 8px 32px -6px rgba(16, 36, 26, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px -6px rgba(26, 15, 8, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
   .glass-panel {
     background: rgba(255, 255, 255, 0.14);
     backdrop-filter: blur(24px) saturate(140%);
     -webkit-backdrop-filter: blur(24px) saturate(140%);
     border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 12px 48px -8px rgba(16, 36, 26, 0.4);
+    box-shadow: 0 12px 48px -8px rgba(26, 15, 8, 0.4);
   }
 }
 
