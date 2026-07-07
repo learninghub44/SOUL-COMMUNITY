@@ -9,6 +9,7 @@ import {
   Ticket as TicketIcon,
   Loader2,
   CheckCircle2,
+  MessageCircle,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
@@ -110,6 +111,35 @@ export default function AdminTicketsPage() {
       toast.success('Marked as paid');
     } catch {
       toast.error('Could not update payment status');
+    }
+  }
+
+  /** Normalizes local Kenyan numbers (07xx / 01xx / +254...) to wa.me's expected format. */
+  function toWhatsAppNumber(raw: string) {
+    const digits = raw.replace(/[^\d]/g, '');
+    if (digits.startsWith('254')) return digits;
+    if (digits.startsWith('0')) return `254${digits.slice(1)}`;
+    return digits;
+  }
+
+  function handleSendWhatsApp(ticket: Ticket) {
+    const message = [
+      `🎟️ Hello ${ticket.full_name}, your SOUL Community ticket is confirmed!`,
+      ticket.event?.title ? `Event: ${ticket.event.title}` : '',
+      ticket.event?.date ? `Date: ${format(new Date(ticket.event.date), 'EEEE, MMM d, yyyy')}` : '',
+      ticket.event?.venue ? `Venue: ${ticket.event.venue}` : '',
+      `Reference: ${ticket.ticket_reference}`,
+      `Please keep this reference/QR code and show it at the entrance.`,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    const number = ticket.phone ? toWhatsAppNumber(ticket.phone) : '';
+    const waUrl = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank');
+
+    if (!ticket.phone) {
+      toast.info('No phone number on file — choose the recipient manually in WhatsApp.');
     }
   }
 
@@ -291,16 +321,29 @@ export default function AdminTicketsPage() {
                         {ticket.event?.title && <span>{ticket.event.title}</span>}
                       </div>
                     </div>
-                    {ticket.payment_status === 'pending' && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="shrink-0 border-[#2D5A3D] text-[#2D5A3D] hover:bg-[#2D5A3D] hover:text-white"
-                        onClick={() => handleMarkPaid(ticket.id)}
-                      >
-                        Mark as Paid
-                      </Button>
-                    )}
+                    <div className="flex shrink-0 gap-2">
+                      {ticket.payment_status === 'pending' && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-[#2D5A3D] text-[#2D5A3D] hover:bg-[#2D5A3D] hover:text-white"
+                          onClick={() => handleMarkPaid(ticket.id)}
+                        >
+                          Mark as Paid
+                        </Button>
+                      )}
+                      {ticket.payment_status === 'paid' && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white"
+                          onClick={() => handleSendWhatsApp(ticket)}
+                        >
+                          <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
+                          Send Ticket
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

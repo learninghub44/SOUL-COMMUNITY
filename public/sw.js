@@ -1,26 +1,61 @@
-const CACHE_NAME = "soul-community-v1";
+const CACHE_VERSION = "v2";
+const CACHE_NAME = `soul-community-${CACHE_VERSION}`;
 const OFFLINE_URL = "/offline.html";
 
-const PRE_CACHE = ["/", "/offline.html"];
+// Core app-shell routes, cached up front so a first-time offline visit to
+// these pages still renders instead of falling back to offline.html.
+const PRE_CACHE = [
+  "/",
+  "/offline.html",
+  "/events",
+  "/about",
+  "/announcements",
+  "/contact",
+  "/gallery",
+  "/manifest.json",
+  "/soul-logo.png",
+  "/soul-logo-sm.png",
+  "/icons/icon-192x192.png",
+  "/icons/icon-512x512.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRE_CACHE))
+    caches.open(CACHE_NAME).then((cache) =>
+      // Cache each URL independently so one missing/failed asset (e.g. a
+      // route renamed later) doesn't abort the whole install and leave the
+      // app with no working service worker at all.
+      Promise.all(
+        PRE_CACHE.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn("[SW] Failed to precache", url, err);
+          })
+        )
+      )
+    )
   );
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+    caches
+      .keys()
+      .then((cacheNames) =>
+        Promise.all(
+          cacheNames
+            .filter((name) => name !== CACHE_NAME)
+            .map((name) => caches.delete(name))
+        )
       )
-    )
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener("fetch", (event) => {
@@ -28,8 +63,10 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
 
   if (request.method !== "GET") return;
+  if (url.origin !== self.location.origin) return;
 
-  // Network-first for navigation requests (HTML pages)
+  // Network-first for navigation requests (HTML pages), falling back to
+  // whatever was cached for that exact page, then to the offline page.
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
@@ -38,13 +75,17 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match(OFFLINE_URL)))
+        .catch(async () => {
+          const cached = await caches.match(request, { ignoreSearch: true });
+          return cached || caches.match(OFFLINE_URL);
+        })
     );
     return;
   }
 
-  // Cache-first for static assets (images, fonts, styles, scripts)
+  // Cache-first for static assets (images, fonts, styles, scripts, Next chunks)
   if (
+    url.pathname.startsWith("/_next/static/") ||
     url.pathname.endsWith(".png") ||
     url.pathname.endsWith(".jpg") ||
     url.pathname.endsWith(".jpeg") ||
@@ -73,7 +114,8 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Network-first for everything else
+  // Network-first for everything else (Supabase API calls go to a different
+  // origin and are already excluded above).
   event.respondWith(
     fetch(request)
       .then((response) => {

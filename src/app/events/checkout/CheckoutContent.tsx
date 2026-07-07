@@ -25,6 +25,7 @@ export default function CheckoutContent() {
   const [submitting, setSubmitting] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
     if (!id) return;
@@ -50,8 +51,8 @@ export default function CheckoutContent() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!event) return;
-    if (!fullName.trim() || !email.trim()) {
-      toast.error('Please fill in your name and email');
+    if (!fullName.trim() || !email.trim() || !phone.trim()) {
+      toast.error('Please fill in your name, email and phone number');
       return;
     }
 
@@ -62,13 +63,19 @@ export default function CheckoutContent() {
         event_id: event.id,
         full_name: fullName.trim(),
         email: email.trim(),
+        phone: phone.trim(),
         is_free: event.is_free,
       });
-      router.push(
-        `/events/confirmation?ref=${ticket.ticket_reference}&event=${encodeURIComponent(
-          event.title
-        )}&name=${encodeURIComponent(fullName.trim())}&free=${event.is_free ? '1' : '0'}`
-      );
+      const params = new URLSearchParams({
+        ref: ticket.ticket_reference,
+        event: event.title,
+        name: fullName.trim(),
+        free: event.is_free ? '1' : '0',
+        date: event.date || '',
+        venue: event.venue || '',
+        phone: phone.trim(),
+      });
+      router.push(`/events/confirmation?${params.toString()}`);
     } catch {
       toast.error('Could not complete your registration. Please try again.');
     } finally {
@@ -154,6 +161,21 @@ export default function CheckoutContent() {
                   placeholder="you@example.com"
                   required
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5">
+                  WhatsApp / Phone Number
+                </label>
+                <Input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="e.g. 0712 345 678"
+                  required
+                />
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Your ticket can be sent to this number on WhatsApp.
+                </p>
               </div>
               <Button
                 type="submit"

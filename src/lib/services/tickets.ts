@@ -29,7 +29,7 @@ function generateTicketReference() {
  */
 export async function createTicket(
   supabase: SupabaseClient,
-  input: { event_id: string; full_name: string; email: string; is_free: boolean }
+  input: { event_id: string; full_name: string; email: string; phone?: string; is_free: boolean }
 ) {
   const id = crypto.randomUUID();
   const reference = generateTicketReference();
@@ -40,6 +40,7 @@ export async function createTicket(
     event_id: input.event_id,
     full_name: input.full_name,
     email: input.email,
+    phone: input.phone || null,
     ticket_reference: reference,
     qr_code: reference,
     payment_status,
@@ -52,6 +53,7 @@ export async function createTicket(
     event_id: input.event_id,
     full_name: input.full_name,
     email: input.email,
+    phone: input.phone || null,
     ticket_reference: reference,
     qr_code: reference,
     payment_status,

@@ -3,6 +3,8 @@ import { Playfair_Display, Lora } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SWRegister } from '@/components/layout/SWRegister';
+import { InstallPrompt } from '@/components/layout/InstallPrompt';
+import { OfflineBanner } from '@/components/layout/OfflineBanner';
 import { Toaster } from 'sonner';
 import './globals.css';
 
@@ -86,12 +88,14 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="SOUL" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
+        <OfflineBanner />
         <Navbar />
         <main className="flex-1 pt-16 lg:pt-20">
           {children}
         </main>
         <Footer />
         <SWRegister />
+        <InstallPrompt />
         <Toaster position="top-right" richColors />
       </body>
     </html>
