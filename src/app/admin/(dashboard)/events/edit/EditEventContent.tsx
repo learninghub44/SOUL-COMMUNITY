@@ -529,7 +529,11 @@ export default function EditEventContent() {
                       className="w-full h-48 object-cover rounded-lg"
                     />
                     <button
-                      onClick={() => setPosterPreview(null)}
+                      onClick={() => {
+                        setPosterPreview(null)
+                        setPosterFile(null)
+                        setExistingImageUrl('')
+                      }}
                       className="absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-lg hover:bg-soul-cream"
                     >
                       <X className="w-4 h-4 text-soul-brown" />

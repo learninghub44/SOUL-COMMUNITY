@@ -18,7 +18,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { createClient } from '@/lib/supabase/client';
-import { listTickets, getTicketByReference, checkInTicket } from '@/lib/services/tickets';
+import { listTickets, getTicketByReference, checkInTicket, updatePaymentStatus } from '@/lib/services/tickets';
 import type { Ticket } from '@/types';
 
 const statusVariant: Record<Ticket['payment_status'], 'default' | 'secondary' | 'destructive' | 'outline'> = {
@@ -99,6 +99,17 @@ export default function AdminTicketsPage() {
       toast.error('No ticket found with that reference');
     } finally {
       setVerifying(false);
+    }
+  }
+
+  async function handleMarkPaid(ticketId: string) {
+    try {
+      const supabase = createClient();
+      const updated = await updatePaymentStatus(supabase, ticketId, 'paid');
+      setTickets((prev) => prev.map((t) => (t.id === updated.id ? { ...t, ...updated } : t)));
+      toast.success('Marked as paid');
+    } catch {
+      toast.error('Could not update payment status');
     }
   }
 
@@ -280,6 +291,16 @@ export default function AdminTicketsPage() {
                         {ticket.event?.title && <span>{ticket.event.title}</span>}
                       </div>
                     </div>
+                    {ticket.payment_status === 'pending' && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="shrink-0 border-[#2D5A3D] text-[#2D5A3D] hover:bg-[#2D5A3D] hover:text-white"
+                        onClick={() => handleMarkPaid(ticket.id)}
+                      >
+                        Mark as Paid
+                      </Button>
+                    )}
                   </div>
                 ))}
               </div>
