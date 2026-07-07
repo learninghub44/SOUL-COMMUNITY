@@ -1,25 +1,23 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Fraunces } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SWRegister } from '@/components/layout/SWRegister';
 import { Toaster } from 'sonner';
 import './globals.css';
 
-// Fraunces for headings (warm, characterful serif with soft terminals —
-// fits a community/nonprofit tone) paired with DM Sans for body copy.
+// Poppins across the whole site per the redesign brief (Inter / Plus
+// Jakarta Sans are the CSS fallbacks, set in the @theme font stack).
 // Variable names kept as --font-playfair / --font-inter so existing
 // heading/body classes throughout the codebase don't need to change.
-const headingFont = Fraunces({
+const headingFont = Poppins({
   variable: '--font-playfair',
   subsets: ['latin'],
-  weight: 'variable',
-  style: ['normal'],
-  axes: ['opsz', 'SOFT'],
+  weight: ['600', '700'],
   display: 'swap',
 });
 
-const bodyFont = DM_Sans({
+const bodyFont = Poppins({
   variable: '--font-inter',
   subsets: ['latin'],
   weight: ['400', '500'],
