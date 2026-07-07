@@ -27,10 +27,10 @@ export function Hero() {
           <Image
             src="/soul-logo.png"
             alt="S.O.U.L — Serving Opportunities, Uplifting Lives"
-            width={280}
-            height={280}
+            width={420}
+            height={420}
             priority
-            className="h-40 w-40 sm:h-52 sm:w-52 md:h-64 md:w-64 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+            className="h-56 w-56 sm:h-72 sm:w-72 md:h-96 md:w-96 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
           />
         </motion.div>
 
