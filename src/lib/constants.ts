@@ -340,13 +340,16 @@ export const SITE_CONFIG = {
   ogImage: '/og-image.png',
   whatsappCommunityLink: 'https://chat.whatsapp.com/La7FQSUAfmR02w3OF19AVv',
   whatsappChannelLink: '#',
-  email: 'info@soul-community.org',
+  email: 'hello@soulcommunity.co.ke',
+  crisisHotline: '+254 729 010390',
+  therapistContact: '+254 729 010390',
   // Real social profile URLs. Leave '' for any platform SOUL doesn't
   // have yet - components filter these out and won't render a dead link.
   social: {
-    facebook: '',
-    instagram: '',
-    tiktok: '',
+    facebook: 'https://www.facebook.com/share/18oyHKb1Yh/?mibextid=wwXIfr',
+    instagram: 'https://www.instagram.com/s.o.u.l.06?igsh=bThhZmgzcHUxOXU0&utm_source=qr',
+    tiktok: 'https://www.tiktok.com/@s.o.u.l.6?_r=1&_t=ZS-95vnEV1GAoT',
+    threads: 'https://www.threads.com/@s.o.u.l.06?igshid=NTc4MTIwNjQ2YQ%3D%3D',
     twitter: '',
     youtube: '',
     linkedin: '',

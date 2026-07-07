@@ -5,6 +5,8 @@ import { EventsPreview } from '@/components/home/EventsPreview';
 import { GalleryPreview } from '@/components/home/GalleryPreview';
 import { AnnouncementsPreview } from '@/components/home/AnnouncementsPreview';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
+import { ImpactStats } from '@/components/home/ImpactStats';
+import { ContactSection } from '@/components/home/ContactSection';
 import { WhatsAppCTA } from '@/components/shared/WhatsAppCTA';
 
 export default function HomePage() {
@@ -17,6 +19,8 @@ export default function HomePage() {
       <GalleryPreview />
       <AnnouncementsPreview />
       <TestimonialsSection />
+      <ImpactStats />
+      <ContactSection />
       <WhatsAppCTA />
     </>
   );
