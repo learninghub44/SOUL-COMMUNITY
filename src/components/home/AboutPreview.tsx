@@ -3,6 +3,10 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
+import { Section } from '@/components/marketing/Section';
+import { Card } from '@/components/marketing/Card';
+import { buttonVariants } from '@/components/marketing/Button';
+import { cn } from '@/lib/utils';
 
 const values = [
   {
@@ -29,44 +33,40 @@ const values = [
 
 export function AboutPreview() {
   return (
-    <section className="py-20 px-4 bg-soul-cream">
-      <div className="max-w-6xl mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-soul-green-dark font-heading mb-4">
-              About SOUL
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Serving Opportunities, Uplifting Lives
+    <Section background="muted">
+      <AnimatedSection>
+        <div className="text-center mb-16">
+          <h2 className="text-section-heading font-heading font-bold text-soul-green-dark mb-4">
+            About SOUL
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Serving Opportunities, Uplifting Lives
+          </p>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.1}>
+        <Card hoverable={false} className="mb-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed mb-6">
+              SOUL is a vibrant community dedicated to mental wellness, networking, opportunities,
+              business promotion, outdoor experiences, learning, volunteering, and meaningful friendships.
+              We believe in the power of togetherness to transform lives and build a more compassionate world.
+            </p>
+            <p className="text-base text-muted-foreground leading-relaxed">
+              Our weekly activities, events, and shared resources create a space where every member
+              can grow, connect, and find purpose. Whether you&apos;re seeking support, opportunities,
+              or simply a community that cares — SOUL is here for you.
             </p>
           </div>
-        </AnimatedSection>
+        </Card>
+      </AnimatedSection>
 
-        <AnimatedSection delay={0.1}>
-          <div className="glass-card rounded-2xl p-8 md:p-12 mb-12">
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-lg md:text-xl text-foreground/80 leading-relaxed mb-6">
-                SOUL is a vibrant community dedicated to mental wellness, networking, opportunities,
-                business promotion, outdoor experiences, learning, volunteering, and meaningful friendships.
-                We believe in the power of togetherness to transform lives and build a more compassionate world.
-              </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                Our weekly activities, events, and shared resources create a space where every member
-                can grow, connect, and find purpose. Whether you&apos;re seeking support, opportunities,
-                or simply a community that cares — SOUL is here for you.
-              </p>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {values.map((value, index) => (
-            <AnimatedSection key={value.title} delay={0.15 + index * 0.1}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-                className="glass-card rounded-xl p-6 h-full"
-              >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {values.map((value, index) => (
+          <AnimatedSection key={value.title} delay={0.15 + index * 0.1}>
+            <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="h-full">
+              <Card className="h-full">
                 <div className="w-12 h-12 rounded-xl bg-soul-green/10 flex items-center justify-center mb-4">
                   <span className="text-xl font-bold text-soul-green font-heading">
                     {value.letter}
@@ -74,22 +74,22 @@ export function AboutPreview() {
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{value.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
-              </motion.div>
-            </AnimatedSection>
-          ))}
-        </div>
-
-        <AnimatedSection delay={0.5}>
-          <div className="text-center">
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-soul-green text-white rounded-full font-semibold transition-all hover:bg-soul-green-dark hover:shadow-lg hover:scale-105"
-            >
-              Read More
-            </Link>
-          </div>
-        </AnimatedSection>
+              </Card>
+            </motion.div>
+          </AnimatedSection>
+        ))}
       </div>
-    </section>
+
+      <AnimatedSection delay={0.5}>
+        <div className="text-center">
+          <Link
+            href="/about"
+            className={cn(buttonVariants({ variant: 'primary', size: 'lg' }), 'rounded-full')}
+          >
+            Read More
+          </Link>
+        </div>
+      </AnimatedSection>
+    </Section>
   );
 }
