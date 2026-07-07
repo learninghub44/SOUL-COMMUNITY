@@ -8,10 +8,6 @@ import { buttonVariants } from '@/components/marketing/Button';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export function Hero() {
-  const scrollToContent = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-  };
-
   return (
     <section className="relative h-screen w-full overflow-hidden soul-gradient-green">
       {/* Big S.O.U.L emblem as the hero backdrop itself — multiply-blended into
@@ -30,13 +26,13 @@ export function Hero() {
           width={1200}
           height={1200}
           priority
-          className="h-[80vh] w-[80vh] max-w-none object-contain opacity-90 mix-blend-multiply sm:h-[88vh] sm:w-[88vh]"
+          className="h-[80vh] w-[80vh] max-w-none object-contain opacity-100 sm:h-[88vh] sm:w-[88vh]"
         />
       </motion.div>
 
-      {/* Soft gold glow + dark gradient overlay so the heading/body text stay legible over the emblem */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(200,155,60,0.18),transparent_60%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/35 to-black/65" />
+      {/* Soft gold glow + light gradient overlay so the heading/body text stay legible over the emblem, without dulling it down */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(200,155,60,0.15),transparent_60%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/45" />
 
       <div className="container-app relative z-10 flex h-full flex-col items-center justify-center text-center">
         <motion.div
@@ -88,24 +84,6 @@ export function Hero() {
           </Link>
         </motion.div>
       </div>
-
-      <motion.button
-        onClick={scrollToContent}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.3, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3"
-        aria-label="Scroll down"
-      >
-        <span className="soul-dotted-arc w-16 text-white/50" />
-        <motion.span
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm"
-        >
-          <span className="block h-2 w-2 rounded-full bg-soul-gold-light" />
-        </motion.span>
-      </motion.button>
     </section>
   );
 }
