@@ -303,6 +303,7 @@ export const NAV_LINKS = [
   { href: '/resources', label: 'Resources' },
   { href: '/suggestions', label: 'Suggestions' },
   { href: '/contact', label: 'Contact' },
+  { href: '/donate', label: 'Donate' },
 ];
 
 export const GENDER_OPTIONS = ['Female', 'Male', 'Non-binary', 'Prefer not to say'];
