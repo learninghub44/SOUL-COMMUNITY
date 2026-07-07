@@ -3,20 +3,34 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ExternalLink, MessageCircle } from 'lucide-react';
+import { Menu, X, ExternalLink, MessageCircle, UserCircle, LogOut } from 'lucide-react';
+import { toast } from 'sonner';
 import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+import { createClient } from '@/lib/supabase/client';
+import { useAuthSession } from '@/lib/hooks/useAuthSession';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user } = useAuthSession();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  async function handleSignOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    toast.success('Signed out');
+    router.push('/');
+    router.refresh();
+  }
 
   return (
     <motion.header
@@ -78,6 +92,24 @@ export function Navbar() {
               <MessageCircle className="w-4 h-4" />
               Follow Channel
             </a>
+            {user ? (
+              <button
+                onClick={handleSignOut}
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-foreground/70 hover:text-soul-green rounded-lg hover:bg-soul-cream-dark/50 transition-all"
+                title="Sign out"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                href="/sign-in"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-foreground/70 hover:text-soul-green rounded-lg hover:bg-soul-cream-dark/50 transition-all"
+              >
+                <UserCircle className="w-4 h-4" />
+                Sign In
+              </Link>
+            )}
           </div>
 
           <button
@@ -129,6 +161,27 @@ export function Navbar() {
                   <MessageCircle className="w-4 h-4" />
                   Follow WhatsApp Channel
                 </a>
+                {user ? (
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      handleSignOut();
+                    }}
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 border border-soul-cream-dark text-foreground/70 text-sm font-medium rounded-full"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </button>
+                ) : (
+                  <Link
+                    href="/sign-in"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 border border-soul-cream-dark text-foreground/70 text-sm font-medium rounded-full"
+                  >
+                    <UserCircle className="w-4 h-4" />
+                    Sign In
+                  </Link>
+                )}
               </div>
             </div>
           </motion.div>

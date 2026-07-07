@@ -37,6 +37,7 @@ export default function AdminSettingsPage() {
     twitter: '',
     youtube: '',
     tiktok: '',
+    linkedin: '',
   });
 
   const [seo, setSeo] = useState({
@@ -70,6 +71,7 @@ export default function AdminSettingsPage() {
           twitter: data.social_media?.twitter || '',
           youtube: data.social_media?.youtube || '',
           tiktok: data.social_media?.tiktok || '',
+          linkedin: data.social_media?.linkedin || '',
         });
         setSeo({
           siteTitle: data.seo?.title || '',
@@ -103,6 +105,7 @@ export default function AdminSettingsPage() {
           twitter: social.twitter,
           youtube: social.youtube,
           tiktok: social.tiktok,
+          linkedin: social.linkedin,
         },
         seo: {
           title: seo.siteTitle,
@@ -366,6 +369,22 @@ export default function AdminSettingsPage() {
                       className="border-[#F5F0E8] bg-[#FFFBF5]"
                     />
                   </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-[#8B6B4A]">
+                      LinkedIn URL
+                    </label>
+                    <Input
+                      value={social.linkedin}
+                      onChange={(e) =>
+                        setSocial({ ...social, linkedin: e.target.value })
+                      }
+                      className="border-[#F5F0E8] bg-[#FFFBF5]"
+                    />
+                  </div>
+                  <p className="text-xs text-[#8B6B4A]">
+                    Leave any of these blank to hide that icon everywhere on the
+                    public site - only platforms you fill in here will show up.
+                  </p>
                 </div>
               </TabsContent>
 

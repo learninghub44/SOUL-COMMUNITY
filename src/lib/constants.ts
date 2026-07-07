@@ -301,7 +301,35 @@ export const NAV_LINKS = [
   { href: '/gallery', label: 'Gallery' },
   { href: '/announcements', label: 'Announcements' },
   { href: '/resources', label: 'Resources' },
+  { href: '/suggestions', label: 'Suggestions' },
   { href: '/contact', label: 'Contact' },
+];
+
+export const GENDER_OPTIONS = ['Female', 'Male', 'Non-binary', 'Prefer not to say'];
+
+export const SUPPORT_CATEGORIES = [
+  'Mental Health',
+  'Substance Abuse / Addiction Recovery',
+  'Domestic Violence',
+  'Sexual Abuse',
+  'Grief or Loss Support',
+  'Financial Assistance',
+  'Youth Empowerment',
+  'LGBTQ+ Support',
+  'Disability Support',
+  'Relationship/Family Counseling',
+  'Other',
+];
+
+export const KENYA_COUNTIES = [
+  'Mombasa', 'Kwale', 'Kilifi', 'Tana River', 'Lamu', 'Taita-Taveta',
+  'Garissa', 'Wajir', 'Mandera', 'Marsabit', 'Isiolo', 'Meru',
+  'Tharaka-Nithi', 'Embu', 'Kitui', 'Machakos', 'Makueni', 'Nyandarua',
+  'Nyeri', 'Kirinyaga', "Murang'a", 'Kiambu', 'Turkana', 'West Pokot',
+  'Samburu', 'Trans Nzoia', 'Uasin Gishu', 'Elgeyo-Marakwet', 'Nandi',
+  'Baringo', 'Laikipia', 'Nakuru', 'Narok', 'Kajiado', 'Kericho',
+  'Bomet', 'Kakamega', 'Vihiga', 'Bungoma', 'Busia', 'Siaya', 'Kisumu',
+  'Homa Bay', 'Migori', 'Kisii', 'Nyamira', 'Nairobi',
 ];
 
 export const SITE_CONFIG = {
@@ -322,5 +350,5 @@ export const SITE_CONFIG = {
     twitter: '',
     youtube: '',
     linkedin: '',
-  },
+  } as Record<string, string>,
 };

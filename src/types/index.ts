@@ -141,6 +141,35 @@ export interface SocialMedia {
   twitter: string;
   youtube: string;
   tiktok: string;
+  linkedin: string;
+}
+
+export interface MemberProfile {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string | null;
+  gender: string | null;
+  age: number | null;
+  county: string | null;
+  support_categories: string[];
+  personal_statement: string | null;
+  emergency_contact_name: string | null;
+  emergency_contact_phone: string | null;
+  emergency_contact_relationship: string | null;
+  location_lat: number | null;
+  location_lng: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Suggestion {
+  id: string;
+  name: string | null;
+  email: string | null;
+  message: string;
+  status: 'new' | 'reviewed' | 'archived';
+  created_at: string;
 }
 
 export interface SEOSettings {
