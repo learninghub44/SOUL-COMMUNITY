@@ -250,6 +250,20 @@ Reset your mind. Refocus your vision. Restart with purpose.`,
 
 export const ABOUT_CONTENT = {
   mission: 'To create meaningful connections through honest conversations, personal development, career opportunities, networking, mentorship, and fun social activities.',
+  missionPillars: [
+    {
+      title: 'Mental Health Awareness',
+      description: "We believe that mental health support should be accessible to every young person, regardless of their background, circumstances, or financial situation. No one should have to struggle in silence or face life's challenges alone. We are committed to creating safe spaces, promoting mental health awareness, and fostering supportive communities where every individual feels seen, heard, valued, and empowered to thrive.",
+    },
+    {
+      title: 'Community Engagement',
+      description: 'Our mission is to promote emotional well-being and community empowerment by actively engaging communities in mental health initiatives and creating safe, inclusive and supportive spaces where young people can connect, access opportunities, support one another and grow through meaningful relationships, shared experiences and collective healing, helping build a world where everyone feels seen, heard, valued and supported.',
+    },
+    {
+      title: 'Opportunities and Empowerment',
+      description: 'To empower individuals and strengthen youths by promoting mental wellness, fostering meaningful connections, creating opportunities for growth and advocating for inclusive support systems through community engagement, creating opportunities for youths, mentorship and strategic business partnerships.',
+    },
+  ],
   vision: 'A safe, welcoming, and inclusive community where people from all walks of life can connect, grow, and support one another.',
   description: `We are building a safe, welcoming, and inclusive community where people from all walks of life can connect, grow, and support one another. We believe everyone deserves a place where they feel heard, valued, and accepted without judgment.
 

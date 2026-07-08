@@ -63,7 +63,7 @@ export default function AboutPage() {
       <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="flex items-start gap-6">
+            <div className="flex items-start gap-6 mb-10">
               <div className="w-14 h-14 rounded-2xl bg-soul-green/10 flex items-center justify-center shrink-0">
                 <Compass className="w-7 h-7 text-soul-green" />
               </div>
@@ -77,6 +77,19 @@ export default function AboutPage() {
               </div>
             </div>
           </AnimatedSection>
+
+          <div className="grid grid-cols-1 gap-6 sm:pl-20">
+            {ABOUT_CONTENT.missionPillars.map((pillar, index) => (
+              <AnimatedSection key={pillar.title} delay={0.1 + index * 0.08}>
+                <div className="bg-white rounded-2xl p-6 md:p-8 soul-shadow-card">
+                  <h3 className="text-lg font-semibold text-soul-green-dark mb-2">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-foreground/80 leading-relaxed">{pillar.description}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
