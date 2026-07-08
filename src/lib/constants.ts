@@ -67,13 +67,15 @@ Community members can also receive support through:
 
 Our goal is to ensure that opportunities don't remain hidden but reach the people who need them most.
 
-Growth here is practical, personal, and financial.`,
+Growth here is practical, personal, and financial.
+
+In addition to sharing opportunities all day on WhatsApp, we hold a live meeting every Tuesday at 8:00 PM where members can ask questions, get real-time guidance, and connect directly with one another.`,
     color: '#C8A84E',
     icon: 'Lightbulb',
-    meetingInfo: 'WhatsApp Community | All Day',
+    meetingInfo: 'WhatsApp Community All Day | Live Meeting at 8:00 PM',
     meeting: {
-      time: 'All Day',
-      format: 'WhatsApp Community',
+      time: '8:00 PM',
+      format: 'WhatsApp Community + Live Meeting',
       platform: 'WhatsApp',
     },
   },
@@ -142,13 +144,15 @@ The purpose is to encourage genuine engagement, meaningful conversations, and re
 
 Instead of competing with one another, we choose to collaborate, encourage, and uplift.
 
-Your success is our success.`,
+Your success is our success.
+
+We also come together for a live meeting every Thursday at 8:00 PM to showcase what members are building and cheer each other on in real time.`,
     color: '#A67C52',
     icon: 'TrendingUp',
-    meetingInfo: 'WhatsApp Community | All Day',
+    meetingInfo: 'WhatsApp Community All Day | Live Meeting at 8:00 PM',
     meeting: {
-      time: 'All Day',
-      format: 'WhatsApp Community',
+      time: '8:00 PM',
+      format: 'WhatsApp Community + Live Meeting',
       platform: 'WhatsApp',
     },
   },
@@ -186,12 +190,14 @@ Where strangers become friends and friends become family.`,
   },
   {
     day: 'saturday',
-    title: 'Outdoor Experience Saturday',
-    shortTitle: 'Outdoor Experience',
-    description: 'Strong communities are built both online and offline. Every month we organize optional outdoor experiences.',
-    detailedDescription: `Strong communities are built both online and offline.
+    title: 'Mental Health & Outdoor Experience Saturday',
+    shortTitle: 'Mental Health & Outdoor',
+    description: 'Saturdays combine a mental health check-in for members with strong communities built both online and offline through optional outdoor experiences.',
+    detailedDescription: `Strong communities are built both online and offline — and so is good mental health.
 
-Every month, the admin will organize optional outdoor experiences and social activities during weekends.
+Saturday is a Mental Health Day for members: a space to check in on how you're really doing, share how the week treated you, and lean on the community for support before the weekend.
+
+Every month, the admin also organizes optional outdoor experiences and social activities during weekends.
 
 Activities may include:
 
@@ -210,11 +216,11 @@ These events help members build meaningful relationships beyond the screen.
 Some of life's best conversations happen face-to-face.`,
     color: '#2D5A3D',
     icon: 'Mountain',
-    meetingInfo: 'Monthly Outdoor Events',
+    meetingInfo: 'Mental Health Check-In | Monthly Outdoor Events',
     meeting: {
       time: 'Varies',
-      format: 'In-Person',
-      platform: 'Various Locations',
+      format: 'Mental Health Day + In-Person',
+      platform: 'WhatsApp + Various Locations',
     },
   },
   {

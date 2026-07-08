@@ -1,13 +1,14 @@
 import { Heart, Smartphone, Globe, MessageCircle, Repeat, CalendarClock, Sparkles } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
+import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
 import { Section } from '@/components/marketing/Section';
 import { Card } from '@/components/marketing/Card';
 import { buttonVariants } from '@/components/marketing/Button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { CopyTillNumber } from '@/components/donate/CopyTillNumber';
 import { cn } from '@/lib/utils';
-import { SITE_CONFIG, DONATION_CONFIG } from '@/lib/constants';
+import { DONATION_CONFIG } from '@/lib/constants';
 
 export const metadata = {
   title: 'Donate | S.O.U.L',
@@ -157,15 +158,10 @@ export default function DonatePage() {
               <a href="/contact" className={cn(buttonVariants({ variant: 'secondary', size: 'md' }))}>
                 Contact Us
               </a>
-              <a
-                href={SITE_CONFIG.whatsappCommunityLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: 'ghost', size: 'md' }))}
-              >
+              <WhatsAppJoinGate className={cn(buttonVariants({ variant: 'ghost', size: 'md' }))}>
                 <MessageCircle className="h-4 w-4" />
                 Message on WhatsApp
-              </a>
+              </WhatsAppJoinGate>
             </div>
           </Card>
         </AnimatedSection>
