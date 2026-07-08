@@ -32,9 +32,12 @@ import {
   DollarSign,
   MessageSquare,
   LinkIcon,
-  ImagePlus
+  ImagePlus,
+  Images,
+  Trash2
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GalleryPickerModal } from '@/components/admin/GalleryPickerModal'
 
 interface FAQ {
   id: string
@@ -69,6 +72,9 @@ export default function EditEventContent() {
   const [faqs, setFaqs] = useState<FAQ[]>([])
   const [posterPreview, setPosterPreview] = useState<string | null>(null)
   const [dragActive, setDragActive] = useState(false)
+  const [showPosterPicker, setShowPosterPicker] = useState(false)
+  const [showGalleryPicker, setShowGalleryPicker] = useState(false)
+  const [eventGallery, setEventGallery] = useState<string[]>([])
 
   useEffect(() => {
     if (!eventId) {
@@ -105,6 +111,7 @@ export default function EditEventContent() {
         )
         setExistingImageUrl(event.image_url || '')
         setPosterPreview(event.image_url || null)
+        setEventGallery(event.gallery || [])
       })
       .catch(() => {
         toast.error('Could not load this event')
@@ -157,6 +164,14 @@ export default function EditEventContent() {
       setPosterPreview(reader.result as string)
     }
     reader.readAsDataURL(file)
+  }
+
+  const handlePosterFromGallery = (urls: string[]) => {
+    const url = urls[0]
+    if (!url) return
+    setExistingImageUrl(url)
+    setPosterFile(null)
+    setPosterPreview(url)
   }
 
   const addFaq = () => {
@@ -257,6 +272,7 @@ export default function EditEventContent() {
         whatsapp_link: formData.whatsappLink.trim(),
         status: formData.status as 'draft' | 'published' | 'cancelled',
         is_featured: formData.isFeatured,
+        gallery: eventGallery,
         faqs: faqs.map(({ question, answer }) => ({ question, answer })),
       })
 
@@ -552,25 +568,73 @@ export default function EditEventContent() {
                         PNG, JPG up to 5MB
                       </p>
                     </div>
-                    <label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={e => {
-                          if (e.target.files?.[0]) {
-                            handlePosterFile(e.target.files[0])
-                          }
-                        }}
-                      />
-                      <Button type="button" variant="outline" size="sm" className="border-soul-green text-soul-green hover:bg-soul-green hover:text-white cursor-pointer">
-                        <Upload className="w-4 h-4 mr-2" />
-                        Browse Files
+                    <div className="flex items-center justify-center gap-2 flex-wrap">
+                      <label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={e => {
+                            if (e.target.files?.[0]) {
+                              handlePosterFile(e.target.files[0])
+                            }
+                          }}
+                        />
+                        <Button type="button" variant="outline" size="sm" className="border-soul-green text-soul-green hover:bg-soul-green hover:text-white cursor-pointer">
+                          <Upload className="w-4 h-4 mr-2" />
+                          Browse Files
+                        </Button>
+                      </label>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowPosterPicker(true)}
+                        className="border-soul-gold text-soul-gold hover:bg-soul-gold hover:text-white"
+                      >
+                        <Images className="w-4 h-4 mr-2" />
+                        Choose from Gallery
                       </Button>
-                    </label>
+                    </div>
                   </div>
                 )}
               </div>
+            </Card>
+
+            <Card className="p-6 bg-white">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-soul-green-dark">Event Gallery</h2>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowGalleryPicker(true)}
+                  className="border-soul-gold text-soul-gold hover:bg-soul-gold hover:text-white"
+                >
+                  <Images className="w-4 h-4 mr-2" />
+                  Add from Gallery
+                </Button>
+              </div>
+              {eventGallery.length === 0 ? (
+                <p className="text-soul-brown/60 text-sm text-center py-6">
+                  No gallery photos added yet. Click &quot;Add from Gallery&quot; to attach photos to this event.
+                </p>
+              ) : (
+                <div className="grid grid-cols-3 gap-3">
+                  {eventGallery.map((url) => (
+                    <div key={url} className="group relative rounded-lg overflow-hidden border border-soul-cream-dark">
+                      <img src={url} alt="Event gallery item" className="w-full h-20 object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => setEventGallery(prev => prev.filter(u => u !== url))}
+                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
+                      >
+                        <Trash2 className="w-4 h-4 text-white" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </Card>
 
             <Card className="p-6 bg-white">
@@ -640,6 +704,20 @@ export default function EditEventContent() {
           </div>
         </div>
       </div>
+
+      <GalleryPickerModal
+        open={showPosterPicker}
+        onClose={() => setShowPosterPicker(false)}
+        mode="single"
+        onSelect={handlePosterFromGallery}
+      />
+      <GalleryPickerModal
+        open={showGalleryPicker}
+        onClose={() => setShowGalleryPicker(false)}
+        mode="multi"
+        initialSelected={eventGallery}
+        onSelect={setEventGallery}
+      />
     </div>
   )
 }
