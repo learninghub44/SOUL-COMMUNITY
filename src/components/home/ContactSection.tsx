@@ -42,7 +42,7 @@ export function ContactSection() {
       <AnimatedSection>
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h2 className="text-section-heading font-heading font-bold text-soul-green-dark mb-4">
-            Contact Us
+            Crisis Support Hotline
           </h2>
           <p className="text-lg text-muted-foreground">
             Reach out any time — support is always within reach.

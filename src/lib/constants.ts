@@ -271,15 +271,9 @@ export const ABOUT_CONTENT = {
     },
   ],
   vision: 'A world where mental well-being is openly supported, human connection is valued and every individual feels safe, empowered and emotionally supported.',
-  description: `S.O.U.L (Serving Opportunities, Uplifting Lives) is a community-driven organization dedicated to promoting mental health awareness, emotional well-being, meaningful connections and personal growth among young people.
+  description: `We recognize that many young people face challenges such as anxiety, loneliness, burnout, social pressure, unemployment, uncertainty about the future and limited access to support systems. Through community engagement, mental health initiatives, empowerment programs, networking opportunities and social activities, we aim to create an environment where every individual feels seen, heard, valued and supported.
 
-Founded on the belief that no one should struggle in silence or navigate life alone, S.O.U.L was created to provide a safe, inclusive and supportive space where individuals can be themselves, share their experiences, access opportunities and build genuine relationships.
-
-We recognize that many young people face challenges such as anxiety, loneliness, burnout, social pressure, unemployment, uncertainty about the future and limited access to support systems. Through community engagement, mental health initiatives, empowerment programs, networking opportunities and social activities, we aim to create an environment where every individual feels seen, heard, valued and supported.
-
-At S.O.U.L, we believe that mental well-being is just as important as physical well-being and that healing happens through connection, understanding and community. Our holistic approach focuses on emotional, social, psychological and personal development, empowering young people to thrive in all areas of life.
-
-Whether you're looking for support, friendship, opportunities, personal growth, or simply a place where you belong, S.O.U.L welcomes you.`,
+At S.O.U.L, we believe that mental well-being is just as important as physical well-being and that healing happens through connection, understanding and community. Our holistic approach focuses on emotional, social, psychological and personal development, empowering young people to thrive in all areas of life.`,
   finalVibe: `This community is more than just another WhatsApp group - it's a family built on respect, kindness, growth, and genuine human connection.
 
 Here, you'll find people who celebrate your wins, encourage you through difficult moments, share opportunities, exchange knowledge, and inspire you to become the best version of yourself.
@@ -400,6 +394,27 @@ export const DONATION_CONFIG = {
   },
   paypalUrl: 'https://www.paypal.com/donate/?hosted_button_id=PPKSWLGHPLVRJ',
 };
+
+export const DONATION_TIERS = [
+  {
+    title: 'The Spark Soul',
+    amount: '$20',
+    tagline: 'You light the first spark.',
+    description:
+      'Helps provide one safe space counseling or peer support session for a young person who just needs to be heard.',
+    image: '/donate-tiers/spark-soul.jpg',
+  },
+  {
+    title: 'The Voice Holder',
+    amount: '$40',
+    tagline: 'You help silence turn into expression.',
+    description:
+      'Funds youth workshops, mental health education and empowerment tools that shift lives and mindsets.',
+    image: '/donate-tiers/voice-holder.jpg',
+  },
+];
+
+export const CONSTITUTION_URL = '/documents/SOUL-Constitution.pdf';
 
 export const SITE_CONFIG = {
   name: 'SOUL - Serving Opportunities, Uplifting Lives',

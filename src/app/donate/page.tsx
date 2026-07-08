@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Heart, Smartphone, Globe, MessageCircle, Repeat, CalendarClock, Sparkles } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
@@ -8,7 +9,7 @@ import { buttonVariants } from '@/components/marketing/Button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { CopyTillNumber } from '@/components/donate/CopyTillNumber';
 import { cn } from '@/lib/utils';
-import { DONATION_CONFIG } from '@/lib/constants';
+import { DONATION_CONFIG, DONATION_TIERS } from '@/lib/constants';
 
 export const metadata = {
   title: 'Donate | S.O.U.L',
@@ -45,7 +46,69 @@ export default function DonatePage() {
         description="Your support helps us keep serving opportunities and uplifting lives across the community."
       />
 
-      <Section background="default">
+      {/* Support Our Mission — donation tiers */}
+      <Section background="muted">
+        <AnimatedSection className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-3">
+              Support Our Mission
+            </h2>
+            <p className="text-muted-foreground leading-relaxed max-w-xl mx-auto">
+              Every tier represents a real, tangible way your gift moves someone forward.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            {DONATION_TIERS.map((tier) => (
+              <Card key={tier.title} className="overflow-hidden flex flex-col p-0" hoverable>
+                <div className="flex gap-5 p-6 sm:p-8">
+                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0">
+                    <Image
+                      src={tier.image}
+                      alt={tier.title}
+                      fill
+                      className="object-cover"
+                      sizes="112px"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground">
+                      {tier.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground italic">{tier.tagline}</p>
+                    <p className="text-soul-gold font-bold text-lg mt-1">{tier.amount}</p>
+                  </div>
+                </div>
+                <div className="px-6 sm:px-8 pb-6 sm:pb-8 flex flex-col grow">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 grow">
+                    {tier.description}
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <a
+                      href={DONATION_CONFIG.paypalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(buttonVariants({ variant: 'gold', size: 'sm' }), 'flex-1')}
+                    >
+                      <Globe className="h-4 w-4" />
+                      Give via PayPal
+                    </a>
+                    <a
+                      href="#donation-methods"
+                      className={cn(buttonVariants({ variant: 'primary', size: 'sm' }), 'flex-1')}
+                    >
+                      <Smartphone className="h-4 w-4" />
+                      Give via M-Pesa
+                    </a>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </AnimatedSection>
+      </Section>
+
+      <Section background="default" id="donation-methods">
         <AnimatedSection className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-soul-green/10">

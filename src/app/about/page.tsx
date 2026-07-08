@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Users,
   Heart,
@@ -14,11 +15,24 @@ import {
   Smile,
   ShieldCheck,
   Zap,
+  Brain,
+  Lightbulb,
+  Mountain,
+  Sun,
+  ArrowRight,
+  FileText,
+  Download,
 } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { WhatsAppCTA } from '@/components/shared/WhatsAppCTA';
-import { ABOUT_CONTENT, TEAM_MEMBERS, PROGRAMS } from '@/lib/constants';
+import {
+  ABOUT_CONTENT,
+  TEAM_MEMBERS,
+  PROGRAMS,
+  WEEKLY_ACTIVITIES,
+  CONSTITUTION_URL,
+} from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'About SOUL – Serving Opportunities, Uplifting Lives',
@@ -41,6 +55,19 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Smile,
   ShieldCheck,
   Zap,
+};
+
+const weekdayIconMap: Record<
+  string,
+  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
+> = {
+  Brain,
+  Lightbulb,
+  BookOpen,
+  TrendingUp,
+  Heart,
+  Mountain,
+  Sun,
 };
 
 const colorMap: Record<string, { color: string; bg: string }> = {
@@ -156,8 +183,49 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Core Values */}
       <section className="py-20 px-4 bg-soul-cream">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
+                Our Core Values
+              </h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                The principles that guide everything we do as a community.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ABOUT_CONTENT.values.map((value, index) => {
+              const Icon = iconMap[value.icon];
+              const colors = colorMap[value.title] || {
+                color: 'text-soul-green',
+                bg: 'bg-soul-green/10',
+              };
+              return (
+                <AnimatedSection key={value.title} delay={0.1 + index * 0.08}>
+                  <div className="bg-white rounded-xl p-6 soul-shadow-card h-full">
+                    <div
+                      className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-4`}
+                    >
+                      {Icon && <Icon className={`w-6 h-6 ${colors.color}`} />}
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{value.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
@@ -174,7 +242,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {TEAM_MEMBERS.map((member, index) => (
               <AnimatedSection key={member.name} delay={0.1 + index * 0.08}>
-                <div className="bg-white rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
+                <div className="bg-soul-cream rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
                   <div className="relative w-full aspect-[4/5]">
                     <Image
                       src={member.image}
@@ -220,44 +288,74 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Core Values */}
-      <section className="py-20 px-4 bg-white">
+      {/* Weekly Activities */}
+      <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
-                Our Core Values
+                Weekly Activities
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
-                The principles that guide everything we do as a community.
+                Something meaningful every day of the week.
               </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ABOUT_CONTENT.values.map((value, index) => {
-              const Icon = iconMap[value.icon];
-              const colors = colorMap[value.title] || {
-                color: 'text-soul-green',
-                bg: 'bg-soul-green/10',
-              };
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4 mb-10">
+            {WEEKLY_ACTIVITIES.map((activity, index) => {
+              const Icon = weekdayIconMap[activity.icon];
               return (
-                <AnimatedSection key={value.title} delay={0.1 + index * 0.08}>
-                  <div className="bg-soul-cream rounded-xl p-6 soul-shadow-card h-full">
+                <AnimatedSection key={activity.day} delay={0.05 + index * 0.05}>
+                  <div className="bg-white rounded-xl p-4 soul-shadow-card h-full flex flex-col items-center text-center gap-2">
                     <div
-                      className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-4`}
+                      className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${activity.color}1A` }}
                     >
-                      {Icon && <Icon className={`w-6 h-6 ${colors.color}`} />}
+                      {Icon && <Icon className="w-5 h-5" style={{ color: activity.color }} />}
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">{value.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {value.description}
+                    <p className="text-xs font-semibold text-soul-green-dark capitalize">
+                      {activity.day}
+                    </p>
+                    <p className="text-xs text-muted-foreground leading-snug">
+                      {activity.shortTitle}
                     </p>
                   </div>
                 </AnimatedSection>
               );
             })}
           </div>
+
+          <AnimatedSection delay={0.3}>
+            <div className="text-center">
+              <Link
+                href="/weekly-activities"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-soul-green text-white text-sm font-medium hover:bg-soul-green-light transition-colors"
+              >
+                View Full Schedule
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Final Vibe */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <AnimatedSection>
+            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
+              The SOUL Vibe
+            </h2>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.1}>
+            <div className="bg-soul-cream rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
+              {finalVibeParagraphs.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -303,20 +401,31 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Final Vibe */}
+      {/* Constitution */}
       <section className="py-20 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
-              The SOUL Vibe
-            </h2>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.1}>
-            <div className="bg-soul-cream rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
-              {finalVibeParagraphs.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
-              ))}
+            <div className="bg-soul-cream rounded-2xl p-8 md:p-12 soul-shadow-card flex flex-col sm:flex-row items-center gap-8 text-center sm:text-left">
+              <div className="w-16 h-16 rounded-2xl bg-soul-green/10 flex items-center justify-center shrink-0">
+                <FileText className="w-8 h-8 text-soul-green" />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-xl md:text-2xl font-bold text-soul-green-dark font-heading mb-2">
+                  Our Constitution
+                </h2>
+                <p className="text-foreground/80 leading-relaxed mb-5">
+                  The governing document behind S.O.U.L — our structure, principles, and
+                  commitments to the community, laid out in full.
+                </p>
+                <a
+                  href={CONSTITUTION_URL}
+                  download
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-soul-green text-white text-sm font-medium hover:bg-soul-green-light transition-colors"
+                >
+                  <Download className="w-4 h-4" />
+                  Download PDF
+                </a>
+              </div>
             </div>
           </AnimatedSection>
         </div>
