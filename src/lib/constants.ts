@@ -347,6 +347,14 @@ export const KENYA_COUNTIES = [
   'Homa Bay', 'Migori', 'Kisii', 'Nyamira', 'Nairobi',
 ];
 
+export const DONATION_CONFIG = {
+  mpesa: {
+    method: 'Buy Goods and Services',
+    till: '3503157',
+  },
+  paypalUrl: 'https://www.paypal.com/donate/?hosted_button_id=PPKSWLGHPLVRJ',
+};
+
 export const SITE_CONFIG = {
   name: 'SOUL - Serving Opportunities, Uplifting Lives',
   tagline: 'Serving Opportunities, Uplifting Lives',
