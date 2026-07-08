@@ -40,7 +40,11 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
+                    className={
+                      link.label === 'Donate'
+                        ? 'text-sm font-bold text-soul-gold hover:text-soul-gold-light transition-colors'
+                        : 'text-sm text-white/70 hover:text-white transition-colors'
+                    }
                   >
                     {link.label}
                   </Link>

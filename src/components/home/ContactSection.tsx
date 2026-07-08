@@ -18,7 +18,7 @@ const infoItems = [
   },
   {
     icon: Phone,
-    label: 'Crisis Hotline',
+    label: 'Crisis Support Hotline',
     detail: SITE_CONFIG.crisisHotline,
     href: `tel:${SITE_CONFIG.crisisHotline.replace(/\s/g, '')}`,
   },

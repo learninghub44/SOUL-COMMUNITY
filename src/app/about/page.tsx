@@ -75,7 +75,7 @@ export default function AboutPage() {
       <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
-            <div className="flex items-start gap-6 mb-10">
+            <div className="flex items-start gap-6">
               <div className="w-14 h-14 rounded-2xl bg-soul-green/10 flex items-center justify-center shrink-0">
                 <Compass className="w-7 h-7 text-soul-green" />
               </div>
@@ -89,19 +89,6 @@ export default function AboutPage() {
               </div>
             </div>
           </AnimatedSection>
-
-          <div className="grid grid-cols-1 gap-6 sm:pl-20">
-            {ABOUT_CONTENT.missionPillars.map((pillar, index) => (
-              <AnimatedSection key={pillar.title} delay={0.1 + index * 0.08}>
-                <div className="bg-white rounded-2xl p-6 md:p-8 soul-shadow-card">
-                  <h3 className="text-lg font-semibold text-soul-green-dark mb-2">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-foreground/80 leading-relaxed">{pillar.description}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -126,8 +113,32 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* About */}
+      {/* Community Objectives */}
       <section className="py-20 px-4 bg-soul-cream">
+        <div className="max-w-4xl mx-auto">
+          <AnimatedSection>
+            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-10 text-center">
+              Our Community Objectives
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 gap-6">
+            {ABOUT_CONTENT.missionPillars.map((pillar, index) => (
+              <AnimatedSection key={pillar.title} delay={0.1 + index * 0.08}>
+                <div className="bg-white rounded-2xl p-6 md:p-8 soul-shadow-card">
+                  <h3 className="text-lg font-semibold text-soul-green-dark mb-2">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-foreground/80 leading-relaxed">{pillar.description}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
@@ -136,7 +147,7 @@ export default function AboutPage() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.1}>
-            <div className="bg-white rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
+            <div className="bg-soul-cream rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
               {descriptionParagraphs.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
@@ -146,7 +157,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
@@ -163,7 +174,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {TEAM_MEMBERS.map((member, index) => (
               <AnimatedSection key={member.name} delay={0.1 + index * 0.08}>
-                <div className="bg-soul-cream rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
+                <div className="bg-white rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
                   <div className="relative w-full aspect-[4/5]">
                     <Image
                       src={member.image}
@@ -210,7 +221,7 @@ export default function AboutPage() {
       </section>
 
       {/* Core Values */}
-      <section className="py-20 px-4 bg-soul-cream">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
@@ -232,7 +243,7 @@ export default function AboutPage() {
               };
               return (
                 <AnimatedSection key={value.title} delay={0.1 + index * 0.08}>
-                  <div className="bg-white rounded-xl p-6 soul-shadow-card h-full">
+                  <div className="bg-soul-cream rounded-xl p-6 soul-shadow-card h-full">
                     <div
                       className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center mb-4`}
                     >
@@ -251,7 +262,7 @@ export default function AboutPage() {
       </section>
 
       {/* Programs */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-12">
@@ -267,7 +278,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PROGRAMS.map((program, index) => (
               <AnimatedSection key={program.title} delay={0.1 + index * 0.08}>
-                <div className="bg-soul-cream rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
+                <div className="bg-white rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
                   <div className="relative w-full aspect-[4/3]">
                     <Image
                       src={program.image}
@@ -293,7 +304,7 @@ export default function AboutPage() {
       </section>
 
       {/* Final Vibe */}
-      <section className="py-20 px-4 bg-soul-cream">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
@@ -302,7 +313,7 @@ export default function AboutPage() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.1}>
-            <div className="bg-white rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
+            <div className="bg-soul-cream rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
               {finalVibeParagraphs.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}

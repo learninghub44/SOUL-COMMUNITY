@@ -126,7 +126,10 @@ export function Navbar() {
                       <MenuPrimitive.Item
                         key={link.href}
                         render={<Link href={link.href} />}
-                        className="block cursor-default rounded-xl px-3 py-2 text-sm font-medium text-foreground/70 outline-none select-none data-[highlighted]:bg-muted data-[highlighted]:text-primary"
+                        className={cn(
+                          'block cursor-default rounded-xl px-3 py-2 text-sm font-medium text-foreground/70 outline-none select-none data-[highlighted]:bg-muted data-[highlighted]:text-primary',
+                          link.label === 'Donate' && 'font-bold text-soul-gold'
+                        )}
                       >
                         {link.label}
                       </MenuPrimitive.Item>
@@ -196,7 +199,10 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-foreground/70 hover:text-primary rounded-xl hover:bg-muted transition-colors"
+                  className={cn(
+                    'block px-4 py-3 text-sm font-medium text-foreground/70 hover:text-primary rounded-xl hover:bg-muted transition-colors',
+                    link.label === 'Donate' && 'font-bold text-soul-gold'
+                  )}
                 >
                   {link.label}
                 </Link>
