@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import {
   Select,
@@ -424,7 +423,7 @@ export default function CreateEventPage() {
               </div>
               {faqs.length === 0 ? (
                 <p className="text-soul-brown/60 text-sm text-center py-6">
-                  No FAQs yet. Click "Add FAQ" to create one.
+                  No FAQs yet. Click &quot;Add FAQ&quot; to create one.
                 </p>
               ) : (
                 <div className="space-y-4">

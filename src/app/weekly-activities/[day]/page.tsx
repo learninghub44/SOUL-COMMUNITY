@@ -12,6 +12,6 @@ export function generateStaticParams() {
   ];
 }
 
-export default function DayActivityPage({ params }: { params: { day: string } }) {
+export default function DayActivityPage() {
   return <DayContent />;
 }

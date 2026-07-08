@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Megaphone, Search, Pin, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
-import { toast } from 'sonner';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { Input } from '@/components/ui/input';
