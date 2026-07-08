@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { MessageCircle, ExternalLink } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
+import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
 
 export function WhatsAppCTA() {
   return (
@@ -25,29 +26,21 @@ export function WhatsAppCTA() {
             Connect with like-minded individuals and make a difference.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.a
+            <WhatsAppJoinGate
               href={SITE_CONFIG.whatsappCommunityLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-soul-green text-white font-semibold rounded-full shadow-lg hover:bg-soul-green-dark transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-soul-green text-white font-semibold rounded-full shadow-lg hover:bg-soul-green-dark transition-colors hover:scale-105 active:scale-95"
             >
               <MessageCircle className="w-5 h-5" />
               Join WhatsApp Community
               <ExternalLink className="w-4 h-4" />
-            </motion.a>
-            <motion.a
+            </WhatsAppJoinGate>
+            <WhatsAppJoinGate
               href={SITE_CONFIG.whatsappChannelLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-soul-gold text-white font-semibold rounded-full shadow-lg hover:bg-soul-gold-dark transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-soul-gold text-white font-semibold rounded-full shadow-lg hover:bg-soul-gold-dark transition-colors hover:scale-105 active:scale-95"
             >
               <MessageCircle className="w-5 h-5" />
               Follow WhatsApp Channel
-            </motion.a>
+            </WhatsAppJoinGate>
           </div>
         </motion.div>
       </div>

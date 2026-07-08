@@ -341,6 +341,9 @@ export const SITE_CONFIG = {
   ogImage: '/og-image.png',
   whatsappCommunityLink: 'https://chat.whatsapp.com/La7FQSUAfmR02w3OF19AVv',
   whatsappChannelLink: '#',
+  // New members must contact this admin/support number before joining the
+  // WhatsApp community or channel — enforced via WhatsAppJoinGate.
+  adminContactPhone: '+254726998022',
   email: 'hello@soulcommunity.co.ke',
   crisisHotline: '+254 729 010390',
   therapistContact: '+254 729 010390',

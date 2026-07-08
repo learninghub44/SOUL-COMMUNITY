@@ -2,10 +2,10 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/marketing/Button';
 import { SITE_CONFIG } from '@/lib/constants';
+import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
 
 export function Hero() {
   return (
@@ -63,25 +63,21 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
           className="flex flex-col items-center gap-4 sm:flex-row"
         >
-          <Link
+          <WhatsAppJoinGate
             href={SITE_CONFIG.whatsappCommunityLink}
-            target="_blank"
-            rel="noopener noreferrer"
             className={cn(buttonVariants({ variant: 'gold', size: 'lg' }), 'rounded-full')}
           >
             Join WhatsApp Community
-          </Link>
-          <Link
+          </WhatsAppJoinGate>
+          <WhatsAppJoinGate
             href={SITE_CONFIG.whatsappChannelLink}
-            target="_blank"
-            rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: 'ghost', size: 'lg' }),
               'rounded-full border border-white/40 bg-white/5 text-white/90 backdrop-blur-sm hover:bg-white/15 hover:text-white'
             )}
           >
             Follow WhatsApp Channel
-          </Link>
+          </WhatsAppJoinGate>
         </motion.div>
       </div>
     </section>

@@ -7,8 +7,10 @@ import { Calendar, MapPin, Users, ArrowLeft, Loader2, ExternalLink } from 'lucid
 import { format } from 'date-fns';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { WhatsAppCTA } from '@/components/shared/WhatsAppCTA';
+import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
+import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
 import { getEvent } from '@/lib/services/events';
 import type { Event } from '@/types';
@@ -146,12 +148,13 @@ export default function EventContent() {
                     </Button>
                   )}
                   {event.whatsapp_link && (
-                    <a href={event.whatsapp_link} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" className="w-full sm:w-auto text-lg py-6">
-                        WhatsApp Group
-                        <ExternalLink className="w-4 h-4 ml-2" />
-                      </Button>
-                    </a>
+                    <WhatsAppJoinGate
+                      href={event.whatsapp_link}
+                      className={cn(buttonVariants({ variant: 'outline' }), 'w-full sm:w-auto text-lg py-6')}
+                    >
+                      WhatsApp Group
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </WhatsAppJoinGate>
                   )}
                 </div>
               </div>

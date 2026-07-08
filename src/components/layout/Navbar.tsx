@@ -21,6 +21,7 @@ import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
 import { useAuthSession } from '@/lib/hooks/useAuthSession';
 import { buttonVariants } from '@/components/marketing/Button';
+import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
 
 /**
  * Navbar (Step 3 of the redesign).
@@ -137,25 +138,21 @@ export function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <a
+            <WhatsAppJoinGate
               href={SITE_CONFIG.whatsappCommunityLink}
-              target="_blank"
-              rel="noopener noreferrer"
               className={cn(buttonVariants({ variant: 'primary', size: 'sm' }), 'gap-2')}
             >
               <MessageCircle className="w-4 h-4" />
               Join Community
               <ExternalLink className="w-3 h-3" />
-            </a>
-            <a
+            </WhatsAppJoinGate>
+            <WhatsAppJoinGate
               href={SITE_CONFIG.whatsappChannelLink}
-              target="_blank"
-              rel="noopener noreferrer"
               className={cn(buttonVariants({ variant: 'secondary', size: 'sm' }), 'gap-2')}
             >
               <MessageCircle className="w-4 h-4" />
               Follow Channel
-            </a>
+            </WhatsAppJoinGate>
             {user ? (
               <button
                 onClick={handleSignOut}
@@ -207,24 +204,20 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="pt-4 space-y-2">
-                <a
+                <WhatsAppJoinGate
                   href={SITE_CONFIG.whatsappCommunityLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className={cn(buttonVariants({ variant: 'primary', size: 'md' }), 'w-full')}
                 >
                   <MessageCircle className="w-4 h-4" />
                   Join WhatsApp Community
-                </a>
-                <a
+                </WhatsAppJoinGate>
+                <WhatsAppJoinGate
                   href={SITE_CONFIG.whatsappChannelLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className={cn(buttonVariants({ variant: 'secondary', size: 'md' }), 'w-full')}
                 >
                   <MessageCircle className="w-4 h-4" />
                   Follow WhatsApp Channel
-                </a>
+                </WhatsAppJoinGate>
                 {user ? (
                   <button
                     onClick={() => {

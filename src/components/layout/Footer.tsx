@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { MessageCircle, Mail, ExternalLink } from 'lucide-react';
 import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
 import { SocialLinks } from '@/components/shared/SocialLinks';
+import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
 
 export function Footer() {
   const quickLinks = NAV_LINKS.filter((link) => link.href !== '/');
@@ -53,28 +53,24 @@ export function Footer() {
             <h4 className="font-heading font-semibold text-soul-gold mb-4">Connect With Us</h4>
             <ul className="space-y-3">
               <li>
-                <a
+                <WhatsAppJoinGate
                   href={SITE_CONFIG.whatsappCommunityLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-soul-green-light" />
                   WhatsApp Community
                   <ExternalLink className="w-3 h-3" />
-                </a>
+                </WhatsAppJoinGate>
               </li>
               <li>
-                <a
+                <WhatsAppJoinGate
                   href={SITE_CONFIG.whatsappChannelLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-soul-gold" />
                   WhatsApp Channel
                   <ExternalLink className="w-3 h-3" />
-                </a>
+                </WhatsAppJoinGate>
               </li>
               <li>
                 <a
@@ -94,25 +90,21 @@ export function Footer() {
               Be part of a movement that serves, uplifts, and transforms lives.
             </p>
             <div className="space-y-3">
-              <a
+              <WhatsAppJoinGate
                 href={SITE_CONFIG.whatsappCommunityLink}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-soul-green text-white text-sm font-medium rounded-full hover:bg-soul-green-light transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
                 Join Community
                 <ExternalLink className="w-3 h-3" />
-              </a>
-              <a
+              </WhatsAppJoinGate>
+              <WhatsAppJoinGate
                 href={SITE_CONFIG.whatsappChannelLink}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-soul-gold text-white text-sm font-medium rounded-full hover:bg-soul-gold-light transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
                 Follow Channel
-              </a>
+              </WhatsAppJoinGate>
             </div>
             <SocialLinks
               className="flex flex-wrap gap-2 mt-4"

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SITE_CONFIG } from '@/lib/constants'
+import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate'
 import { createClient } from '@/lib/supabase/client'
 import { createContactMessage } from '@/lib/services/contact'
 
@@ -64,18 +65,21 @@ export default function ContactPage() {
       title: 'WhatsApp Community',
       description: 'Join our vibrant community',
       href: SITE_CONFIG.whatsappCommunityLink || '#',
+      gated: true,
     },
     {
       label: 'WA',
       title: 'WhatsApp Channel',
       description: 'Stay updated with our channel',
       href: SITE_CONFIG.whatsappChannelLink || '#',
+      gated: true,
     },
     {
       label: '@',
       title: 'Email',
       description: SITE_CONFIG.email || 'info@soulcommunity.org',
       href: `mailto:${SITE_CONFIG.email || 'info@soulcommunity.org'}`,
+      gated: false,
     },
   ]
 
@@ -208,35 +212,49 @@ export default function ContactPage() {
 
               {/* Contact Cards */}
               <div className="space-y-4">
-                {contactInfo.map((item, index) => (
-                  <motion.a
-                    key={item.title}
-                    href={item.href}
-                    target={item.href.startsWith('http') ? '_blank' : undefined}
-                    rel={
-                      item.href.startsWith('http')
-                        ? 'noopener noreferrer'
-                        : undefined
-                    }
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -2 }}
-                    className="glass-card flex items-center gap-4 p-4 rounded-xl"
-                  >
-                    <div className="w-11 h-11 rounded-xl bg-soul-green/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-sm font-bold text-soul-green font-heading">
-                        {item.label}
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
-                    </div>
-                  </motion.a>
-                ))}
+                {contactInfo.map((item, index) => {
+                  const cardClassName = 'glass-card flex items-center gap-4 p-4 rounded-xl w-full text-left'
+                  const cardContent = (
+                    <>
+                      <div className="w-11 h-11 rounded-xl bg-soul-green/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-sm font-bold text-soul-green font-heading">
+                          {item.label}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-foreground">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">{item.description}</p>
+                      </div>
+                    </>
+                  )
+
+                  return (
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ y: -2 }}
+                    >
+                      {item.gated ? (
+                        <WhatsAppJoinGate href={item.href} className={cardClassName}>
+                          {cardContent}
+                        </WhatsAppJoinGate>
+                      ) : (
+                        <a
+                          href={item.href}
+                          target={item.href.startsWith('http') ? '_blank' : undefined}
+                          rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className={cardClassName}
+                        >
+                          {cardContent}
+                        </a>
+                      )}
+                    </motion.div>
+                  )
+                })}
               </div>
 
               {/* Social Media */}
