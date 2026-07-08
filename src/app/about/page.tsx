@@ -56,7 +56,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title="About SOUL"
-        description="We are building a safe, welcoming, and inclusive community"
+        description="A safe, inclusive space for mental health awareness, meaningful connections, and personal growth."
       />
 
       {/* Mission */}

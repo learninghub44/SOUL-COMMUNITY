@@ -255,7 +255,7 @@ Reset your mind. Refocus your vision. Restart with purpose.`,
 ];
 
 export const ABOUT_CONTENT = {
-  mission: 'To create meaningful connections through honest conversations, personal development, career opportunities, networking, mentorship, and fun social activities.',
+  mission: 'To actively engage communities in promoting mental health awareness, reducing stigma and fostering emotional well-being by creating safe and inclusive spaces where young people can connect, access opportunities, support one another and grow through meaningful relationships, shared experiences and collective healing.',
   missionPillars: [
     {
       title: 'Mental Health Awareness',
@@ -270,21 +270,23 @@ export const ABOUT_CONTENT = {
       description: 'To empower individuals and strengthen youths by promoting mental wellness, fostering meaningful connections, creating opportunities for growth and advocating for inclusive support systems through community engagement, creating opportunities for youths, mentorship and strategic business partnerships.',
     },
   ],
-  vision: 'A safe, welcoming, and inclusive community where people from all walks of life can connect, grow, and support one another.',
-  description: `We are building a safe, welcoming, and inclusive community where people from all walks of life can connect, grow, and support one another. We believe everyone deserves a place where they feel heard, valued, and accepted without judgment.
+  vision: 'A world where mental well-being is openly supported, human connection is valued and every individual feels safe, empowered and emotionally supported.',
+  description: `S.O.U.L (Serving Opportunities, Uplifting Lives) is a community-driven organization dedicated to promoting mental health awareness, emotional well-being, meaningful connections and personal growth among young people.
 
-Our mission is to create meaningful connections through honest conversations, personal development, career opportunities, networking, mentorship, and fun social activities. We encourage members to share knowledge, inspire one another, and celebrate each other's successes.
+Founded on the belief that no one should struggle in silence or navigate life alone, S.O.U.L was created to provide a safe, inclusive and supportive space where individuals can be themselves, share their experiences, access opportunities and build genuine relationships.
 
-Whether you're a student, entrepreneur, job seeker, professional, creative, or simply looking for a positive community, you'll always find people willing to encourage and support your journey.
+We recognize that many young people face challenges such as anxiety, loneliness, burnout, social pressure, unemployment, uncertainty about the future and limited access to support systems. Through community engagement, mental health initiatives, empowerment programs, networking opportunities and social activities, we aim to create an environment where every individual feels seen, heard, valued and supported.
 
-Together, we grow stronger.`,
+At S.O.U.L, we believe that mental well-being is just as important as physical well-being and that healing happens through connection, understanding and community. Our holistic approach focuses on emotional, social, psychological and personal development, empowering young people to thrive in all areas of life.
+
+Whether you're looking for support, friendship, opportunities, personal growth, or simply a place where you belong, S.O.U.L welcomes you.`,
   finalVibe: `This community is more than just another WhatsApp group - it's a family built on respect, kindness, growth, and genuine human connection.
 
 Here, you'll find people who celebrate your wins, encourage you through difficult moments, share opportunities, exchange knowledge, and inspire you to become the best version of yourself.
 
 Whether you're looking for friendship, mentorship, career opportunities, business growth, emotional support, or simply a place where you truly belong, you're in the right place.
 
-Come as you are. Leave stronger, wiser, and surrounded by lifelong friends.`,
+Come As You Are, Leave As a Soulmate.`,
   values: [
     { title: 'Community', description: 'Building meaningful connections and a sense of belonging for every member.', icon: 'Users' },
     { title: 'Mental Wellness', description: 'Prioritizing mental and emotional well-being as the foundation for growth.', icon: 'Heart' },
