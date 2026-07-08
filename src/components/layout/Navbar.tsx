@@ -16,7 +16,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
+import { NAV_LINKS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
 import { useAuthSession } from '@/lib/hooks/useAuthSession';
@@ -139,7 +139,6 @@ export function Navbar() {
 
           <div className="hidden lg:flex items-center gap-3">
             <WhatsAppJoinGate
-              href={SITE_CONFIG.whatsappCommunityLink}
               className={cn(buttonVariants({ variant: 'primary', size: 'sm' }), 'gap-2')}
             >
               <MessageCircle className="w-4 h-4" />
@@ -147,7 +146,6 @@ export function Navbar() {
               <ExternalLink className="w-3 h-3" />
             </WhatsAppJoinGate>
             <WhatsAppJoinGate
-              href={SITE_CONFIG.whatsappChannelLink}
               className={cn(buttonVariants({ variant: 'secondary', size: 'sm' }), 'gap-2')}
             >
               <MessageCircle className="w-4 h-4" />
@@ -205,14 +203,12 @@ export function Navbar() {
               ))}
               <div className="pt-4 space-y-2">
                 <WhatsAppJoinGate
-                  href={SITE_CONFIG.whatsappCommunityLink}
                   className={cn(buttonVariants({ variant: 'primary', size: 'md' }), 'w-full')}
                 >
                   <MessageCircle className="w-4 h-4" />
                   Join WhatsApp Community
                 </WhatsAppJoinGate>
                 <WhatsAppJoinGate
-                  href={SITE_CONFIG.whatsappChannelLink}
                   className={cn(buttonVariants({ variant: 'secondary', size: 'md' }), 'w-full')}
                 >
                   <MessageCircle className="w-4 h-4" />

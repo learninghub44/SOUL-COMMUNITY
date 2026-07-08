@@ -11,8 +11,6 @@ const ADMIN_WA_LINK = `https://wa.me/${ADMIN_PHONE_DIGITS}?text=${encodeURICompo
 )}`;
 
 interface WhatsAppJoinGateProps {
-  /** The real WhatsApp community/channel invite link the user is trying to reach. */
-  href: string;
   /** Classes for the trigger element — pass through the original button/link styling. */
   className?: string;
   children: ReactNode;
@@ -20,11 +18,11 @@ interface WhatsAppJoinGateProps {
 
 /**
  * Wraps any "Join WhatsApp Community" / "Follow WhatsApp Channel" trigger.
- * Instead of navigating straight to the invite link, it opens a wall
- * requiring the user to contact admin support first. The real invite link
- * is only revealed after they acknowledge they've reached out.
+ * Instead of navigating to the invite link, it opens a hard wall requiring
+ * the user to contact admin support first. The real invite link is never
+ * shown here — the admin adds the member directly after being contacted.
  */
-export function WhatsAppJoinGate({ href, className, children }: WhatsAppJoinGateProps) {
+export function WhatsAppJoinGate({ className, children }: WhatsAppJoinGateProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -63,31 +61,22 @@ export function WhatsAppJoinGate({ href, className, children }: WhatsAppJoinGate
               </div>
 
               <h3 className="font-heading text-xl font-bold text-foreground">
-                Contact admin before joining
+                Contact admin to join
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                To join, you must first contact our support admin on WhatsApp. This helps us
-                welcome and verify every member of the SOUL Community.
+                We don&apos;t have an open invite link. To join, message our support admin on
+                WhatsApp and they&apos;ll add you directly.
               </p>
 
               <a
                 href={ADMIN_WA_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
                 className="mt-5 flex items-center justify-center gap-2 rounded-full bg-soul-green px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-soul-green-dark"
               >
                 <Phone className="h-4 w-4" />
                 Message Admin: {SITE_CONFIG.adminContactPhone}
-              </a>
-
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
-                className="mt-3 block text-center text-sm font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-              >
-                I&apos;ve already contacted admin — continue to join
               </a>
             </motion.div>
           </motion.div>

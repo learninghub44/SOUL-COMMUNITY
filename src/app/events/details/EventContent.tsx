@@ -149,7 +149,6 @@ export default function EventContent() {
                   )}
                   {event.whatsapp_link && (
                     <WhatsAppJoinGate
-                      href={event.whatsapp_link}
                       className={cn(buttonVariants({ variant: 'outline' }), 'w-full sm:w-auto text-lg py-6')}
                     >
                       WhatsApp Group

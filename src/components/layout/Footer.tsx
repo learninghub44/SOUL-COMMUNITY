@@ -54,7 +54,6 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <WhatsAppJoinGate
-                  href={SITE_CONFIG.whatsappCommunityLink}
                   className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-soul-green-light" />
@@ -64,7 +63,6 @@ export function Footer() {
               </li>
               <li>
                 <WhatsAppJoinGate
-                  href={SITE_CONFIG.whatsappChannelLink}
                   className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-soul-gold" />
@@ -91,7 +89,6 @@ export function Footer() {
             </p>
             <div className="space-y-3">
               <WhatsAppJoinGate
-                href={SITE_CONFIG.whatsappCommunityLink}
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-soul-green text-white text-sm font-medium rounded-full hover:bg-soul-green-light transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
@@ -99,7 +96,6 @@ export function Footer() {
                 <ExternalLink className="w-3 h-3" />
               </WhatsAppJoinGate>
               <WhatsAppJoinGate
-                href={SITE_CONFIG.whatsappChannelLink}
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-soul-gold text-white text-sm font-medium rounded-full hover:bg-soul-gold-light transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />

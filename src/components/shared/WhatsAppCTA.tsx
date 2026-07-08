@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { MessageCircle, ExternalLink } from 'lucide-react';
-import { SITE_CONFIG } from '@/lib/constants';
 import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
 
 export function WhatsAppCTA() {
@@ -27,7 +26,6 @@ export function WhatsAppCTA() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <WhatsAppJoinGate
-              href={SITE_CONFIG.whatsappCommunityLink}
               className="inline-flex items-center gap-2 px-8 py-4 bg-soul-green text-white font-semibold rounded-full shadow-lg hover:bg-soul-green-dark transition-colors hover:scale-105 active:scale-95"
             >
               <MessageCircle className="w-5 h-5" />
@@ -35,7 +33,6 @@ export function WhatsAppCTA() {
               <ExternalLink className="w-4 h-4" />
             </WhatsAppJoinGate>
             <WhatsAppJoinGate
-              href={SITE_CONFIG.whatsappChannelLink}
               className="inline-flex items-center gap-2 px-8 py-4 bg-soul-gold text-white font-semibold rounded-full shadow-lg hover:bg-soul-gold-dark transition-colors hover:scale-105 active:scale-95"
             >
               <MessageCircle className="w-5 h-5" />

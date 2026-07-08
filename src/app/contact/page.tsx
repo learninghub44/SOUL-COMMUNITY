@@ -239,7 +239,7 @@ export default function ContactPage() {
                       whileHover={{ y: -2 }}
                     >
                       {item.gated ? (
-                        <WhatsAppJoinGate href={item.href} className={cardClassName}>
+                        <WhatsAppJoinGate className={cardClassName}>
                           {cardContent}
                         </WhatsAppJoinGate>
                       ) : (
