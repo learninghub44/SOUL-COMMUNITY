@@ -11,11 +11,14 @@ import {
   Globe,
   Phone,
   Mail,
+  Smile,
+  ShieldCheck,
+  Zap,
 } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { WhatsAppCTA } from '@/components/shared/WhatsAppCTA';
-import { ABOUT_CONTENT, TEAM_MEMBERS } from '@/lib/constants';
+import { ABOUT_CONTENT, TEAM_MEMBERS, PROGRAMS } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'About SOUL – Serving Opportunities, Uplifting Lives',
@@ -35,6 +38,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   HandHeart: HeartHandshake,
   BookOpen,
   Target,
+  Smile,
+  ShieldCheck,
+  Zap,
 };
 
 const colorMap: Record<string, { color: string; bg: string }> = {
@@ -44,6 +50,9 @@ const colorMap: Record<string, { color: string; bg: string }> = {
   Service: { color: 'text-soul-green-light', bg: 'bg-soul-green-light/10' },
   Learning: { color: 'text-soul-brown-light', bg: 'bg-soul-brown-light/10' },
   Purpose: { color: 'text-soul-green-dark', bg: 'bg-soul-green-dark/10' },
+  Compassion: { color: 'text-soul-brown-light', bg: 'bg-soul-brown-light/10' },
+  Integrity: { color: 'text-soul-green', bg: 'bg-soul-green/10' },
+  Empowerment: { color: 'text-soul-gold', bg: 'bg-soul-gold/10' },
 };
 
 export default function AboutPage() {
@@ -241,8 +250,50 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Final Vibe */}
+      {/* Programs */}
       <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
+                Our Programs
+              </h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                How we put our mission into action, every day.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PROGRAMS.map((program, index) => (
+              <AnimatedSection key={program.title} delay={0.1 + index * 0.08}>
+                <div className="bg-soul-cream rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
+                  <div className="relative w-full aspect-[4/3]">
+                    <Image
+                      src={program.image}
+                      alt={program.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col grow">
+                    <h3 className="text-lg font-semibold text-soul-green-dark mb-2">
+                      {program.title}
+                    </h3>
+                    <p className="text-sm text-foreground/80 leading-relaxed grow">
+                      {program.description}
+                    </p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final Vibe */}
+      <section className="py-20 px-4 bg-soul-cream">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection>
             <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
@@ -251,7 +302,7 @@ export default function AboutPage() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.1}>
-            <div className="bg-soul-cream rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
+            <div className="bg-white rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
               {finalVibeParagraphs.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}

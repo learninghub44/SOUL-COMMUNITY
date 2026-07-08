@@ -294,8 +294,21 @@ Come As You Are, Leave As a Soulmate.`,
     { title: 'Service', description: 'Uplifting one another through shared opportunities and support.', icon: 'HandHeart' },
     { title: 'Learning', description: 'Sharing wisdom, knowledge, and life experiences that inspire growth.', icon: 'BookOpen' },
     { title: 'Purpose', description: 'Helping every member discover and pursue their unique calling.', icon: 'Target' },
+    { title: 'Compassion', description: "We believe in treating everyone with empathy and kindness, recognizing that every individual's mental health journey is unique and deserves understanding.", icon: 'Smile' },
+    { title: 'Integrity', description: 'Our commitment to honesty and transparency ensures that we build trust within the community, fostering an environment where youth feel safe to share their experiences.', icon: 'ShieldCheck' },
+    { title: 'Empowerment', description: 'We strive to empower young individuals by providing them with the resources and support they need to take charge of their lives and personal development.', icon: 'Zap' },
   ],
 };
+
+export const PROGRAMS = ABOUT_CONTENT.missionPillars.map((pillar, i) => ({
+  title: pillar.title,
+  description: pillar.description,
+  image: [
+    '/programs/mental-health-awareness.jpg',
+    '/programs/community-engagement.jpg',
+    '/programs/opportunities-empowerment.jpg',
+  ][i],
+}));
 
 export const TEAM_MEMBERS = [
   {
