@@ -297,6 +297,31 @@ Come As You Are, Leave As a Soulmate.`,
   ],
 };
 
+export const TEAM_MEMBERS = [
+  {
+    name: 'Valentine Muthoni',
+    role: 'Founder & Director',
+    bio: "Mental health support in Kenya can be expensive, difficult to access, and often surrounded by stigma. I founded S.O.U.L to provide young people with a safe and supportive community where they can connect, heal, grow, and access the support they need. Through peer support, meaningful conversations, and community-driven initiatives, we aim to ensure that no one faces life's challenges alone.",
+    image: '/team/valentine-muthoni.jpg',
+  },
+  {
+    name: 'Wickliffe Okoth Otieno',
+    role: 'Counselling Psychologist',
+    bio: 'Wickliffe Okoth Otieno is a licensed counseling psychologist dedicated to providing tailored mental health support for youth.',
+    image: '/team/wickliffe-okoth.jpg',
+    phone: '+254729010390',
+    email: 'wickliffeokoth53@gmail.com',
+  },
+  {
+    name: 'Diana Muthoni',
+    role: 'Community Psychologist',
+    bio: 'Diana Muthoni is a licensed community psychologist committed to addressing the specific mental health challenges faced by young individuals in our society.',
+    image: '/team/diana-muthoni.jpg',
+    phone: '+254701286253',
+    email: 'dianamwendiamuthoni@gmail.com',
+  },
+];
+
 export const RESOURCE_CATEGORIES = [
   { value: 'jobs', label: 'Jobs', icon: 'Briefcase' },
   { value: 'scholarships', label: 'Scholarships', icon: 'GraduationCap' },
