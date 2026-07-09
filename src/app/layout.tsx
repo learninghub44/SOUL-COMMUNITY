@@ -5,7 +5,6 @@ import { Footer } from '@/components/layout/Footer';
 import { SWRegister } from '@/components/layout/SWRegister';
 import { InstallPrompt } from '@/components/layout/InstallPrompt';
 import { OfflineBanner } from '@/components/layout/OfflineBanner';
-import { HomepageMaintenanceOverlay } from '@/components/layout/HomepageMaintenanceOverlay';
 import { Toaster } from 'sonner';
 import './globals.css';
 
@@ -90,7 +89,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <OfflineBanner />
-        <HomepageMaintenanceOverlay />
         <Navbar />
         <main className="flex-1 pt-16 lg:pt-20">
           {children}
