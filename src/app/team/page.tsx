@@ -1,33 +1,26 @@
-import type { Metadata } from 'next';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail, MessageSquareText, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MessageSquareText, ArrowRight, Loader2 } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { WhatsAppCTA } from '@/components/shared/WhatsAppCTA';
-import { TEAM_MEMBERS } from '@/lib/constants';
+import { EmptyState } from '@/components/shared/EmptyState';
+import { createClient } from '@/lib/supabase/client';
+import { listTeamMembers } from '@/lib/services/team';
+import type { TeamMember } from '@/types';
 
-export const metadata: Metadata = {
-  title: 'Our Team – SOUL',
-  description:
-    'Meet the people behind S.O.U.L — our founder, director, and therapists working to make mental health support accessible to every young person.',
-  openGraph: {
-    title: 'Our Team – SOUL',
-    description:
-      'Meet the people behind S.O.U.L — our founder, director, and therapists.',
-  },
-};
-
-const [founder, ...therapists] = TEAM_MEMBERS;
-
-function TeamCard({ member }: { member: (typeof TEAM_MEMBERS)[number] }) {
+function TeamCard({ member }: { member: TeamMember }) {
   return (
     <div className="bg-soul-cream rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
       <div className="relative w-full aspect-[4/5]">
         <Image
-          src={member.image}
+          src={member.image_url}
           alt={member.name}
           fill
+          unoptimized
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
@@ -64,6 +57,24 @@ function TeamCard({ member }: { member: (typeof TEAM_MEMBERS)[number] }) {
 }
 
 export default function TeamPage() {
+  const [members, setMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    const supabase = createClient();
+    listTeamMembers(supabase)
+      .then((data) => active && setMembers(data))
+      .catch(() => active && setMembers([]))
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const founder = members.find((m) => m.is_founder) ?? members[0];
+  const therapists = members.filter((m) => m.id !== founder?.id);
+
   return (
     <>
       <PageHeader
@@ -71,46 +82,66 @@ export default function TeamPage() {
         description="The people behind S.O.U.L, working to make mental health support accessible to every young person."
       />
 
-      {/* Founder & Director */}
-      <section className="py-20 px-4 bg-soul-cream">
-        <div className="max-w-4xl mx-auto">
-          <AnimatedSection>
-            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-10 text-center">
-              Founder &amp; Director
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.1}>
-            <div className="max-w-sm mx-auto">
-              <TeamCard member={founder} />
-            </div>
-          </AnimatedSection>
+      {loading ? (
+        <div className="flex items-center justify-center py-24">
+          <Loader2 className="w-6 h-6 animate-spin text-soul-green" />
         </div>
-      </section>
-
-      {/* Therapists */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <AnimatedSection>
-            <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
-                Therapists
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                Licensed professionals providing tailored mental health support for our
-                community.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {therapists.map((member, index) => (
-              <AnimatedSection key={member.name} delay={0.1 + index * 0.08}>
-                <TeamCard member={member} />
-              </AnimatedSection>
-            ))}
-          </div>
+      ) : members.length === 0 ? (
+        <div className="py-24 px-4">
+          <EmptyState
+            icon={<MessageSquareText className="w-8 h-8" />}
+            title="Team coming soon"
+            description="We're putting together our team page — check back shortly."
+          />
         </div>
-      </section>
+      ) : (
+        <>
+          {/* Founder & Director */}
+          {founder && (
+            <section className="py-20 px-4 bg-soul-cream">
+              <div className="max-w-4xl mx-auto">
+                <AnimatedSection>
+                  <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-10 text-center">
+                    Founder &amp; Director
+                  </h2>
+                </AnimatedSection>
+                <AnimatedSection delay={0.1}>
+                  <div className="max-w-sm mx-auto">
+                    <TeamCard member={founder} />
+                  </div>
+                </AnimatedSection>
+              </div>
+            </section>
+          )}
+
+          {/* Rest of the team */}
+          {therapists.length > 0 && (
+            <section className="py-20 px-4 bg-white">
+              <div className="max-w-6xl mx-auto">
+                <AnimatedSection>
+                  <div className="text-center mb-12">
+                    <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-4">
+                      Therapists
+                    </h2>
+                    <p className="text-muted-foreground max-w-xl mx-auto">
+                      Licensed professionals providing tailored mental health support for our
+                      community.
+                    </p>
+                  </div>
+                </AnimatedSection>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {therapists.map((member, index) => (
+                    <AnimatedSection key={member.id} delay={0.1 + index * 0.08}>
+                      <TeamCard member={member} />
+                    </AnimatedSection>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+        </>
+      )}
 
       {/* Suggestion Box */}
       <section className="py-20 px-4 bg-soul-cream">

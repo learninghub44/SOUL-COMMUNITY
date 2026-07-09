@@ -71,6 +71,19 @@ export interface GalleryAlbum {
   created_at: string;
 }
 
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  image_url: string;
+  phone: string | null;
+  email: string | null;
+  is_founder: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
 export interface WeeklyActivity {
   id: string;
   day: string;

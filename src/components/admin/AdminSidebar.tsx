@@ -18,6 +18,7 @@ import {
   Loader2,
   Mail,
   Lightbulb,
+  Users,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -37,6 +38,7 @@ const sidebarLinks = [
   { href: '/admin/tickets', label: 'Tickets', icon: Ticket },
   { href: '/admin/announcements', label: 'Announcements', icon: Megaphone },
   { href: '/admin/gallery', label: 'Gallery', icon: Image },
+  { href: '/admin/team', label: 'Team', icon: Users },
   { href: '/admin/weekly-activities', label: 'Weekly Activities', icon: CalendarDays },
   { href: '/admin/resources', label: 'Resources', icon: FolderOpen },
   { href: '/admin/messages', label: 'Messages', icon: Mail },
