@@ -28,7 +28,7 @@ export function Hero() {
           width={1200}
           height={1200}
           priority
-          className="h-[80vh] w-[80vh] max-w-none object-contain opacity-100 sm:h-[88vh] sm:w-[88vh]"
+          className="h-[80vh] w-[80vh] max-w-none object-contain opacity-100 sm:h-[88vh] sm:w-[88vh] lg:h-full lg:w-full lg:max-w-full lg:object-cover"
         />
       </motion.div>
 
