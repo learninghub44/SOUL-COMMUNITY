@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { MessageCircle, Mail, ExternalLink } from 'lucide-react';
+import { MessageCircle, Mail, ExternalLink, Heart } from 'lucide-react';
 import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
 import { SocialLinks } from '@/components/shared/SocialLinks';
 import { WhatsAppJoinGate } from '@/components/shared/WhatsAppJoinGate';
@@ -51,6 +51,13 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            <Link
+              href="/support"
+              className="mt-4 flex items-center justify-center gap-2 w-full px-4 py-3 bg-soul-gold text-white text-sm font-bold rounded-full hover:bg-soul-gold-light transition-colors soul-shadow-card"
+            >
+              <Heart className="w-4 h-4 fill-current" />
+              Donate Now
+            </Link>
           </div>
 
           <div>

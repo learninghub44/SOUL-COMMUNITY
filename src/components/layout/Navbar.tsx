@@ -14,6 +14,7 @@ import {
   MessageCircle,
   UserCircle,
   LogOut,
+  Heart,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { NAV_LINKS } from '@/lib/constants';
@@ -134,6 +135,13 @@ export function Navbar() {
                         {link.label}
                       </MenuPrimitive.Item>
                     ))}
+                    <MenuPrimitive.Item
+                      render={<Link href="/support" />}
+                      className="mt-1 flex cursor-default items-center justify-center gap-2 rounded-xl bg-soul-gold px-3 py-2.5 text-sm font-bold text-white outline-none select-none hover:bg-soul-gold-light data-[highlighted]:bg-soul-gold-light"
+                    >
+                      <Heart className="w-4 h-4 fill-current" />
+                      Donate Now
+                    </MenuPrimitive.Item>
                   </MenuPrimitive.Popup>
                 </MenuPrimitive.Positioner>
               </MenuPrimitive.Portal>
