@@ -41,7 +41,7 @@ export function Footer() {
                   <Link
                     href={link.href}
                     className={
-                      link.label === 'Donate'
+                      link.label === 'Support'
                         ? 'text-sm font-bold text-soul-gold hover:text-soul-gold-light transition-colors'
                         : 'text-sm text-white/70 hover:text-white transition-colors'
                     }
