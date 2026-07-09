@@ -128,7 +128,7 @@ export function Navbar() {
                         render={<Link href={link.href} />}
                         className={cn(
                           'block cursor-default rounded-xl px-3 py-2 text-sm font-medium text-foreground/70 outline-none select-none data-[highlighted]:bg-muted data-[highlighted]:text-primary',
-                          link.label === 'Donate' && 'font-bold text-soul-gold'
+                          link.label === 'Support' && 'font-bold text-soul-gold'
                         )}
                       >
                         {link.label}
@@ -201,7 +201,7 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className={cn(
                     'block px-4 py-3 text-sm font-medium text-foreground/70 hover:text-primary rounded-xl hover:bg-muted transition-colors',
-                    link.label === 'Donate' && 'font-bold text-soul-gold'
+                    link.label === 'Support' && 'font-bold text-soul-gold'
                   )}
                 >
                   {link.label}

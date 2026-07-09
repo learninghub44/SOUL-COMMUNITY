@@ -350,6 +350,8 @@ export const GALLERY_CATEGORIES = [
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
+  { href: '/programmes', label: 'Our Programmes' },
+  { href: '/team', label: 'Our Team' },
   { href: '/weekly-activities', label: 'Weekly Activities' },
   { href: '/events', label: 'Events' },
   { href: '/gallery', label: 'Gallery' },
@@ -357,7 +359,7 @@ export const NAV_LINKS = [
   { href: '/resources', label: 'Resources' },
   { href: '/suggestions', label: 'Suggestions' },
   { href: '/contact', label: 'Contact' },
-  { href: '/donate', label: 'Donate' },
+  { href: '/support', label: 'Support' },
 ];
 
 export const GENDER_OPTIONS = ['Female', 'Male', 'Non-binary', 'Prefer not to say'];
