@@ -352,6 +352,7 @@ export const NAV_LINKS = [
   { href: '/about', label: 'About' },
   { href: '/programmes', label: 'Our Programmes' },
   { href: '/team', label: 'Our Team' },
+  { href: '/the-soul-vibe', label: 'The Soul Vibe' },
   { href: '/weekly-activities', label: 'Weekly Activities' },
   { href: '/events', label: 'Events' },
   { href: '/gallery', label: 'Gallery' },

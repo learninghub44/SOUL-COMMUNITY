@@ -59,10 +59,6 @@ export default function AboutPage() {
     .split('\n\n')
     .filter((p) => p.trim());
 
-  const finalVibeParagraphs = ABOUT_CONTENT.finalVibe
-    .split('\n\n')
-    .filter((p) => p.trim());
-
   return (
     <>
       <PageHeader
@@ -193,25 +189,6 @@ export default function AboutPage() {
               );
             })}
           </div>
-        </div>
-      </section>
-
-      {/* Final Vibe */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <AnimatedSection>
-            <h2 className="text-2xl md:text-3xl font-bold text-soul-green-dark font-heading mb-6 text-center">
-              The SOUL Vibe
-            </h2>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.1}>
-            <div className="bg-soul-cream rounded-2xl p-8 md:p-12 soul-shadow-card space-y-5 text-foreground/80 leading-relaxed">
-              {finalVibeParagraphs.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
-              ))}
-            </div>
-          </AnimatedSection>
         </div>
       </section>
 
