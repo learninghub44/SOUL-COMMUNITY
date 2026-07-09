@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/marketing/Button';
 import { SITE_CONFIG } from '@/lib/constants';
@@ -68,14 +70,16 @@ export function Hero() {
           >
             Join WhatsApp Community
           </WhatsAppJoinGate>
-          <WhatsAppJoinGate
+          <Link
+            href="/support"
             className={cn(
-              buttonVariants({ variant: 'ghost', size: 'lg' }),
-              'rounded-full border border-white/40 bg-white/5 text-white/90 backdrop-blur-sm hover:bg-white/15 hover:text-white'
+              buttonVariants({ variant: 'secondary', size: 'lg' }),
+              'gap-2 rounded-full soul-shadow-lg bg-white border-white hover:bg-white/90'
             )}
           >
-            Follow WhatsApp Channel
-          </WhatsAppJoinGate>
+            <Heart className="h-5 w-5 fill-current text-primary" />
+            Donate Now
+          </Link>
         </motion.div>
       </div>
     </section>
