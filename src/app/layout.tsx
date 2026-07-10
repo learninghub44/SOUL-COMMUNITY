@@ -27,6 +27,7 @@ const bodyFont = Lora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.soulcommunity.co.ke'),
   title: {
     default: 'SOUL – Serving Opportunities, Uplifting Lives',
     template: '%s | SOUL Community',
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://soul-community.org',
+    url: 'https://www.soulcommunity.co.ke',
     siteName: 'SOUL Community',
     title: 'SOUL – Serving Opportunities, Uplifting Lives',
     description: 'A vibrant community dedicated to mental wellness, networking, opportunities, and meaningful friendships.',

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://soul-community.org/sitemap.xml
+Sitemap: https://www.soulcommunity.co.ke/sitemap.xml
