@@ -329,6 +329,7 @@ export const PROGRAMS = [
   },
   {
     title: 'Young Parent & Parent Support Circle',
+    image: '/programs/young-parent-support-circle.png',
     description:
       'At S.O.U.L, we recognize the unique challenges faced by young parents, including emotional stress, financial pressure, isolation and the difficulty of balancing personal growth with the demands of raising a child. The Young Parent & Parent Support Circle is a safe and supportive space where young mothers and fathers can connect, share their experiences and find encouragement without judgment. Through peer support sessions, parenting guidance, mental health awareness and access to community resources, we help young parents navigate this journey with confidence and resilience. The program also creates opportunities for mentorship, skills-building and networking, empowering parents to grow personally and professionally while raising their children in a nurturing environment. At its heart, the Young Parent & Parent Support Circle reminds every parent that they are not alone \u2014 that with the right community, support and understanding, they can thrive both as individuals and as parents.',
   },

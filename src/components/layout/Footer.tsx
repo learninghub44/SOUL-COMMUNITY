@@ -128,6 +128,17 @@ export function Footer() {
           <p className="text-xs text-white/50 text-center">
             © 2025–{new Date().getFullYear()} S.O.U.L – Serving Opportunities, Uplifting Lives. All rights reserved.
           </p>
+          <p className="text-xs text-white/40 text-center">
+            Built by{' '}
+            <a
+              href="https://www.christech.co.ke"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-soul-gold transition-colors"
+            >
+              christech.co.ke
+            </a>
+          </p>
         </div>
       </div>
     </footer>
