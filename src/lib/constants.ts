@@ -385,7 +385,7 @@ export const NAV_LINKS = [
   { href: '/team', label: 'Our Team' },
   { href: '/the-soul-vibe', label: 'The Soul Vibe' },
   { href: '/weekly-activities', label: 'Weekly Activities' },
-  { href: '/events', label: 'Workshops' },
+  { href: '/events', label: 'Events' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/announcements', label: 'Announcements' },
   { href: '/resources', label: 'Resources' },

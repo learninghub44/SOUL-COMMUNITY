@@ -171,7 +171,7 @@ export default function CreateEventPage() {
       return false
     }
     if (!formData.isFree && (!formData.ticketPrice || parseFloat(formData.ticketPrice) < 0)) {
-      toast.error('Ticket price is required for paid workshops')
+      toast.error('Ticket price is required for paid events')
       return false
     }
     return true
@@ -222,7 +222,7 @@ export default function CreateEventPage() {
         faqs: faqs.map(({ question, answer }) => ({ question, answer })),
       })
 
-      toast.success(asDraft ? 'Workshop saved as draft' : 'Workshop created successfully')
+      toast.success(asDraft ? 'Event saved as draft' : 'Event created successfully')
       router.push('/admin/events')
       router.refresh()
     } catch (err) {
@@ -242,7 +242,7 @@ export default function CreateEventPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-soul-green-dark">Create Workshop</h1>
+            <h1 className="text-3xl font-bold text-soul-green-dark">Create Event</h1>
             <p className="text-soul-brown mt-1">Add a new event to the community</p>
           </div>
         </div>
@@ -254,10 +254,10 @@ export default function CreateEventPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-soul-green-dark mb-1.5">
-                    Workshop Title *
+                    Event Title *
                   </label>
                   <Input
-                    placeholder="Enter workshop title"
+                    placeholder="Enter event title"
                     value={formData.title}
                     onChange={e => handleInputChange('title', e.target.value)}
                     className="border-soul-cream-dark focus:border-soul-green"
@@ -268,7 +268,7 @@ export default function CreateEventPage() {
                     Description *
                   </label>
                   <Textarea
-                    placeholder="Describe your workshop..."
+                    placeholder="Describe your event..."
                     rows={4}
                     value={formData.description}
                     onChange={e => handleInputChange('description', e.target.value)}
@@ -314,7 +314,7 @@ export default function CreateEventPage() {
                     Venue *
                   </label>
                   <Input
-                    placeholder="Workshop venue"
+                    placeholder="Event venue"
                     value={formData.venue}
                     onChange={e => handleInputChange('venue', e.target.value)}
                     className="border-soul-cream-dark focus:border-soul-green"
@@ -463,7 +463,7 @@ export default function CreateEventPage() {
 
           <div className="space-y-6">
             <Card className="p-6 bg-white">
-              <h2 className="text-lg font-semibold text-soul-green-dark mb-4">Workshop Poster</h2>
+              <h2 className="text-lg font-semibold text-soul-green-dark mb-4">Event Poster</h2>
               <div
                 className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
                   dragActive
@@ -541,7 +541,7 @@ export default function CreateEventPage() {
 
             <Card className="p-6 bg-white">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-soul-green-dark">Workshop Gallery</h2>
+                <h2 className="text-lg font-semibold text-soul-green-dark">Event Gallery</h2>
                 <Button
                   type="button"
                   variant="outline"
@@ -561,7 +561,7 @@ export default function CreateEventPage() {
                 <div className="grid grid-cols-3 gap-3">
                   {eventGallery.map((url) => (
                     <div key={url} className="group relative rounded-lg overflow-hidden border border-soul-cream-dark">
-                      <img src={url} alt="Workshop gallery item" className="w-full h-20 object-cover" />
+                      <img src={url} alt="Event gallery item" className="w-full h-20 object-cover" />
                       <button
                         type="button"
                         onClick={() => setEventGallery(prev => prev.filter(u => u !== url))}
@@ -628,7 +628,7 @@ export default function CreateEventPage() {
                 disabled={isSubmitting}
                 className="w-full bg-soul-green hover:bg-soul-green-dark text-white"
               >
-                {isSubmitting ? 'Creating...' : 'Create Workshop'}
+                {isSubmitting ? 'Creating...' : 'Create Event'}
               </Button>
               <Button
                 onClick={() => handleSubmit(true)}

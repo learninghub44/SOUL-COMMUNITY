@@ -53,7 +53,7 @@ export default function AdminEventsPage() {
         if (active) setEvents(data)
       })
       .catch(() => {
-        toast.error('Could not load workshops')
+        toast.error('Could not load events')
       })
       .finally(() => {
         if (active) setLoading(false)
@@ -83,16 +83,16 @@ export default function AdminEventsPage() {
   }, [events, activeTab, searchQuery])
 
   async function handleDelete(id: string) {
-    if (!confirm('Delete this workshop? This cannot be undone.')) return
+    if (!confirm('Delete this event? This cannot be undone.')) return
 
     setDeletingId(id)
     try {
       const supabase = createClient()
       await deleteEvent(supabase, id)
       setEvents((prev) => prev.filter((e) => e.id !== id))
-      toast.success('Workshop deleted')
+      toast.success('Event deleted')
     } catch {
-      toast.error('Could not delete workshop')
+      toast.error('Could not delete event')
     } finally {
       setDeletingId(null)
     }
@@ -103,13 +103,13 @@ export default function AdminEventsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-soul-green-dark">Workshops</h1>
-            <p className="text-soul-brown mt-1">Manage your community workshops</p>
+            <h1 className="text-3xl font-bold text-soul-green-dark">Events</h1>
+            <p className="text-soul-brown mt-1">Manage your community events</p>
           </div>
           <Link href="/admin/events/new">
             <Button className="bg-soul-green hover:bg-soul-green-dark text-white">
               <Plus className="w-4 h-4 mr-2" />
-              Create Workshop
+              Create Event
             </Button>
           </Link>
         </div>
@@ -138,7 +138,7 @@ export default function AdminEventsPage() {
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-soul-brown/50" />
             <Input
-              placeholder="Search workshops..."
+              placeholder="Search events..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               className="pl-10 bg-white border-soul-cream-dark focus:border-soul-green"
@@ -154,10 +154,10 @@ export default function AdminEventsPage() {
           ) : filteredEvents.length === 0 ? (
             <EmptyState
               icon={<Calendar className="w-8 h-8" />}
-              title={events.length === 0 ? 'No workshops yet' : 'No workshops match your filters'}
+              title={events.length === 0 ? 'No events yet' : 'No events match your filters'}
               description={
                 events.length === 0
-                  ? 'Create your first workshop to get started.'
+                  ? 'Create your first event to get started.'
                   : 'Try a different search term or filter.'
               }
             />

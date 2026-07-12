@@ -77,7 +77,7 @@ export default function EditEventContent() {
 
   useEffect(() => {
     if (!eventId) {
-      toast.error('No workshop specified')
+      toast.error('No event specified')
       router.push('/admin/events')
       return
     }
@@ -113,7 +113,7 @@ export default function EditEventContent() {
         setEventGallery(event.gallery || [])
       })
       .catch(() => {
-        toast.error('Could not load this workshop')
+        toast.error('Could not load this event')
         router.push('/admin/events')
       })
       .finally(() => {
@@ -224,7 +224,7 @@ export default function EditEventContent() {
       return false
     }
     if (!formData.isFree && (!formData.ticketPrice || parseFloat(formData.ticketPrice) < 0)) {
-      toast.error('Ticket price is required for paid workshops')
+      toast.error('Ticket price is required for paid events')
       return false
     }
     return true
@@ -275,7 +275,7 @@ export default function EditEventContent() {
         faqs: faqs.map(({ question, answer }) => ({ question, answer })),
       })
 
-      toast.success('Workshop updated successfully')
+      toast.success('Event updated successfully')
       router.push('/admin/events')
       router.refresh()
     } catch (err) {
@@ -303,7 +303,7 @@ export default function EditEventContent() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-soul-green-dark">Edit Workshop</h1>
+            <h1 className="text-3xl font-bold text-soul-green-dark">Edit Event</h1>
             <p className="text-soul-brown mt-1">Update event details</p>
           </div>
         </div>
@@ -315,10 +315,10 @@ export default function EditEventContent() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-soul-green-dark mb-1.5">
-                    Workshop Title *
+                    Event Title *
                   </label>
                   <Input
-                    placeholder="Enter workshop title"
+                    placeholder="Enter event title"
                     value={formData.title}
                     onChange={e => handleInputChange('title', e.target.value)}
                     className="border-soul-cream-dark focus:border-soul-green"
@@ -329,7 +329,7 @@ export default function EditEventContent() {
                     Description *
                   </label>
                   <Textarea
-                    placeholder="Describe your workshop..."
+                    placeholder="Describe your event..."
                     rows={4}
                     value={formData.description}
                     onChange={e => handleInputChange('description', e.target.value)}
@@ -375,7 +375,7 @@ export default function EditEventContent() {
                     Venue *
                   </label>
                   <Input
-                    placeholder="Workshop venue"
+                    placeholder="Event venue"
                     value={formData.venue}
                     onChange={e => handleInputChange('venue', e.target.value)}
                     className="border-soul-cream-dark focus:border-soul-green"
@@ -524,7 +524,7 @@ export default function EditEventContent() {
 
           <div className="space-y-6">
             <Card className="p-6 bg-white">
-              <h2 className="text-lg font-semibold text-soul-green-dark mb-4">Workshop Poster</h2>
+              <h2 className="text-lg font-semibold text-soul-green-dark mb-4">Event Poster</h2>
               <div
                 className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
                   dragActive
@@ -602,7 +602,7 @@ export default function EditEventContent() {
 
             <Card className="p-6 bg-white">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-soul-green-dark">Workshop Gallery</h2>
+                <h2 className="text-lg font-semibold text-soul-green-dark">Event Gallery</h2>
                 <Button
                   type="button"
                   variant="outline"
@@ -622,7 +622,7 @@ export default function EditEventContent() {
                 <div className="grid grid-cols-3 gap-3">
                   {eventGallery.map((url) => (
                     <div key={url} className="group relative rounded-lg overflow-hidden border border-soul-cream-dark">
-                      <img src={url} alt="Workshop gallery item" className="w-full h-20 object-cover" />
+                      <img src={url} alt="Event gallery item" className="w-full h-20 object-cover" />
                       <button
                         type="button"
                         onClick={() => setEventGallery(prev => prev.filter(u => u !== url))}
@@ -689,7 +689,7 @@ export default function EditEventContent() {
                 disabled={isSubmitting}
                 className="w-full bg-soul-green hover:bg-soul-green-dark text-white"
               >
-                {isSubmitting ? 'Updating...' : 'Update Workshop'}
+                {isSubmitting ? 'Updating...' : 'Update Event'}
               </Button>
               <Link href="/admin/events" className="block">
                 <Button

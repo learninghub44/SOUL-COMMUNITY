@@ -117,7 +117,7 @@ export default function ConfirmationContent() {
       doc.text('SOUL COMMUNITY', 180, 96, { align: 'center' });
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9);
-      doc.text('WORKSHOP TICKET', 180, 112, { align: 'center' });
+      doc.text('EVENT TICKET', 180, 112, { align: 'center' });
 
       // Dashed divider
       doc.setDrawColor(gold);
@@ -143,7 +143,7 @@ export default function ConfirmationContent() {
         y += 38;
       };
 
-      field('Workshop', eventName);
+      field('Event', eventName);
       if (name) field('Attendee', name);
       if (formattedDate) field('Date', formattedDate);
       if (venue) field('Venue', venue);
@@ -206,7 +206,7 @@ export default function ConfirmationContent() {
               <Link href="/events">
                 <Button className="bg-soul-green hover:bg-soul-green-dark text-white">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Browse Workshops
+                  Browse Events
                 </Button>
               </Link>
             </div>
@@ -253,7 +253,7 @@ export default function ConfirmationContent() {
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-soul-green shrink-0" />
                 <div>
-                  <p className="text-sm text-muted-foreground">Workshop</p>
+                  <p className="text-sm text-muted-foreground">Event</p>
                   <p className="font-medium">{eventName}</p>
                 </div>
               </div>
@@ -354,7 +354,7 @@ export default function ConfirmationContent() {
                 className="inline-flex items-center gap-2 text-sm text-soul-green hover:underline"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Workshops
+                Back to Events
               </Link>
             </div>
           </div>
