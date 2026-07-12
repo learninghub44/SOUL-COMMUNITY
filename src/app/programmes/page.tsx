@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Brain, Lightbulb, BookOpen, TrendingUp, Heart, Mountain, Sun, ArrowRight } from 'lucide-react';
 import { PageHeader } from '@/components/shared/PageHeader';
@@ -44,24 +43,13 @@ export default function ProgrammesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {PROGRAMS.map((program, index) => (
               <AnimatedSection key={program.title} delay={0.1 + index * 0.08}>
-                <div className="bg-soul-cream rounded-2xl overflow-hidden soul-shadow-card h-full flex flex-col">
-                  <div className="relative w-full aspect-[4/3]">
-                    <Image
-                      src={program.image}
-                      alt={program.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col grow">
-                    <h2 className="text-lg font-semibold text-soul-green-dark mb-2">
-                      {program.title}
-                    </h2>
-                    <p className="text-sm text-foreground/80 leading-relaxed grow">
-                      {program.description}
-                    </p>
-                  </div>
+                <div className="bg-soul-cream rounded-2xl soul-shadow-card h-full flex flex-col p-6">
+                  <h2 className="text-lg font-semibold text-soul-green-dark mb-3">
+                    {program.title}
+                  </h2>
+                  <p className="text-sm text-foreground/80 leading-relaxed grow whitespace-pre-line">
+                    {program.description}
+                  </p>
                 </div>
               </AnimatedSection>
             ))}

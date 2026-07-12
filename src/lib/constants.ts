@@ -302,15 +302,33 @@ Come As You Are, Leave As a Soulmate.`,
   ],
 };
 
-export const PROGRAMS = ABOUT_CONTENT.missionPillars.map((pillar, i) => ({
-  title: pillar.title,
-  description: pillar.description,
-  image: [
-    '/programs/mental-health-awareness.jpg',
-    '/programs/community-engagement.jpg',
-    '/programs/opportunities-empowerment.jpg',
-  ][i],
-}));
+export const PROGRAMS = [
+  {
+    title: 'Brotherhood Support Circle',
+    description:
+      'The Brotherhood Support Circle is a safe and empowering space within S.O.U.L designed to support young men in their mental, emotional and personal growth journey. It provides a judgment-free environment where members can openly share their experiences, challenges, and successes while building genuine connections with others. Through peer support sessions, workshops, and open discussions, we focus on mental health awareness, emotional well-being, and breaking the stigma around men\u2019s struggles. The program also offers opportunities for personal development, mentorship, career guidance and skills-building to help young men grow into confident and responsible individuals. At its core, the Brotherhood Support Circle aims to create a strong community where men support each other, grow together and learn that true strength comes from openness, connection and healing.',
+  },
+  {
+    title: 'S.O.U.L Sisters Network',
+    description:
+      'The S.O.U.L Sisters Network is a safe and empowering community where young women come together to support one another through shared experiences, mental health awareness and personal growth. We provide a space for healing, connection and open conversations, while also offering opportunities for mentorship, skills development and leadership building. Through workshops, peer support and community engagement activities, we help women build confidence, resilience and purpose. At S.O.U.L Sisters Network, every woman is encouraged to grow, thrive, and rise knowing she is not alone.',
+  },
+  {
+    title: 'S.O.U.L.mates',
+    description:
+      "As a S.O.U.L Member, you become part of a supportive community dedicated to mental wellness, personal growth and youth empowerment.\n\nWhat S.O.U.L Members Receive:\n- Access to a safe and inclusive community\n- Peer support and meaningful connections\n- Mental health awareness and wellness resources\n- Personal development and life-skills workshops\n- Networking and mentorship opportunities\n- Access to youth empowerment programs and opportunities\n- Opportunities to volunteer, lead and make an impact\n- Invitations to exclusive S.O.U.L events and discussions\n\nWho Can Join? Young people who are passionate about growth, community, mental well-being and creating positive change.\n\nBeing a S.O.U.L Member means you don't have to navigate life's challenges alone \u2014 you grow, heal, learn and thrive alongside a community that cares.",
+  },
+  {
+    title: 'Young Adults',
+    description:
+      "Our Young Adult Support Network provides a safe space for you to share your experiences and connect with others navigating the same season of life \u2014 figuring out careers, relationships, independence and identity all at once. It's a place to be heard without judgment, to talk through the pressure of expectations, uncertainty about the future, and the everyday stress of adulting. Through peer support sessions, mental health awareness, career guidance and skills-building workshops, we help young adults build confidence, resilience and clarity as they navigate this transitional stage. The program also creates space for networking, mentorship and genuine friendships \u2014 reminding every young adult that growth doesn't happen in isolation. At its core, the Young Adult Support Network exists to help you show up for yourself, connect with people who get it, and move forward with purpose.",
+  },
+  {
+    title: 'Young Parent & Parent Support Circle',
+    description:
+      'At S.O.U.L, we recognize the unique challenges faced by young parents, including emotional stress, financial pressure, isolation and the difficulty of balancing personal growth with the demands of raising a child. The Young Parent & Parent Support Circle is a safe and supportive space where young mothers and fathers can connect, share their experiences and find encouragement without judgment. Through peer support sessions, parenting guidance, mental health awareness and access to community resources, we help young parents navigate this journey with confidence and resilience. The program also creates opportunities for mentorship, skills-building and networking, empowering parents to grow personally and professionally while raising their children in a nurturing environment. At its heart, the Young Parent & Parent Support Circle reminds every parent that they are not alone \u2014 that with the right community, support and understanding, they can thrive both as individuals and as parents.',
+  },
+];
 
 export const TEAM_MEMBERS = [
   {
