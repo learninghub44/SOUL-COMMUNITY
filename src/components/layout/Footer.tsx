@@ -46,7 +46,7 @@ export function Footer() {
                         : 'text-sm text-white/70 hover:text-white transition-colors'
                     }
                   >
-                    {link.label}
+                    {link.href === '/events' ? 'Events' : link.label}
                   </Link>
                 </li>
               ))}
