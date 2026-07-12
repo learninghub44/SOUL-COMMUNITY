@@ -305,6 +305,7 @@ Come As You Are, Leave As a Soulmate.`,
 export const PROGRAMS = [
   {
     title: 'Brotherhood Support Circle',
+    image: '/programs/brotherhood-support-circle.png',
     description:
       'The Brotherhood Support Circle is a safe and empowering space within S.O.U.L designed to support young men in their mental, emotional and personal growth journey. It provides a judgment-free environment where members can openly share their experiences, challenges, and successes while building genuine connections with others. Through peer support sessions, workshops, and open discussions, we focus on mental health awareness, emotional well-being, and breaking the stigma around men\u2019s struggles. The program also offers opportunities for personal development, mentorship, career guidance and skills-building to help young men grow into confident and responsible individuals. At its core, the Brotherhood Support Circle aims to create a strong community where men support each other, grow together and learn that true strength comes from openness, connection and healing.',
   },
