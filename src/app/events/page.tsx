@@ -79,7 +79,7 @@ export default function EventsPage() {
                   <TabsTrigger value="all">All</TabsTrigger>
                   <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
                   <TabsTrigger value="past">Past</TabsTrigger>
-                  <TabsTrigger value="free">Free</TabsTrigger>
+                  <TabsTrigger value="free">Workshop</TabsTrigger>
                   <TabsTrigger value="paid">Paid</TabsTrigger>
                 </TabsList>
 
@@ -136,7 +136,7 @@ export default function EventsPage() {
                             )}
                             {event.is_free && (
                               <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-soul-gold text-white text-xs font-semibold">
-                                Free
+                                Workshop
                               </span>
                             )}
                           </div>
