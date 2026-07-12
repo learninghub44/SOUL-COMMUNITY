@@ -317,6 +317,7 @@ export const PROGRAMS = [
   },
   {
     title: 'S.O.U.L.mates',
+    image: '/programs/soulmates.png',
     description:
       "As a S.O.U.L Member, you become part of a supportive community dedicated to mental wellness, personal growth and youth empowerment.\n\nWhat S.O.U.L Members Receive:\n- Access to a safe and inclusive community\n- Peer support and meaningful connections\n- Mental health awareness and wellness resources\n- Personal development and life-skills workshops\n- Networking and mentorship opportunities\n- Access to youth empowerment programs and opportunities\n- Opportunities to volunteer, lead and make an impact\n- Invitations to exclusive S.O.U.L events and discussions\n\nWho Can Join? Young people who are passionate about growth, community, mental well-being and creating positive change.\n\nBeing a S.O.U.L Member means you don't have to navigate life's challenges alone \u2014 you grow, heal, learn and thrive alongside a community that cares.",
   },
