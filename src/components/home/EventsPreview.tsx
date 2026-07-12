@@ -43,7 +43,7 @@ export function EventsPreview() {
         <AnimatedSection>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-soul-green-dark mb-4">
-              Upcoming Events
+              Upcoming Workshops
             </h2>
             <p className="text-lg text-soul-brown max-w-2xl mx-auto">
               Don&apos;t miss out on what&apos;s happening in our community
@@ -58,8 +58,8 @@ export function EventsPreview() {
         ) : events.length === 0 ? (
           <EmptyState
             icon={<Calendar className="w-8 h-8" />}
-            title="No upcoming events yet"
-            description="Check back soon for upcoming events and activities."
+            title="No upcoming workshops yet"
+            description="Check back soon for upcoming workshops and activities."
           />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -115,7 +115,7 @@ export function EventsPreview() {
               href="/events"
               className="inline-flex items-center px-8 py-4 bg-soul-green-dark text-white rounded-lg font-semibold hover:bg-soul-green transition-colors text-lg"
             >
-              View All Events
+              View All Workshops
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>

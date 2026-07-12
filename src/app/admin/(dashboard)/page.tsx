@@ -21,7 +21,7 @@ import { createClient } from '@/lib/supabase/client';
 
 const quickActions = [
   {
-    label: 'Create Event',
+    label: 'Create Workshop',
     href: '/admin/events/new',
     icon: Plus,
     color: 'bg-soul-green hover:bg-soul-green-dark text-white',
@@ -119,14 +119,14 @@ export default function AdminDashboardPage() {
   const statCards = stats
     ? [
         {
-          title: 'Total Events',
+          title: 'Total Workshops',
           value: String(stats.totalEvents),
           icon: Calendar,
           color: 'text-soul-green',
           bg: 'bg-soul-green/10',
         },
         {
-          title: 'Upcoming Events',
+          title: 'Upcoming Workshops',
           value: String(stats.upcomingEvents),
           icon: CalendarCheck,
           color: 'text-soul-gold',

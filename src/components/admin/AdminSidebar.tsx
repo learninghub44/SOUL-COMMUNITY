@@ -34,7 +34,7 @@ import {
 
 const sidebarLinks = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/events', label: 'Events', icon: Calendar },
+  { href: '/admin/events', label: 'Workshops', icon: Calendar },
   { href: '/admin/tickets', label: 'Tickets', icon: Ticket },
   { href: '/admin/announcements', label: 'Announcements', icon: Megaphone },
   { href: '/admin/gallery', label: 'Gallery', icon: Image },

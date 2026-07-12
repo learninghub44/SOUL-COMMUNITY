@@ -125,7 +125,7 @@ export default function AdminTicketsPage() {
   function handleSendWhatsApp(ticket: Ticket) {
     const message = [
       `🎟️ Hello ${ticket.full_name}, your SOUL Community ticket is confirmed!`,
-      ticket.event?.title ? `Event: ${ticket.event.title}` : '',
+      ticket.event?.title ? `Workshop: ${ticket.event.title}` : '',
       ticket.event?.date ? `Date: ${format(new Date(ticket.event.date), 'EEEE, MMM d, yyyy')}` : '',
       ticket.event?.venue ? `Venue: ${ticket.event.venue}` : '',
       `Reference: ${ticket.ticket_reference}`,
@@ -148,7 +148,7 @@ export default function AdminTicketsPage() {
       toast.error('No tickets to export');
       return;
     }
-    const header = ['Reference', 'Name', 'Email', 'Event', 'Payment Status', 'Checked In', 'Created At'];
+    const header = ['Reference', 'Name', 'Email', 'Workshop', 'Payment Status', 'Checked In', 'Created At'];
     const rows = tickets.map((t) => [
       t.ticket_reference,
       t.full_name,

@@ -95,8 +95,8 @@ export default function CheckoutContent() {
     return (
       <>
         <PageHeader
-          title="Event Not Found"
-          description="The event you are looking for does not exist."
+          title="Workshop Not Found"
+          description="The workshop you are looking for does not exist."
         />
         <section className="py-20 px-4 bg-soul-cream">
           <div className="max-w-4xl mx-auto text-center">

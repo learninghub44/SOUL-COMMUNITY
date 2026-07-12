@@ -339,7 +339,7 @@ export const RESOURCE_CATEGORIES = [
 ] as const;
 
 export const GALLERY_CATEGORIES = [
-  'Events',
+  'Workshops',
   'Outdoor',
   'Community',
   'Meetups',
@@ -354,7 +354,7 @@ export const NAV_LINKS = [
   { href: '/team', label: 'Our Team' },
   { href: '/the-soul-vibe', label: 'The Soul Vibe' },
   { href: '/weekly-activities', label: 'Weekly Activities' },
-  { href: '/events', label: 'Events' },
+  { href: '/events', label: 'Workshops' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/announcements', label: 'Announcements' },
   { href: '/resources', label: 'Resources' },

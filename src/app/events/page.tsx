@@ -66,8 +66,8 @@ export default function EventsPage() {
   return (
     <>
       <PageHeader
-        title="Events"
-        description="Discover upcoming events, workshops, and experiences. Connect, learn, and grow with the SOUL community."
+        title="Workshops"
+        description="Discover upcoming workshops and experiences. Connect, learn, and grow with the SOUL community."
       />
 
       <section className="py-12 px-4 bg-soul-cream min-h-[60vh]">
@@ -87,7 +87,7 @@ export default function EventsPage() {
                   <div className="relative flex-1 md:w-72">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
-                      placeholder="Search events..."
+                      placeholder="Search workshops..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="pl-9 bg-white"
@@ -104,14 +104,14 @@ export default function EventsPage() {
                 ) : loadError ? (
                   <EmptyState
                     icon={<Calendar className="w-8 h-8" />}
-                    title="Couldn't load events"
+                    title="Couldn't load workshops"
                     description="Something went wrong reaching the server. Please refresh the page or try again shortly."
                   />
                 ) : filtered.length === 0 ? (
                   <EmptyState
                     icon={<Calendar className="w-8 h-8" />}
-                    title="No events found"
-                    description="Try a different filter or check back soon for new events."
+                    title="No workshops found"
+                    description="Try a different filter or check back soon for new workshops."
                   />
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

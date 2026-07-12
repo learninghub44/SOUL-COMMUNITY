@@ -55,20 +55,20 @@ export default function EventContent() {
     return (
       <>
         <PageHeader
-          title="Event Not Found"
-          description="The event you are looking for does not exist or has been removed."
+          title="Workshop Not Found"
+          description="The workshop you are looking for does not exist or has been removed."
         />
         <section className="py-20 px-4 bg-soul-cream">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection>
               <Calendar className="w-16 h-16 text-muted-foreground mx-auto mb-6" />
               <p className="text-lg text-muted-foreground mb-8">
-                We could not find that event. It may have been removed.
+                We could not find that workshop. It may have been removed.
               </p>
               <Link href="/events">
                 <Button className="bg-soul-green hover:bg-soul-green-dark text-white">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Events
+                  Back to Workshops
                 </Button>
               </Link>
             </AnimatedSection>
@@ -165,7 +165,7 @@ export default function EventContent() {
                 className="inline-flex items-center gap-2 text-soul-green hover:text-soul-green-dark font-medium"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Events
+                Back to Workshops
               </Link>
             </div>
           </AnimatedSection>

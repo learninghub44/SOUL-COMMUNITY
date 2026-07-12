@@ -47,9 +47,9 @@
       ]
     },
     {
-      "name": "Events",
-      "short_name": "Events",
-      "description": "View upcoming SOUL events",
+      "name": "Workshops",
+      "short_name": "Workshops",
+      "description": "View upcoming SOUL workshops",
       "url": "/events",
       "icons": [
         {
