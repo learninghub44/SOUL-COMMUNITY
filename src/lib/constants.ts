@@ -323,6 +323,7 @@ export const PROGRAMS = [
   },
   {
     title: 'Young Adults',
+    image: '/programs/young-adults.png',
     description:
       "Our Young Adult Support Network provides a safe space for you to share your experiences and connect with others navigating the same season of life \u2014 figuring out careers, relationships, independence and identity all at once. It's a place to be heard without judgment, to talk through the pressure of expectations, uncertainty about the future, and the everyday stress of adulting. Through peer support sessions, mental health awareness, career guidance and skills-building workshops, we help young adults build confidence, resilience and clarity as they navigate this transitional stage. The program also creates space for networking, mentorship and genuine friendships \u2014 reminding every young adult that growth doesn't happen in isolation. At its core, the Young Adult Support Network exists to help you show up for yourself, connect with people who get it, and move forward with purpose.",
   },
