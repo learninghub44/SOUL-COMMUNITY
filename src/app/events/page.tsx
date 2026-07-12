@@ -66,7 +66,7 @@ export default function EventsPage() {
   return (
     <>
       <PageHeader
-        title="Workshops"
+        title="Events"
         description="Discover upcoming workshops and experiences. Connect, learn, and grow with the SOUL community."
       />
 
