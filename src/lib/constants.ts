@@ -311,6 +311,7 @@ export const PROGRAMS = [
   },
   {
     title: 'S.O.U.L Sisters Network',
+    image: '/programs/soul-sisters-network.png',
     description:
       'The S.O.U.L Sisters Network is a safe and empowering community where young women come together to support one another through shared experiences, mental health awareness and personal growth. We provide a space for healing, connection and open conversations, while also offering opportunities for mentorship, skills development and leadership building. Through workshops, peer support and community engagement activities, we help women build confidence, resilience and purpose. At S.O.U.L Sisters Network, every woman is encouraged to grow, thrive, and rise knowing she is not alone.',
   },
