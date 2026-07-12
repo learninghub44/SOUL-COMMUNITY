@@ -1,3 +1,11 @@
+// Toggle to true to show the "under improvement" lock screen on the homepage.
+// Flip back to false (and redeploy) to restore the live homepage.
+export const MAINTENANCE_MODE = true;
+// ISO timestamp for when the lock is expected to lift. Update this if the
+// work takes longer or finishes early — it only drives the countdown text,
+// it does not auto-unlock the site.
+export const MAINTENANCE_ENDS_AT = '2026-07-13T09:22:05.000Z';
+
 export const WEEKLY_ACTIVITIES = [
   {
     day: 'monday',

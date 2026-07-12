@@ -8,8 +8,14 @@ import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { ImpactStats } from '@/components/home/ImpactStats';
 import { ContactSection } from '@/components/home/ContactSection';
 import { WhatsAppCTA } from '@/components/shared/WhatsAppCTA';
+import { MaintenanceMode } from '@/components/home/MaintenanceMode';
+import { MAINTENANCE_MODE } from '@/lib/constants';
 
 export default function HomePage() {
+  if (MAINTENANCE_MODE) {
+    return <MaintenanceMode />;
+  }
+
   return (
     <>
       <Hero />
