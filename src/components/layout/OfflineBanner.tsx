@@ -98,10 +98,7 @@ export function OfflineBanner() {
   if (!isOffline) return null;
 
   return (
-    <div
-      className="fixed inset-x-0 z-[60] flex items-center justify-center gap-2 bg-[#8B6B4A] text-white text-sm py-2 px-4"
-      style={{ top: 'var(--banner-h, 0px)' }}
-    >
+    <div className="fixed top-0 inset-x-0 z-[60] flex items-center justify-center gap-2 bg-[#8B6B4A] text-white text-sm py-2 px-4">
       <WifiOff className="w-4 h-4 shrink-0" />
       <span>You&apos;re offline — showing saved content where available.</span>
     </div>

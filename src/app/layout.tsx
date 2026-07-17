@@ -5,7 +5,6 @@ import { Footer } from '@/components/layout/Footer';
 import { SWRegister } from '@/components/layout/SWRegister';
 import { InstallPrompt } from '@/components/layout/InstallPrompt';
 import { OfflineBanner } from '@/components/layout/OfflineBanner';
-import { MaintenanceBanner } from '@/components/layout/MaintenanceBanner';
 import { Toaster } from 'sonner';
 import './globals.css';
 
@@ -90,10 +89,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="SOUL" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <MaintenanceBanner />
         <OfflineBanner />
         <Navbar />
-        <main className="flex-1 pt-16 lg:pt-20" style={{ marginTop: 'var(--banner-h, 0px)' }}>
+        <main className="flex-1 pt-16 lg:pt-20">
           {children}
         </main>
         <Footer />
