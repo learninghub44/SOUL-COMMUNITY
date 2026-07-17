@@ -84,11 +84,12 @@ export function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed left-0 right-0 z-50 transition-all duration-300',
         scrolled
           ? 'bg-background/95 backdrop-blur-md soul-shadow border-b border-border'
           : 'bg-transparent'
       )}
+      style={{ top: 'var(--banner-h, 0px)' }}
     >
       <div className="container-app">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -199,7 +200,8 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-16 z-40 overflow-y-auto bg-background lg:hidden"
+            className="fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-background lg:hidden"
+            style={{ top: 'calc(var(--banner-h, 0px) + 4rem)' }}
           >
             <div className="container-app py-4 space-y-1 min-h-full">
               {NAV_LINKS.map((link) => (
